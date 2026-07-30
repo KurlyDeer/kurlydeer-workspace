@@ -12,19 +12,9 @@ class WelcomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppColors.glassGradientStart,
+      backgroundColor: AppColors.gradientStart,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.glassGradientStart,
-              AppColors.glassGradientMid,
-              AppColors.glassGradientEnd,
-            ],
-          ),
-        ),
+        color: AppColors.gradientStart,
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -61,7 +51,9 @@ class _AppLogo extends StatelessWidget {
       children: [
         GlassContainer(
           padding: const EdgeInsets.all(20),
-          borderRadius: 22,
+          borderRadius: 8,
+          backgroundColor: AppColors.surface1,
+          borderColor: AppColors.borderLight,
           child: Text('🌉', style: TextStyle(fontSize: 48)),
         ),
         const SizedBox(height: 16),
@@ -71,7 +63,7 @@ class _AppLogo extends StatelessWidget {
           style: TextStyle(
             fontSize: AppFontSizes.headline,
             fontWeight: FontWeight.w800,
-            color: AppColors.glassText,
+            color: AppColors.text,
             letterSpacing: -0.5,
           ),
         ),
@@ -81,7 +73,7 @@ class _AppLogo extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.subtitle,
-            color: AppColors.glassText,
+            color: AppColors.text,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -91,7 +83,7 @@ class _AppLogo extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.body,
-            color: AppColors.glassTextMuted,
+            color: AppColors.textDim,
             fontStyle: FontStyle.italic,
           ),
         ),
@@ -109,8 +101,8 @@ class _WelcomeMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlassContainer(
       padding: const EdgeInsets.all(24),
-      backgroundColor: Color(0xFF2E86C1).withValues(alpha: 0.25),
-      borderColor: AppColors.deepBlue.withValues(alpha: 0.5),
+      backgroundColor: AppColors.surface1,
+      borderColor: AppColors.borderLight,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -119,7 +111,7 @@ class _WelcomeMessage extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.title,
               fontWeight: FontWeight.w800,
-              color: AppColors.glassText,
+              color: AppColors.text,
             ),
           ),
           const SizedBox(height: 14),
@@ -127,18 +119,18 @@ class _WelcomeMessage extends StatelessWidget {
             AppStrings.welcomeBodyEs,
             style: TextStyle(
               fontSize: AppFontSizes.body,
-              color: AppColors.glassText,
+              color: AppColors.text,
               height: 1.6,
             ),
           ),
           const SizedBox(height: 16),
-          Divider(color: AppColors.glassText.withValues(alpha: 0.3)),
+          Divider(color: AppColors.borderLight),
           const SizedBox(height: 12),
           Text(
             AppStrings.welcomeBodyEn,
             style: TextStyle(
               fontSize: AppFontSizes.body - 1,
-              color: AppColors.glassTextMuted,
+              color: AppColors.textDim,
               height: 1.5,
               fontStyle: FontStyle.italic,
             ),
@@ -160,24 +152,18 @@ class _StartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.glowTerracotta.withValues(alpha: 0.4),
-            blurRadius: 20,
-            spreadRadius: 2,
-          ),
-        ],
+        borderRadius: AppRadius.smBr,
       ),
       child: SizedBox(
         height: 60,
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.glowTerracotta,
-            foregroundColor: AppColors.lightText,
+            backgroundColor: AppColors.text,
+            foregroundColor: AppColors.surface0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: AppRadius.smBr,
+              side: const BorderSide(color: AppColors.borderDark, width: 1.0),
             ),
             elevation: 0,
           ),

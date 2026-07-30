@@ -43,19 +43,9 @@ class _PersonaScreenState extends ConsumerState<PersonaScreen> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        backgroundColor: AppColors.glassGradientStart,
+        backgroundColor: AppColors.gradientStart,
         body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                AppColors.glassGradientStart,
-                AppColors.glassGradientMid,
-                AppColors.glassGradientEnd,
-              ],
-            ),
-          ),
+          color: AppColors.gradientStart,
           child: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -88,7 +78,7 @@ class _PersonaScreenState extends ConsumerState<PersonaScreen> {
           style: TextStyle(
             fontSize: isSenior ? AppFontSizes.titleLarge : AppFontSizes.title,
             fontWeight: FontWeight.w800,
-            color: AppColors.glassText,
+            color: AppColors.text,
           ),
         ),
         const SizedBox(height: 6),
@@ -99,7 +89,7 @@ class _PersonaScreenState extends ConsumerState<PersonaScreen> {
             fontSize: isSenior
                 ? AppFontSizes.bodyLarge - 2
                 : AppFontSizes.body - 2,
-            color: AppColors.glassTextMuted,
+            color: AppColors.textDim,
           ),
         ),
       ],
@@ -159,37 +149,37 @@ class _PersonaScreenState extends ConsumerState<PersonaScreen> {
           style: TextStyle(
             fontSize: bodySize,
             fontWeight: FontWeight.w600,
-            color: AppColors.glassText,
+            color: AppColors.text,
           ),
         ),
         const SizedBox(height: 10),
         TextField(
           controller: _nameController,
-          style: TextStyle(fontSize: bodySize, color: AppColors.glassText),
+          style: TextStyle(fontSize: bodySize, color: AppColors.text),
           decoration: InputDecoration(
             hintText: AppStrings.personaNameHintEs,
             hintStyle: TextStyle(
               fontSize: bodySize,
-              color: AppColors.glassTextMuted,
+              color: AppColors.textDim,
             ),
             filled: true,
-            fillColor: AppColors.glassSurface,
+            fillColor: AppColors.surface1,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 18,
               vertical: 16,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: AppColors.glassBorder),
+              borderSide: const BorderSide(color: AppColors.borderLight),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: AppColors.glassBorder),
+              borderSide: const BorderSide(color: AppColors.borderLight),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
               borderSide:
-                  BorderSide(color: AppColors.glowTerracotta, width: 2),
+                  const BorderSide(color: AppColors.borderDark, width: 2),
             ),
           ),
         ),
@@ -205,29 +195,20 @@ class _PersonaScreenState extends ConsumerState<PersonaScreen> {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: hasSelection
-            ? [
-                BoxShadow(
-                  color: AppColors.glowTerracotta.withValues(alpha: 0.4),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                ),
-              ]
-            : [],
+        borderRadius: AppRadius.smBr,
       ),
       child: SizedBox(
         height: buttonHeight,
         child: ElevatedButton(
           onPressed: hasSelection ? _onContinue : null,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.glowTerracotta,
-            foregroundColor: AppColors.lightText,
-            disabledBackgroundColor:
-                AppColors.glowTerracotta.withValues(alpha: 0.35),
-            disabledForegroundColor: AppColors.lightText.withValues(alpha: 0.6),
+            backgroundColor: AppColors.text,
+            foregroundColor: AppColors.surface0,
+            disabledBackgroundColor: AppColors.surface2,
+            disabledForegroundColor: AppColors.textDim,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: AppRadius.smBr,
+              side: const BorderSide(color: AppColors.borderDark, width: 1.0),
             ),
             elevation: 0,
           ),
@@ -285,23 +266,11 @@ class _PersonaCard extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOutBack,
         child: Container(
-          decoration: _isSelected
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.glowTerracotta.withValues(alpha: 0.4),
-                      blurRadius: 16,
-                      spreadRadius: 2,
-                    ),
-                  ],
-                )
-              : null,
           child: GlassContainer(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
-            borderRadius: 18,
-            borderColor:
-                _isSelected ? AppColors.glowTerracotta : AppColors.glassBorder,
+            borderRadius: 8,
+            backgroundColor: _isSelected ? AppColors.surface0 : AppColors.surface1,
+            borderColor: _isSelected ? AppColors.borderDark : AppColors.borderLight,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -318,9 +287,7 @@ class _PersonaCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: labelSize,
                     fontWeight: FontWeight.w700,
-                    color: _isSelected
-                        ? AppColors.glowTerracotta
-                        : AppColors.glassText,
+                    color: AppColors.text,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -331,7 +298,7 @@ class _PersonaCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: sublabelSize,
-                    color: AppColors.glassTextMuted,
+                    color: AppColors.textDim,
                   ),
                 ),
                 if (_isSelected) ...[
@@ -339,13 +306,13 @@ class _PersonaCard extends StatelessWidget {
                   Container(
                     width: 28,
                     height: 28,
-                    decoration: BoxDecoration(
-                      color: AppColors.glowTerracotta,
+                    decoration: const BoxDecoration(
+                      color: AppColors.text,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.check,
-                      color: AppColors.lightText,
+                      color: AppColors.surface0,
                       size: 18,
                     ),
                   ),
