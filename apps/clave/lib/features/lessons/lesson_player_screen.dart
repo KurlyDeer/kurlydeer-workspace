@@ -197,6 +197,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         );
 
       case LessonStatus.voiceLoading:
+      case LessonStatus.voiceListeningChoice:
         final bodySize =
             isSenior ? AppFontSizes.bodyLarge : AppFontSizes.body;
         return Center(
@@ -209,7 +210,9 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                AppStrings.retoScoringEs,
+                state.status == LessonStatus.voiceListeningChoice
+                    ? 'Generando opciones de audio...'
+                    : AppStrings.retoScoringEs,
                 style: TextStyle(
                   fontSize: bodySize,
                   color: AppColors.darkText,
@@ -225,6 +228,11 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           score: state.voiceScore,
           feedbackEs: state.feedbackEs,
           isSenior: isSenior,
+          wordResults: state.wordResults,
+          listenSlower: state.listenSlower,
+          onListenSlower: () {
+             tts.speak(state.content.voiceChallengeEn, rate: 0.75);
+          },
           onTryAgain: () => ref
               .read(lessonPlayerProvider(widget.lesson).notifier)
               .retryVoiceChallenge(),
@@ -372,6 +380,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         return const SizedBox.shrink(); // mic is the CTA
 
       case LessonStatus.voiceLoading:
+      case LessonStatus.voiceListeningChoice:
         return SizedBox(
           height: btnHeight,
           child: ElevatedButton(
@@ -395,7 +404,9 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  AppStrings.retoScoringEs,
+                  state.status == LessonStatus.voiceListeningChoice
+                    ? 'Preparando opciones...'
+                    : AppStrings.retoScoringEs,
                   style: TextStyle(
                     fontSize: bodySize - 2,
                     color: AppColors.darkText,
@@ -407,7 +418,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
         );
 
       case LessonStatus.result:
-        final canComplete = state.voiceScore >= 70 || state.voiceScore == 0;
+        final canComplete = state.voiceScore >= 7 || state.voiceScore == 0;
         return SizedBox(
           height: btnHeight,
           child: ElevatedButton(

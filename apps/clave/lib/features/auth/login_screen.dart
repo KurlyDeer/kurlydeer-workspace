@@ -136,10 +136,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final provider = GoogleAuthProvider();
       await FirebaseAuth.instance.signInWithPopup(provider);
     } on FirebaseAuthException catch (e) {
-      debugPrint('Firebase Auth Exception: ${e.code} - ${e.message}');
-      if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
+      debugPrint('Firebase Auth Exception (Google Popup): ${e.code} - ${e.message}');
+      if (e.code == 'popup-blocked' || e.code == 'popup-closed-by-user') {
+        debugPrint('Popup blocked/closed. Falling back to signInWithRedirect...');
+        final provider = GoogleAuthProvider();
+        await FirebaseAuth.instance.signInWithRedirect(provider);
+      } else {
+        if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
+      }
     } catch (e) {
-      debugPrint('Firebase Auth Exception: $e');
+      debugPrint('Firebase Auth Exception (Google): $e');
       if (mounted) setState(() => _errorMessage = e.toString());
     }
   }
@@ -149,10 +155,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final provider = OAuthProvider('apple.com');
       await FirebaseAuth.instance.signInWithPopup(provider);
     } on FirebaseAuthException catch (e) {
-      debugPrint('Firebase Auth Exception: ${e.code} - ${e.message}');
-      if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
+      debugPrint('Firebase Auth Exception (Apple Popup): ${e.code} - ${e.message}');
+      if (e.code == 'popup-blocked' || e.code == 'popup-closed-by-user') {
+        debugPrint('Popup blocked/closed. Falling back to signInWithRedirect...');
+        final provider = OAuthProvider('apple.com');
+        await FirebaseAuth.instance.signInWithRedirect(provider);
+      } else {
+        if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
+      }
     } catch (e) {
-      debugPrint('Firebase Auth Exception: $e');
+      debugPrint('Firebase Auth Exception (Apple): $e');
       if (mounted) setState(() => _errorMessage = e.toString());
     }
   }

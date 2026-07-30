@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/services/sync_service.dart';
+
 import '../../core/providers/persona_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
@@ -30,6 +32,14 @@ class _MainShellScreenState extends ConsumerState<MainShellScreen> {
     CompaneroScreen(),
     LibraryTab(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(syncServiceProvider).syncProgress();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

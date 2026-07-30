@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_strings.dart';
 
+import '../../../core/utils/pronunciation_grader.dart';
+
 class ResultSlideCard extends StatelessWidget {
   const ResultSlideCard({
     super.key,
@@ -10,22 +12,28 @@ class ResultSlideCard extends StatelessWidget {
     required this.feedbackEs,
     required this.isSenior,
     required this.onTryAgain,
+    this.wordResults = const [],
+    this.listenSlower = false,
+    this.onListenSlower,
   });
 
   final int score;
   final String feedbackEs;
   final bool isSenior;
   final VoidCallback onTryAgain;
+  final List<WordMatch> wordResults;
+  final bool listenSlower;
+  final VoidCallback? onListenSlower;
 
   Color get _scoreColor {
-    if (score >= 80) return Colors.green[600]!;
-    if (score >= 50) return Colors.orange[700]!;
-    return Colors.red[600]!;
+    if (score >= 8) return AppColors.emerald;
+    if (score >= 5) return AppColors.gold;
+    return AppColors.error;
   }
 
   String get _scoreEmoji {
-    if (score >= 80) return '🎉';
-    if (score >= 50) return '👍';
+    if (score >= 8) return '🎉';
+    if (score >= 5) return '👍';
     return '💪';
   }
 
@@ -74,7 +82,7 @@ class ResultSlideCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '/ 100',
+                      '/ 10',
                       style: TextStyle(
                         fontSize: bodySize - 4,
                         color: _scoreColor.withValues(alpha: 0.7),
@@ -90,38 +98,91 @@ class ResultSlideCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
-              value: score / 100.0,
+              value: score / 10.0,
               minHeight: 14,
-              backgroundColor: AppColors.unselectedBorder,
+              backgroundColor: AppColors.surface2,
               valueColor: AlwaysStoppedAnimation<Color>(_scoreColor),
             ),
           ),
+          // Word Highlights
+          if (wordResults.isNotEmpty) ...[
+            const SizedBox(height: 24),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: wordResults.map((w) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: w.correct ? AppColors.emerald.withValues(alpha: 0.1) : AppColors.error.withValues(alpha: 0.1),
+                    borderRadius: AppRadius.smBr,
+                    border: Border.all(
+                      color: w.correct ? AppColors.emerald.withValues(alpha: 0.3) : AppColors.error.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Text(
+                    w.word,
+                    style: TextStyle(
+                      fontSize: bodySize,
+                      fontWeight: FontWeight.w600,
+                      color: w.correct ? AppColors.emerald : AppColors.error,
+                      decoration: w.correct ? null : TextDecoration.underline,
+                      decorationColor: AppColors.error,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
           // Feedback
           if (feedbackEs.isNotEmpty) ...[
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.cardBackground,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: const [
-                  BoxShadow(
-                    color: AppColors.shadow,
-                    blurRadius: 8,
-                    offset: Offset(0, 3),
-                  ),
-                ],
+                color: AppColors.surface1,
+                borderRadius: AppRadius.smBr,
+                border: Border.all(color: AppColors.borderLight),
               ),
               child: Text(
                 feedbackEs,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: bodySize,
-                  color: AppColors.darkText,
+                  color: AppColors.text,
                   height: 1.5,
                 ),
               ),
             ),
+          ],
+          const SizedBox(height: 24),
+          // Adaptive Slower Mode Toggle
+          if (listenSlower && score < 7) ...[
+            SizedBox(
+              height: retryHeight,
+              child: ElevatedButton.icon(
+                onPressed: onListenSlower,
+                icon: const Icon(Icons.hearing),
+                label: Text(
+                  'Escuchar más lento',
+                  style: TextStyle(
+                    fontSize: bodySize - 2,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.surface2,
+                  foregroundColor: AppColors.text,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: AppRadius.smBr,
+                  ),
+                  elevation: 0,
+                  side: BorderSide(color: AppColors.borderLight),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
           ],
           const SizedBox(height: 24),
           // Try again option
@@ -130,16 +191,16 @@ class ResultSlideCard extends StatelessWidget {
             child: OutlinedButton(
               onPressed: onTryAgain,
               style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AppColors.deepBlue),
+                side: const BorderSide(color: AppColors.borderDark),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: AppRadius.smBr,
                 ),
               ),
               child: Text(
                 AppStrings.retoTryAgainEs,
                 style: TextStyle(
                   fontSize: bodySize - 2,
-                  color: AppColors.deepBlue,
+                  color: AppColors.text,
                   fontWeight: FontWeight.w600,
                 ),
               ),

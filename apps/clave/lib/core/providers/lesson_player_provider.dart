@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import '../utils/pronunciation_grader.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -9,6 +11,7 @@ import '../models/lesson_models.dart';
 import '../services/audio_service.dart';
 import '../services/claude_service.dart';
 import '../services/connectivity_service.dart';
+import '../services/sync_service.dart';
 import '../../l10n/app_strings.dart';
 import 'connectivity_provider.dart';
 import 'lesson_progress_provider.dart';
@@ -24,6 +27,7 @@ enum LessonStatus {
   voiceChallenge,
   voiceRecording,
   voiceLoading,
+  voiceListeningChoice,
   result,
   complete,
 }
@@ -51,6 +55,9 @@ class LessonState {
     this.grammarFlipOrder = const [],
     this.grammarFlipCorrect,
     this.libroPromptText = '',
+    this.voiceAttemptCount = 0,
+    this.wordResults = const [],
+    this.listenSlower = false,
   });
 
   final LessonData lesson;
@@ -72,6 +79,9 @@ class LessonState {
   final List<String> grammarFlipOrder;
   final bool? grammarFlipCorrect;
   final String libroPromptText;
+  final int voiceAttemptCount;
+  final List<WordMatch> wordResults;
+  final bool listenSlower;
 
   PersonaContent get content => lesson.forPersona(personaKey);
   List<LessonSlide> get slides => content.slides;
@@ -95,6 +105,9 @@ class LessonState {
     List<String>? grammarFlipOrder,
     bool? grammarFlipCorrect,
     String? libroPromptText,
+    int? voiceAttemptCount,
+    List<WordMatch>? wordResults,
+    bool? listenSlower,
     bool resetGrammarFlip = false,
   }) {
     return LessonState(
@@ -119,6 +132,9 @@ class LessonState {
       grammarFlipCorrect:
           resetGrammarFlip ? null : (grammarFlipCorrect ?? this.grammarFlipCorrect),
       libroPromptText: libroPromptText ?? this.libroPromptText,
+      voiceAttemptCount: voiceAttemptCount ?? this.voiceAttemptCount,
+      wordResults: wordResults ?? this.wordResults,
+      listenSlower: listenSlower ?? this.listenSlower,
     );
   }
 }
@@ -130,12 +146,15 @@ class LessonNotifier extends StateNotifier<LessonState> {
     required LessonData lesson,
     required String personaKey,
     required ConnectivityService connectivity,
+    required SyncService syncService,
     required Ref ref,
   })  : _connectivity = connectivity,
+        _syncService = syncService,
         _ref = ref,
         super(LessonState(lesson: lesson, personaKey: personaKey));
 
   final ConnectivityService _connectivity;
+  final SyncService _syncService;
   final Ref _ref;
   final _claude = ClaudeService();
   final _stt = SpeechToText();
@@ -317,24 +336,17 @@ class LessonNotifier extends StateNotifier<LessonState> {
 
     try {
       final expected = state.content.voiceChallengeEn;
-      final prompt = '''
-Eres un profesor de inglés amable evaluando a un estudiante hispano.
-Oración esperada: "$expected"
-Lo que el estudiante dijo: "$transcribed"
-Considera: Significado (40pts) + Palabras correctas (40pts) + Fluidez (20pts)
-Responde SOLO con JSON: {"score": 75, "feedback_es": "¡Muy bien!..."}''';
-
-      final raw = await _claude.complete(
-        systemPrompt: '',
-        userMessage: prompt,
-        maxTokens: 256,
-      );
-
-      final parsed = _parseScore(raw);
+      final result = PronunciationGrader.grade(expected, transcribed);
+      
+      final attemptCount = state.voiceAttemptCount + 1;
+      
       state = state.copyWith(
         status: LessonStatus.result,
-        voiceScore: parsed.$1,
-        feedbackEs: parsed.$2,
+        voiceScore: result.score,
+        feedbackEs: result.feedback,
+        wordResults: result.wordResults,
+        voiceAttemptCount: attemptCount,
+        listenSlower: attemptCount == 2 && result.score < 7,
       );
     } catch (_) {
       state = state.copyWith(
@@ -350,34 +362,47 @@ Responde SOLO con JSON: {"score": 75, "feedback_es": "¡Muy bien!..."}''';
   }
 
   void retryVoiceChallenge() {
-    state = state.copyWith(
-      status: LessonStatus.voiceChallenge,
-      voiceTranscription: '',
-      isOfflineError: false,
-      errorMessage: '',
-      sttLowConfidence: false,
-    );
+    if (state.voiceAttemptCount >= 3 && state.voiceScore < 7) {
+      // Transition to Listening Choice mode on 3rd failure
+      state = state.copyWith(
+        status: LessonStatus.voiceListeningChoice,
+        voiceTranscription: '',
+        isOfflineError: false,
+        errorMessage: '',
+        sttLowConfidence: false,
+      );
+    } else {
+      state = state.copyWith(
+        status: LessonStatus.voiceChallenge,
+        voiceTranscription: '',
+        isOfflineError: false,
+        errorMessage: '',
+        sttLowConfidence: false,
+      );
+    }
   }
 
   // ── Completion ────────────────────────────────────────────────────────────
 
   void completeLesson(int score, String feedbackEs) {
-    // Score 0 means skipped (allowed). Scores 1–69 fail the voice gate.
-    if (score > 0 && score < 70) return;
+    // Score 0 means skipped (allowed). Scores 1–6 fail the voice gate.
+    if (score > 0 && score < 7) return;
 
     final elapsed = _startedAt != null
         ? DateTime.now().difference(_startedAt!).inSeconds
         : 0;
 
     final box = _ref.read(lessonProgressBoxProvider);
-    box.put(
-      state.lesson.id,
-      LessonProgress(
-        completed: true,
-        voiceScore: score,
-        feedbackEs: feedbackEs,
-      ),
+    final progress = LessonProgress(
+      completed: true,
+      voiceScore: score,
+      feedbackEs: feedbackEs,
     );
+
+    box.put(state.lesson.id, progress);
+    
+    // Background sync to Firestore
+    _syncService.saveLessonProgress(state.lesson.id, progress);
 
     _ref.invalidate(completedLessonIdsProvider);
     _ref.invalidate(completedLessonCountProvider);
@@ -475,6 +500,7 @@ final lessonPlayerProvider = StateNotifierProvider.autoDispose
     lesson: lesson,
     personaKey: personaKey,
     connectivity: ref.watch(connectivityServiceProvider),
+    syncService: ref.watch(syncServiceProvider),
     ref: ref,
   );
 });
