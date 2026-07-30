@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "315642142721",
+    "project_id": "clave-app-2ed6e",
+    "storage_bucket": "clave-app-2ed6e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315642142721:android:0991bda7b9c26bb88ba000",
+        "android_client_info": {
+          "package_name": "com.englishbridge.english_bridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315642142721-on7p2ar2ovr3ojcrfpcl4faqd1q3game.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYHdLbncNyKKUGitY1-_babgIfQk185_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315642142721-on7p2ar2ovr3ojcrfpcl4faqd1q3game.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315642142721-kq51mmubc2p4tp169fkgeevpm562m87n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.englishbridge.englishBridge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

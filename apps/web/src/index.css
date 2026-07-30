@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+  --animate-marquee: marquee 35s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom transitions and scrollbar stylings for elegant feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Shimmer effect for progress bars */
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(52,211,153,1) 0%, rgba(16,185,129,1) 40%, rgba(255,255,255,0.4) 50%, rgba(16,185,129,1) 60%, rgba(52,211,153,1) 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* =============================
+   Light Mode Theme Overrides
+   ============================= */
+
+html.light {
+  color-scheme: light;
+}
+
+/* Body & Root backgrounds */
+html.light body {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  color: #27272a;
+}
+
+html.light .bg-zinc-950 { background-color: #ffffff !important; }
+html.light .bg-zinc-950\/70 { background-color: rgba(255,255,255,0.75) !important; }
+html.light .bg-zinc-950\/80 { background-color: rgba(255,255,255,0.85) !important; }
+html.light .bg-zinc-950\/40 { background-color: rgba(248,249,250,0.6) !important; }
+html.light .bg-\[#070708\] { background-color: #f8f9fa !important; }
+
+/* Card surfaces */
+html.light .bg-zinc-900\/70 { background-color: rgba(255,255,255,0.85) !important; }
+html.light .bg-zinc-900\/80 { background-color: rgba(255,255,255,0.9) !important; }
+html.light .bg-zinc-900\/40 { background-color: rgba(255,255,255,0.6) !important; }
+html.light .bg-zinc-900\/50 { background-color: rgba(241,243,245,0.7) !important; }
+html.light .bg-zinc-900 { background-color: #f1f3f5 !important; }
+
+/* Borders */
+html.light .border-zinc-900\/60 { border-color: rgba(0,0,0,0.08) !important; }
+html.light .border-zinc-900 { border-color: #e9ecef !important; }
+html.light .border-zinc-800\/80 { border-color: rgba(0,0,0,0.1) !important; }
+html.light .border-zinc-800\/60 { border-color: rgba(0,0,0,0.06) !important; }
+html.light .border-zinc-800 { border-color: #dee2e6 !important; }
+html.light .border-zinc-850 { border-color: #e9ecef !important; }
+html.light .border-zinc-700\/80 { border-color: rgba(0,0,0,0.12) !important; }
+html.light .border-zinc-700\/50 { border-color: rgba(0,0,0,0.08) !important; }
+html.light .border-zinc-700\/30 { border-color: rgba(0,0,0,0.05) !important; }
+
+/* Text colors */
+html.light .text-zinc-150 { color: #1a1a2e !important; }
+html.light .text-zinc-100 { color: #212529 !important; }
+html.light .text-zinc-200 { color: #343a40 !important; }
+html.light .text-zinc-300 { color: #495057 !important; }
+html.light .text-zinc-400 { color: #6c757d !important; }
+html.light .text-zinc-500 { color: #868e96 !important; }
+html.light .text-zinc-600 { color: #adb5bd !important; }
+html.light .text-zinc-50 { color: #111111 !important; }
+
+/* Hover text overrides */
+html.light .hover\:text-zinc-200:hover { color: #212529 !important; }
+html.light .hover\:text-zinc-100:hover { color: #111111 !important; }
+html.light .group-hover\:text-zinc-50:hover { color: #000000 !important; }
+html.light .group-hover\:text-zinc-300:hover { color: #343a40 !important; }
+
+/* Hover background/border overrides */
+html.light .hover\:bg-zinc-800:hover { background-color: #e9ecef !important; }
+html.light .hover\:bg-zinc-900\/50:hover { background-color: rgba(233,236,239,0.6) !important; }
+html.light .hover\:border-zinc-700:hover { border-color: #ced4da !important; }
+html.light .hover\:border-zinc-700\/80:hover { border-color: rgba(0,0,0,0.12) !important; }
+
+/* Input fields */
+html.light .bg-zinc-950\/50 { background-color: rgba(248,249,250,0.7) !important; }
+html.light input,
+html.light textarea {
+  color: #212529 !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #adb5bd !important;
+}
+
+/* Gradient dividers */
+html.light .via-zinc-800 { --tw-gradient-via: #dee2e6 !important; }
+
+/* Scrollbar for light mode */
+html.light ::-webkit-scrollbar-thumb {
+  background: #ced4da;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+/* Terminal block in hero */
+html.light .bg-zinc-950\/60 { background-color: rgba(241,243,245,0.85) !important; }
+
+/* Back-to-top light overrides (using .light: prefix selectors) */
+html.light .light\:bg-white\/80 { background-color: rgba(255,255,255,0.85) !important; }
+html.light .light\:border-zinc-300\/60 { border-color: rgba(206,212,218,0.6) !important; }
+html.light .light\:text-zinc-500 { color: #868e96 !important; }
+html.light .light\:hover\:text-emerald-600:hover { color: #059669 !important; }
+html.light .light\:shadow-zinc-200\/50 { box-shadow: 0 4px 14px rgba(206,212,218,0.5) !important; }
+
+/* Subtle shadow for cards in light mode */
+html.light .shadow-2xl { box-shadow: 0 4px 30px rgba(0,0,0,0.08) !important; }
+html.light .shadow-black\/30 { --tw-shadow-color: rgba(0,0,0,0.06) !important; }

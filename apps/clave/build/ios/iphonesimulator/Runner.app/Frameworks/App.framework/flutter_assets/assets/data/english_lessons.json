@@ -1,0 +1,1148 @@
+{
+  "version": 1,
+  "lessons": [
+    {
+      "id": "path_firstwords_01",
+      "titleEs": "Primeras Palabras",
+      "titleEn": "First Words",
+      "difficulty": "A1",
+      "iconEmoji": "🗣️",
+      "targetVocabulary": [
+        {
+          "wordEn": "I",
+          "wordEs": "yo",
+          "exampleEn": "I am a student.",
+          "exampleEs": "Yo soy estudiante."
+        },
+        {
+          "wordEn": "you",
+          "wordEs": "tú / usted",
+          "exampleEn": "You are a good teacher.",
+          "exampleEs": "Usted es un buen maestro."
+        },
+        {
+          "wordEn": "he / she",
+          "wordEs": "él / ella",
+          "exampleEn": "He is from Mexico. She is from Guatemala.",
+          "exampleEs": "Él es de México. Ella es de Guatemala."
+        },
+        {
+          "wordEn": "we",
+          "wordEs": "nosotros",
+          "exampleEn": "We are in English class.",
+          "exampleEs": "Nosotros estamos en la clase de inglés."
+        },
+        {
+          "wordEn": "they",
+          "wordEs": "ellos / ellas",
+          "exampleEn": "They are my classmates.",
+          "exampleEs": "Ellos son mis compañeros de clase."
+        },
+        {
+          "wordEn": "am",
+          "wordEs": "soy / estoy (con yo)",
+          "exampleEn": "I am happy to be here.",
+          "exampleEs": "Estoy feliz de estar aquí."
+        },
+        {
+          "wordEn": "is",
+          "wordEs": "es / está (con él, ella)",
+          "exampleEn": "She is my teacher.",
+          "exampleEs": "Ella es mi maestra."
+        },
+        {
+          "wordEn": "are",
+          "wordEs": "son / están (con tú, nosotros, ellos)",
+          "exampleEn": "We are students.",
+          "exampleEs": "Nosotros somos estudiantes."
+        },
+        {
+          "wordEn": "my name is",
+          "wordEs": "me llamo / mi nombre es",
+          "exampleEn": "My name is Rosa.",
+          "exampleEs": "Me llamo Rosa."
+        },
+        {
+          "wordEn": "nice to meet you",
+          "wordEs": "mucho gusto",
+          "exampleEn": "Nice to meet you, Mrs. Patterson!",
+          "exampleEs": "¡Mucho gusto, Sra. Patterson!"
+        },
+        {
+          "wordEn": "where are you from?",
+          "wordEs": "¿de dónde eres / es usted?",
+          "exampleEn": "Where are you from?",
+          "exampleEs": "¿De dónde eres?"
+        },
+        {
+          "wordEn": "I am from",
+          "wordEs": "soy de / vengo de",
+          "exampleEn": "I am from Mexico City.",
+          "exampleEs": "Soy de la Ciudad de México."
+        },
+        {
+          "wordEn": "hello / hi",
+          "wordEs": "hola",
+          "exampleEn": "Hello! Hi! How are you?",
+          "exampleEs": "¡Hola! ¿Cómo estás?"
+        },
+        {
+          "wordEn": "good morning",
+          "wordEs": "buenos días",
+          "exampleEn": "Good morning, class!",
+          "exampleEs": "¡Buenos días, clase!"
+        },
+        {
+          "wordEn": "please",
+          "wordEs": "por favor",
+          "exampleEn": "Please speak slowly.",
+          "exampleEs": "Por favor, hable despacio."
+        },
+        {
+          "wordEn": "thank you",
+          "wordEs": "gracias",
+          "exampleEn": "Thank you for your help.",
+          "exampleEs": "Gracias por su ayuda."
+        },
+        {
+          "wordEn": "you're welcome",
+          "wordEs": "de nada",
+          "exampleEn": "You're welcome! See you next class.",
+          "exampleEs": "¡De nada! Nos vemos en la próxima clase."
+        },
+        {
+          "wordEn": "goodbye / see you later",
+          "wordEs": "adiós / hasta luego",
+          "exampleEn": "Goodbye! See you next week, Mrs. Patterson!",
+          "exampleEs": "¡Adiós! ¡Hasta la próxima semana, Sra. Patterson!"
+        }
+      ],
+      "grammarRuleEs": "En español tenemos DOS verbos: 'ser' y 'estar'. En inglés, los dos se convierten en UN solo verbo: 'to be'. ¡Es una simplificación enorme!\n\n━━━ LOS PRONOMBRES SUJETO ━━━\n\nEn inglés, SIEMPRE debes decir el pronombre. No puedes omitirlo como en español.\n\n• yo → I (¡siempre con mayúscula!)\n• tú / usted → you\n• él → he\n• ella → she\n• nosotros → we\n• ellos / ellas → they\n\n━━━ EL VERBO \"TO BE\" ━━━\n\n• I am = Yo soy / Yo estoy\n• You are = Tú eres / Tú estás\n• He is = Él es / Él está\n• She is = Ella es / Ella está\n• We are = Nosotros somos / estamos\n• They are = Ellos son / están\n\n━━━ EJEMPLOS PRÁCTICOS ━━━\n\n• \"I am Maria.\" = Soy María.\n• \"I am from Mexico.\" = Soy de México.\n• \"She is my teacher.\" = Ella es mi maestra.\n• \"We are students.\" = Somos estudiantes.\n• \"They are from Guatemala.\" = Ellos son de Guatemala.\n• \"Are you from Texas?\" = ¿Eres de Texas?\n\n━━━ LAS CONTRACCIONES (forma corta) ━━━\n\n• I am → I'm\n• You are → You're\n• He is → He's\n• She is → She's\n• We are → We're\n• They are → They're\n\nLas dos formas son correctas. En conversación, se usa más la forma corta.",
+      "grammarRuleEn": "In English, both 'ser' and 'estar' from Spanish become one verb: 'to be'. Always include the subject pronoun — you cannot drop it like in Spanish.",
+      "grammarExample": "\"My name is Maria. I am from Oaxaca. Nice to meet you!\"",
+      "simulatorPrompt": "You are Mrs. Patterson, a warm and patient retired school teacher volunteering as an ESL instructor at a community center in Texas. This is the student's very first English class ever. You speak SLOWLY and CLEARLY, use simple words, smile often, and celebrate every effort the student makes. You have taught immigrants for 20 years and you love this work.\n\nThis conversation has 4 natural stages — guide the student through each one:\n\nSTAGE 1 — GREETING AND NAME: Welcome the student warmly. Ask their name and how they are. Encourage them enthusiastically.\nSTAGE 2 — WHERE ARE YOU FROM: Ask what country or city they are from. Tell them something warm about it. Share that you have many wonderful students from Latin America.\nSTAGE 3 — STUDENT ASKS BACK: Gently prompt the student to ask YOU a question: \"Now, would you like to ask me something?\" If they ask where you are from, tell them you grew up in San Antonio, Texas. Celebrate that they asked!\nSTAGE 4 — GOODBYE: Wrap up class warmly. Tell them you are so proud of them. Say goodbye and see you next week.\n\nRULES:\n- Speak in very short, simple sentences (1-2 sentences). Speak SLOWLY.\n- ALWAYS celebrate the student's effort: \"Wonderful!\" / \"That is perfect!\" / \"Very good!\"\n- If the student makes a grammar error, gently model the correct form in your reply WITHOUT pointing out the error. If they say \"I be from Mexico\" — you respond: \"Wonderful! You ARE from Mexico! We are so happy you are here!\"\n- Never correct directly. Always encourage.\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used I am / my name is / where are you from / I am from correctly; 'amber' = understood but had grammar errors with to be or pronouns; 'red' = could not communicate at all\n- Set isConversationFinished to true only on your final goodbye line in Stage 4",
+      "simulatorCharacterEn": "Mrs. Patterson",
+      "simulatorCharacterRoleEs": "Maestra voluntaria de inglés en el centro comunitario",
+      "simulatorOpeningEn": "Welcome, welcome! Please come in! Oh, it is so nice to see a new face. I am Mrs. Patterson. This is your very first English class, yes? What is your name?",
+      "simulatorOpeningHintEs": "Saluda a la maestra y dile tu nombre — di \"Hello! My name is...\" y luego dile de dónde eres con \"I am from...\"",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Presentarte en inglés usando 'I am', 'my name is', y 'I am from'"
+    },
+    {
+      "id": "path_numbers_01",
+      "titleEs": "Los Números que Necesitas",
+      "titleEn": "Numbers You Need",
+      "difficulty": "A1",
+      "iconEmoji": "🔢",
+      "targetVocabulary": [
+        {
+          "wordEn": "one / two / three",
+          "wordEs": "uno / dos / tres",
+          "exampleEn": "I need one, two, three bags.",
+          "exampleEs": "Necesito una, dos, tres bolsas."
+        },
+        {
+          "wordEn": "four / five / six",
+          "wordEs": "cuatro / cinco / seis",
+          "exampleEn": "It costs five dollars and six cents.",
+          "exampleEs": "Cuesta cinco dólares con seis centavos."
+        },
+        {
+          "wordEn": "ten / eleven / twelve",
+          "wordEs": "diez / once / doce",
+          "exampleEn": "Here is ten dollars.",
+          "exampleEs": "Aquí tiene diez dólares."
+        },
+        {
+          "wordEn": "twenty / thirty / forty",
+          "wordEs": "veinte / treinta / cuarenta",
+          "exampleEn": "The total is twenty-three dollars.",
+          "exampleEs": "El total es veintitrés dólares."
+        },
+        {
+          "wordEn": "fifty / one hundred",
+          "wordEs": "cincuenta / cien",
+          "exampleEn": "I am paying with a fifty-dollar bill.",
+          "exampleEs": "Voy a pagar con un billete de cincuenta."
+        },
+        {
+          "wordEn": "dollar",
+          "wordEs": "dólar",
+          "exampleEn": "It costs twelve dollars.",
+          "exampleEs": "Cuesta doce dólares."
+        },
+        {
+          "wordEn": "cent",
+          "wordEs": "centavo",
+          "exampleEn": "Your change is fifty cents.",
+          "exampleEs": "Su cambio son cincuenta centavos."
+        },
+        {
+          "wordEn": "total",
+          "wordEs": "total",
+          "exampleEn": "What is the total?",
+          "exampleEs": "¿Cuál es el total?"
+        },
+        {
+          "wordEn": "how much?",
+          "wordEs": "¿cuánto cuesta?",
+          "exampleEn": "How much does this cost?",
+          "exampleEs": "¿Cuánto cuesta esto?"
+        },
+        {
+          "wordEn": "it costs",
+          "wordEs": "cuesta",
+          "exampleEn": "It costs fourteen fifty-three.",
+          "exampleEs": "Cuesta catorce dólares con cincuenta y tres centavos."
+        },
+        {
+          "wordEn": "cash",
+          "wordEs": "efectivo",
+          "exampleEn": "I will pay with cash.",
+          "exampleEs": "Voy a pagar en efectivo."
+        },
+        {
+          "wordEn": "change",
+          "wordEs": "cambio",
+          "exampleEn": "Here is your change — five forty-seven.",
+          "exampleEs": "Aquí está su cambio — cinco con cuarenta y siete."
+        },
+        {
+          "wordEn": "rewards card",
+          "wordEs": "tarjeta de puntos / de descuentos",
+          "exampleEn": "Do you have a rewards card?",
+          "exampleEs": "¿Tiene tarjeta de descuentos?"
+        },
+        {
+          "wordEn": "receipt",
+          "wordEs": "recibo",
+          "exampleEn": "Would you like your receipt?",
+          "exampleEs": "¿Quiere su recibo?"
+        },
+        {
+          "wordEn": "card reader",
+          "wordEs": "lector de tarjetas",
+          "exampleEn": "Sorry, the card reader is broken today.",
+          "exampleEs": "Lo siento, el lector de tarjetas está descompuesto hoy."
+        },
+        {
+          "wordEn": "can you repeat that?",
+          "wordEs": "¿puede repetir eso?",
+          "exampleEn": "Sorry, can you repeat that?",
+          "exampleEs": "Perdón, ¿puede repetir eso?"
+        },
+        {
+          "wordEn": "how much did you say?",
+          "wordEs": "¿cuánto dijo?",
+          "exampleEn": "Sorry, how much did you say?",
+          "exampleEs": "Perdón, ¿cuánto dijo?"
+        },
+        {
+          "wordEn": "out of twenty",
+          "wordEs": "de veinte dólares",
+          "exampleEn": "Out of twenty — your change is five forty-seven.",
+          "exampleEs": "De veinte — su cambio son cinco con cuarenta y siete."
+        }
+      ],
+      "grammarRuleEs": "Los números en inglés son esenciales para ir de compras, pagar y entender precios. ¡La buena noticia es que el orden es igual que en español!\n\n━━━ NÚMEROS DEL 1 AL 20 ━━━\n\n1-one, 2-two, 3-three, 4-four, 5-five\n6-six, 7-seven, 8-eight, 9-nine, 10-ten\n11-eleven, 12-twelve, 13-thirteen, 14-fourteen, 15-fifteen\n16-sixteen, 17-seventeen, 18-eighteen, 19-nineteen, 20-twenty\n\n━━━ LAS DECENAS ━━━\n\n• 30 = thirty\n• 40 = forty (¡sin 'u'! No es 'fourty')\n• 50 = fifty\n• 60 = sixty\n• 70 = seventy\n• 80 = eighty\n• 90 = ninety\n• 100 = one hundred\n\n━━━ NÚMEROS COMPUESTOS ━━━\n\nPrimero la decena, luego la unidad — igual que en español:\n• 21 = twenty-one\n• 35 = thirty-five\n• 47 = forty-seven\n• 99 = ninety-nine\n\n━━━ PRECIOS EN INGLÉS ━━━\n\n• \"How much is this?\" = ¿Cuánto cuesta esto?\n• \"It costs fifteen dollars.\" = Cuesta quince dólares.\n• \"That's twelve fifty.\" = Son doce con cincuenta. (12.50)\n• \"Your change is two twenty-five.\" = Su cambio son dos con veinticinco. (2.25)\n\n━━━ TRUCO IMPORTANTE ━━━\n\nLas cajeras americanas hablan RÁPIDO. Está completamente bien decir:\n• \"Sorry, can you repeat that?\" = ¿Puede repetir?\n• \"How much did you say?\" = ¿Cuánto dijo?\n¡Los americanos lo dicen todo el tiempo también!",
+      "grammarRuleEn": "Cardinal numbers 1–100 follow the same order as Spanish (twenty-one, thirty-five). Key difference: 40 is 'forty' not 'fourty'. Cashiers speak fast — it's always OK to ask them to repeat.",
+      "grammarExample": "\"The total is fourteen fifty-three. Here is twenty dollars. Your change is five forty-seven.\"",
+      "simulatorPrompt": "You are Brittany, a 19-year-old cashier at Dollar General. You speak at normal American speed — maybe a bit fast. You are not rude, just busy and casual. You say 'like' and 'gonna' naturally. The card reader is broken today so everyone has to pay cash — you have a handwritten sign that says 'CASH ONLY'.\n\nThis conversation has 4 natural stages — move through them:\n\nSTAGE 1 — TOTAL: Ring up their items and announce the total naturally. Say it fast the first time: \"Okay so your total's gonna be fourteen fifty-three.\" If they ask you to repeat, say it again — slightly clearer but not exaggerated.\nSTAGE 2 — REWARDS CARD: Ask casually: \"Do you have a DG rewards card?\" If they say no, just say \"No worries\" and continue.\nSTAGE 3 — CASH ONLY: Tell them the card reader is broken — cash only today. Accept their cash, count the change back naturally: \"Out of twenty, that's five forty-seven back.\" Hand them the change.\nSTAGE 4 — RECEIPT AND FAREWELL: Ask if they want their receipt. Say goodbye in the casual American way: \"Have a good one!\" or \"You're all set!\"\n\nRULES:\n- Speak casually and at normal speed. Use contractions: gonna, don't, ya, it's.\n- If student doesn't understand, say: \"Oh sorry! I said [repeat slightly clearer]\"\n- Keep your lines SHORT and realistic (1-2 sentences max)\n- If student says something confusing, respond as a real cashier: \"Sorry, what was that?\" or \"Hmm?\"\n- Be patient but don't slow down dramatically — this is real life\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student understood the total and used number/money phrases correctly; 'amber' = communicated but needed prompting or made errors; 'red' = could not communicate the transaction at all\n- Set isConversationFinished to true after the farewell in Stage 4",
+      "simulatorCharacterEn": "Brittany",
+      "simulatorCharacterRoleEs": "Cajera joven en el Dollar General",
+      "simulatorOpeningEn": "Hi! Did you find everything okay? Okay so your total's gonna be fourteen fifty-three.",
+      "simulatorOpeningHintEs": "Brittany habla rápido. Si no entendiste el precio, di \"Sorry, can you repeat that?\" — y luego prepara tu dinero.",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Entender precios, pagar en efectivo y recibir cambio en inglés"
+    },
+    {
+      "id": "path_store_01",
+      "titleEs": "En la Tienda",
+      "titleEn": "At the Store",
+      "difficulty": "A1",
+      "iconEmoji": "🛒",
+      "targetVocabulary": [
+        {
+          "wordEn": "this",
+          "wordEs": "este / esta (cerca de ti)",
+          "exampleEn": "I need this bag of rice.",
+          "exampleEs": "Necesito esta bolsa de arroz."
+        },
+        {
+          "wordEn": "that",
+          "wordEs": "ese / esa (lejos de ti)",
+          "exampleEn": "Can you reach that box for me?",
+          "exampleEs": "¿Puede alcanzarme esa caja?"
+        },
+        {
+          "wordEn": "these",
+          "wordEs": "estos / estas (varios, cerca)",
+          "exampleEn": "I need these beans, please.",
+          "exampleEs": "Necesito estos frijoles, por favor."
+        },
+        {
+          "wordEn": "those",
+          "wordEs": "esos / esas (varios, lejos)",
+          "exampleEn": "Are those tortillas on sale?",
+          "exampleEs": "¿Están en oferta esas tortillas?"
+        },
+        {
+          "wordEn": "I need",
+          "wordEs": "necesito",
+          "exampleEn": "I need corn tortillas.",
+          "exampleEs": "Necesito tortillas de maíz."
+        },
+        {
+          "wordEn": "do you have?",
+          "wordEs": "¿tiene(n)?",
+          "exampleEn": "Do you have masa harina?",
+          "exampleEs": "¿Tienen harina de maíz para tortillas?"
+        },
+        {
+          "wordEn": "where can I find?",
+          "wordEs": "¿dónde puedo encontrar?",
+          "exampleEn": "Where can I find the rice?",
+          "exampleEs": "¿Dónde puedo encontrar el arroz?"
+        },
+        {
+          "wordEn": "aisle",
+          "wordEs": "pasillo",
+          "exampleEn": "Rice is in aisle seven.",
+          "exampleEs": "El arroz está en el pasillo siete."
+        },
+        {
+          "wordEn": "I'm looking for",
+          "wordEs": "estoy buscando",
+          "exampleEn": "I'm looking for black beans.",
+          "exampleEs": "Estoy buscando frijoles negros."
+        },
+        {
+          "wordEn": "ingredient",
+          "wordEs": "ingrediente",
+          "exampleEn": "This is an ingredient for tamales.",
+          "exampleEs": "Este es un ingrediente para tamales."
+        },
+        {
+          "wordEn": "flour",
+          "wordEs": "harina",
+          "exampleEn": "It is a corn flour, not wheat flour.",
+          "exampleEs": "Es harina de maíz, no de trigo."
+        },
+        {
+          "wordEn": "corn",
+          "wordEs": "maíz",
+          "exampleEn": "I need corn, not wheat.",
+          "exampleEs": "Necesito maíz, no trigo."
+        },
+        {
+          "wordEn": "over there",
+          "wordEs": "allá / por allá",
+          "exampleEn": "The beans are over there, in aisle nine.",
+          "exampleEs": "Los frijoles están allá, en el pasillo nueve."
+        },
+        {
+          "wordEn": "section",
+          "wordEs": "sección",
+          "exampleEn": "Check the international foods section.",
+          "exampleEs": "Revise la sección de comida internacional."
+        },
+        {
+          "wordEn": "it looks like",
+          "wordEs": "se parece a / se ve como",
+          "exampleEn": "It looks like flour but it is white and fine.",
+          "exampleEs": "Se parece a la harina pero es blanca y fina."
+        },
+        {
+          "wordEn": "you use it to",
+          "wordEs": "se usa para",
+          "exampleEn": "You use it to make corn tortillas.",
+          "exampleEs": "Se usa para hacer tortillas de maíz."
+        },
+        {
+          "wordEn": "thank you for your help",
+          "wordEs": "gracias por su ayuda",
+          "exampleEn": "Thank you so much for your help, Kevin!",
+          "exampleEs": "¡Muchas gracias por su ayuda, Kevin!"
+        },
+        {
+          "wordEn": "no problem",
+          "wordEs": "no hay problema / con gusto",
+          "exampleEn": "No problem! Good luck with your recipe!",
+          "exampleEs": "¡No hay problema! ¡Buena suerte con su receta!"
+        }
+      ],
+      "grammarRuleEs": "En español tenemos TRES demostrativos: este, ese, aquel. En inglés solo hay DOS: 'this' y 'that'. ¡Más simple!\n\n━━━ LOS CUATRO DEMOSTRATIVOS ━━━\n\n¿Está CERCA de ti?\n• this = este / esta (singular)\n• these = estos / estas (plural)\n\n¿Está LEJOS de ti?\n• that = ese / esa / aquel / aquella (singular)\n• those = esos / esas / aquellos / aquellas (plural)\n\n━━━ EJEMPLOS EN LA TIENDA ━━━\n\n• \"I need this bag of rice.\" = Necesito esta bolsa de arroz. (la tienes en la mano)\n• \"Can I have that one?\" = ¿Me puede dar ese? (está en el estante de allá)\n• \"I'll take these.\" = Me llevo estos. (varios artículos en tu mano)\n• \"Are those on sale?\" = ¿Están en oferta esos? (los de allá)\n\n━━━ PEDIR AYUDA EN LA TIENDA ━━━\n\n• \"I need...\" = Necesito... (directo y claro)\n• \"Do you have...?\" = ¿Tiene(n)...?\n• \"Where can I find...?\" = ¿Dónde puedo encontrar...?\n• \"I'm looking for...\" = Estoy buscando...\n\n━━━ CUANDO NO SABES LA PALABRA EN INGLÉS ━━━\n\n¡No te rindas! Describe lo que necesitas — esto es lo que hacen todos:\n• \"It looks like flour but it is made from corn.\"\n• \"It is a white powder. You use it to make tortillas.\"\n• \"I use this to make tamales.\"\n¡Describir es una habilidad de comunicación, no una falla!",
+      "grammarRuleEn": "English has only two demonstratives (this/that) vs Spanish's three (este/ese/aquel). Add -ese for plural (these/those). Use 'I need' and 'Do you have' to ask for help in any store.",
+      "grammarExample": "\"Excuse me, do you have masa harina? I need this ingredient to make corn tortillas.\"",
+      "simulatorPrompt": "You are Kevin, a friendly 24-year-old Walmart grocery associate. You genuinely want to help every customer. You have absolutely NO idea what 'masa harina' is — you have never heard of it. You are not embarrassed — you just want to find a solution. You are helpful, upbeat, and a little bit proud when you figure things out.\n\nThis conversation has 4 natural stages — move through them:\n\nSTAGE 1 — FINDING BASIC ITEMS: The student asks where to find rice, beans, or a basic item. Help them with a specific aisle: \"Rice and beans are in aisle seven, on your left.\" Be helpful and specific.\nSTAGE 2 — THE MASA HARINA MYSTERY: The student asks about 'masa harina.' You have NO idea. React genuinely: \"Masa harina? Hmm, I've never heard of that one. Can you describe it? Like, what does it look like? What do you make with it?\" Ask clarifying questions.\nSTAGE 3 — FINDING A SOLUTION: Based on their description, suggest alternatives: \"Oh! That sounds like it might be in our Hispanic foods section — aisle 12! Or we have corn meal in aisle 7. Let me check our app real quick.\" Then say: \"Okay yeah, we actually do have it — it is in aisle 12 with the Mexican products. Sorry, I just didn't know the name!\"\nSTAGE 4 — FAREWELL: Student thanks you. You respond warmly: \"Of course! Good luck with your recipe — sounds delicious!\" Close naturally.\n\nRULES:\n- Be genuinely helpful and warm. Not sarcastic.\n- In Stage 2, ask real clarifying questions about what it looks like and what it is used for\n- Use normal American speech: \"Let me check,\" \"I think that's,\" \"Sounds like,\" \"Yeah\"\n- Keep lines short and natural (1-3 sentences)\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used this/that/these/those correctly OR used 'I need' / 'Do you have' / 'I'm looking for' naturally; 'amber' = communicated clearly but missed demonstratives or had grammar errors; 'red' = could not describe what they needed at all\n- Set isConversationFinished to true after the farewell in Stage 4",
+      "simulatorCharacterEn": "Kevin",
+      "simulatorCharacterRoleEs": "Empleado del departamento de comestibles en Walmart",
+      "simulatorOpeningEn": "Hey there! Can I help you find something today?",
+      "simulatorOpeningHintEs": "Pide ayuda a Kevin — di \"I'm looking for...\" o \"Do you have...?\" y dile qué necesitas. ¡Puedes señalar con 'this' o 'that'!",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Pedir artículos en una tienda y describir lo que necesitas cuando no sabes la palabra en inglés"
+    },
+    {
+      "id": "path_family_01",
+      "titleEs": "Mi Familia",
+      "titleEn": "My Family",
+      "difficulty": "A1",
+      "iconEmoji": "👨‍👩‍👧‍👦",
+      "targetVocabulary": [
+        {
+          "wordEn": "family",
+          "wordEs": "familia",
+          "exampleEn": "This is my family in the photo.",
+          "exampleEs": "Esta es mi familia en la foto."
+        },
+        {
+          "wordEn": "mother / mom",
+          "wordEs": "madre / mamá",
+          "exampleEn": "My mother is from Jalisco.",
+          "exampleEs": "Mi madre es de Jalisco."
+        },
+        {
+          "wordEn": "father / dad",
+          "wordEs": "padre / papá",
+          "exampleEn": "My father is a mechanic.",
+          "exampleEs": "Mi padre es mecánico."
+        },
+        {
+          "wordEn": "brother",
+          "wordEs": "hermano",
+          "exampleEn": "I have two brothers.",
+          "exampleEs": "Tengo dos hermanos."
+        },
+        {
+          "wordEn": "sister",
+          "wordEs": "hermana",
+          "exampleEn": "My sister lives in Houston.",
+          "exampleEs": "Mi hermana vive en Houston."
+        },
+        {
+          "wordEn": "son",
+          "wordEs": "hijo",
+          "exampleEn": "My son is seven years old.",
+          "exampleEs": "Mi hijo tiene siete años."
+        },
+        {
+          "wordEn": "daughter",
+          "wordEs": "hija",
+          "exampleEn": "My daughter is in first grade.",
+          "exampleEs": "Mi hija está en primer grado."
+        },
+        {
+          "wordEn": "husband",
+          "wordEs": "esposo / marido",
+          "exampleEn": "My husband works at the factory.",
+          "exampleEs": "Mi esposo trabaja en la fábrica."
+        },
+        {
+          "wordEn": "wife",
+          "wordEs": "esposa",
+          "exampleEn": "His wife is a nurse.",
+          "exampleEs": "Su esposa es enfermera."
+        },
+        {
+          "wordEn": "grandfather / grandpa",
+          "wordEs": "abuelo",
+          "exampleEn": "My grandfather is eighty years old.",
+          "exampleEs": "Mi abuelo tiene ochenta años."
+        },
+        {
+          "wordEn": "grandmother / grandma",
+          "wordEs": "abuela",
+          "exampleEn": "My grandma makes the best tamales.",
+          "exampleEs": "Mi abuela hace los mejores tamales."
+        },
+        {
+          "wordEn": "my",
+          "wordEs": "mi / mis",
+          "exampleEn": "My children are in school.",
+          "exampleEs": "Mis hijos están en la escuela."
+        },
+        {
+          "wordEn": "your",
+          "wordEs": "tu / tus / su / sus (de usted)",
+          "exampleEn": "Is your mother here in the US?",
+          "exampleEs": "¿Está tu madre aquí en los EE.UU.?"
+        },
+        {
+          "wordEn": "his / her",
+          "wordEs": "su / sus (de él o de ella)",
+          "exampleEn": "His name is Carlos. Her name is Ana.",
+          "exampleEs": "Su nombre es Carlos. Su nombre es Ana."
+        },
+        {
+          "wordEn": "I have",
+          "wordEs": "yo tengo",
+          "exampleEn": "I have three children.",
+          "exampleEs": "Yo tengo tres hijos."
+        },
+        {
+          "wordEn": "he has / she has",
+          "wordEs": "él tiene / ella tiene",
+          "exampleEn": "She has two brothers and one sister.",
+          "exampleEs": "Ella tiene dos hermanos y una hermana."
+        },
+        {
+          "wordEn": "years old",
+          "wordEs": "años (de edad)",
+          "exampleEn": "My son is nine years old.",
+          "exampleEs": "Mi hijo tiene nueve años."
+        },
+        {
+          "wordEn": "cute / beautiful",
+          "wordEs": "lindo / hermoso / qué guapo",
+          "exampleEn": "What a cute baby! She is beautiful!",
+          "exampleEs": "¡Qué bebé tan lindo! ¡Ella es hermosa!"
+        }
+      ],
+      "grammarRuleEs": "En inglés, los adjetivos posesivos NO cambian según el género o número de lo que poseen — a diferencia del español. Son siempre iguales, ¡sin importar si es masculino, femenino, singular o plural!\n\n━━━ LOS ADJETIVOS POSESIVOS ━━━\n\n• my = mi / mis (para YO)\n• your = tu / tus / su / sus (para TÚ o USTED)\n• his = su / sus (de ÉL)\n• her = su / sus (de ELLA)\n• our = nuestro/a/os/as (de NOSOTROS)\n• their = su / sus (de ELLOS/ELLAS)\n\n━━━ EJEMPLOS PRÁCTICOS ━━━\n\n• \"My brother is a doctor.\" = Mi hermano es doctor.\n• \"Her children are in school.\" = Sus hijos están en la escuela.\n• \"His wife is from Puebla.\" = Su esposa es de Puebla.\n• \"Their grandmother makes tamales.\" = Su abuela hace tamales.\n• \"Your family is beautiful!\" = ¡Su familia es hermosa!\n\n━━━ HAVE vs HAS — El verbo 'tener' ━━━\n\nEn inglés, el verbo 'have' (tener) cambia solo con él/ella/ello:\n\n• I have = Yo tengo\n• You have = Tú tienes\n• He HAS = Él tiene ← ¡cambia!\n• She HAS = Ella tiene ← ¡cambia!\n• We have = Nosotros tenemos\n• They have = Ellos tienen\n\n━━━ PREGUNTANDO CON 'DO / DOES' ━━━\n\n• \"Do you have brothers?\" = ¿Tienes hermanos?\n• \"Does she have children?\" = ¿Tiene ella hijos?\n• \"How many children do you have?\" = ¿Cuántos hijos tienes?\n\n━━━ LOS EDADES ━━━\n\nEn inglés se dice 'My son IS nine years old' — usamos el verbo 'to be' para las edades, no 'tener':\n• \"How old is she?\" = ¿Cuántos años tiene ella?\n• \"She is seven years old.\" = Ella tiene siete años.",
+      "grammarRuleEn": "Possessive adjectives (my, your, his, her) don't change for gender or number. The verb 'have' changes to 'has' only with he/she/it. Age uses 'to be': 'She is seven years old.'",
+      "grammarExample": "\"This is my family. I have two sons and one daughter. My wife is from Veracruz. Her name is Rosa.\"",
+      "simulatorPrompt": "You are James, a friendly 35-year-old coworker at a food packaging plant. You are having a break with the student and they are showing you photos on their phone. You are genuinely warm and curious about their family. You ask real questions that a coworker would ask. You find their family charming and say so naturally.\n\nThis conversation has 4 natural stages — move through them:\n\nSTAGE 1 — SEEING THE PHOTO: Student shows you a photo. React warmly and ask who the people are: \"Oh nice, is this your family? Who is that?\" Ask about a specific person in the photo (mother, father, sibling, or child).\nSTAGE 2 — NAMES AND AGES: Ask natural follow-up questions about names and ages: \"How old are your kids?\" or \"What's your dad's name?\" Share something brief about your own family (you have a younger sister named Brittany and your parents live in San Antonio).\nSTAGE 3 — WHERE DOES FAMILY LIVE: Ask if their family is here or back home: \"Are your parents here in the US or still in [their home country]?\" React to their answer with empathy if family is far: \"That must be hard, not being close to them.\"\nSTAGE 4 — BACK TO WORK: Break is over. Say it warmly: \"Hey, break's almost over. But your family is great — you should bring in some of your grandma's tamales sometime!\" Laugh and close naturally.\n\nRULES:\n- Be a real coworker — warm, curious, casual. Use contractions naturally.\n- Ask ONE question at a time — don't pile on multiple questions.\n- Keep your lines short and natural (1-3 sentences max)\n- React to what the student actually says — don't ignore their answers\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student correctly used possessive adjectives (my/his/her) and have/has; 'amber' = communicated clearly but mixed up his/her or have/has; 'red' = could not describe family members at all\n- Set isConversationFinished to true after the farewell in Stage 4",
+      "simulatorCharacterEn": "James",
+      "simulatorCharacterRoleEs": "Compañero de trabajo en la planta empacadora",
+      "simulatorOpeningEn": "Hey, is that your phone wallpaper? Are those your kids? Aww, they're so cute! How old are they?",
+      "simulatorOpeningHintEs": "James quiere conocer a tu familia — dile quiénes son usando 'my', 'his', 'her'. Por ejemplo: \"This is my son. His name is...\" o \"I have two children.\"",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Presentar a tu familia usando posesivos (my, his, her) y el verbo 'have / has'"
+    },
+    {
+      "id": "path_restaurant_01",
+      "titleEs": "En el Restaurante",
+      "titleEn": "At the Restaurant",
+      "difficulty": "A1",
+      "iconEmoji": "🍽️",
+      "targetVocabulary": [
+        {
+          "wordEn": "menu",
+          "wordEs": "menú / carta",
+          "exampleEn": "Can I see the menu, please?",
+          "exampleEs": "¿Me puede traer el menú, por favor?"
+        },
+        {
+          "wordEn": "I would like",
+          "wordEs": "quisiera / me gustaría",
+          "exampleEn": "I would like the chicken tacos, please.",
+          "exampleEs": "Quisiera los tacos de pollo, por favor."
+        },
+        {
+          "wordEn": "can I have",
+          "wordEs": "¿me puede dar / traer?",
+          "exampleEn": "Can I have a glass of water?",
+          "exampleEs": "¿Me puede traer un vaso de agua?"
+        },
+        {
+          "wordEn": "to drink",
+          "wordEs": "para tomar / beber",
+          "exampleEn": "What would you like to drink?",
+          "exampleEs": "¿Qué desea para tomar?"
+        },
+        {
+          "wordEn": "water",
+          "wordEs": "agua",
+          "exampleEn": "Just water for me, thank you.",
+          "exampleEs": "Solo agua para mí, gracias."
+        },
+        {
+          "wordEn": "coffee",
+          "wordEs": "café",
+          "exampleEn": "Can I have a coffee with milk?",
+          "exampleEs": "¿Me puede traer un café con leche?"
+        },
+        {
+          "wordEn": "order",
+          "wordEs": "ordenar / pedir",
+          "exampleEn": "Are you ready to order?",
+          "exampleEs": "¿Están listos para ordenar?"
+        },
+        {
+          "wordEn": "for here or to go?",
+          "wordEs": "¿para aquí o para llevar?",
+          "exampleEn": "Is that for here or to go?",
+          "exampleEs": "¿Es para comer aquí o para llevar?"
+        },
+        {
+          "wordEn": "for here",
+          "wordEs": "para comer aquí",
+          "exampleEn": "For here, please.",
+          "exampleEs": "Para comer aquí, por favor."
+        },
+        {
+          "wordEn": "to go",
+          "wordEs": "para llevar",
+          "exampleEn": "To go, please — I am in a hurry.",
+          "exampleEs": "Para llevar, por favor — tengo prisa."
+        },
+        {
+          "wordEn": "combo / meal",
+          "wordEs": "combo / platillo completo",
+          "exampleEn": "The combo comes with rice and beans.",
+          "exampleEs": "El combo viene con arroz y frijoles."
+        },
+        {
+          "wordEn": "comes with",
+          "wordEs": "viene con / incluye",
+          "exampleEn": "Does the plate come with a drink?",
+          "exampleEs": "¿El platillo viene con bebida?"
+        },
+        {
+          "wordEn": "check / bill",
+          "wordEs": "la cuenta",
+          "exampleEn": "Can I have the check, please?",
+          "exampleEs": "¿Me puede traer la cuenta, por favor?"
+        },
+        {
+          "wordEn": "tip",
+          "wordEs": "propina",
+          "exampleEn": "The tip is not included.",
+          "exampleEs": "La propina no está incluida."
+        },
+        {
+          "wordEn": "split",
+          "wordEs": "dividir / separar la cuenta",
+          "exampleEn": "Can we split the check?",
+          "exampleEs": "¿Podemos dividir la cuenta?"
+        },
+        {
+          "wordEn": "spicy",
+          "wordEs": "picante",
+          "exampleEn": "Is the salsa spicy?",
+          "exampleEs": "¿La salsa es picante?"
+        },
+        {
+          "wordEn": "without",
+          "wordEs": "sin",
+          "exampleEn": "Can I have mine without onions?",
+          "exampleEs": "¿Me lo puede hacer sin cebolla?"
+        },
+        {
+          "wordEn": "delicious",
+          "wordEs": "delicioso / rico",
+          "exampleEn": "This is delicious! What is in it?",
+          "exampleEs": "¡Está delicioso! ¿Qué lleva?"
+        }
+      ],
+      "grammarRuleEs": "En los restaurantes americanos, hay dos formas muy importantes de pedir cosas. La primera es directa y común. La segunda es más educada y suena más profesional.\n\n━━━ DOS FORMAS DE PEDIR ━━━\n\n🔵 FORMA DIRECTA (común y aceptable):\n\"Can I have...?\" = ¿Me puede dar / traer...?\n• \"Can I have the chicken plate?\"\n• \"Can I have a coffee?\"\n• \"Can I have the check?\"\n\n🟢 FORMA EDUCADA (suena muy bien):\n\"I would like...\" = Quisiera / Me gustaría...\n• \"I would like the enchiladas, please.\"\n• \"I would like a glass of water.\"\n• \"I would like to see the menu.\"\n\n━━━ LA FORMA CORTA: 'I'D LIKE' ━━━\n\nEn conversación real, se dice 'I'd like' — es la contracción de 'I would like':\n• \"I'd like the combo number two.\"\n• \"I'd like a coffee, please.\"\n\n━━━ PREGUNTAS TÍPICAS DEL MESERO ━━━\n\n• \"Are you ready to order?\" = ¿Están listos para ordenar?\n• \"What would you like to drink?\" = ¿Qué desea para tomar?\n• \"For here or to go?\" = ¿Para aquí o para llevar?\n• \"How is everything?\" = ¿Cómo está todo?\n• \"Can I get you anything else?\" = ¿Le traigo algo más?\n\n━━━ MODIFICAR TU ORDEN ━━━\n\n• \"without onions\" = sin cebolla\n• \"on the side\" = aparte / al lado\n• \"extra salsa\" = salsa extra\n• \"Is it spicy?\" = ¿Es picante?\n\n━━━ LA CUENTA ━━━\n\n• \"Can I have the check, please?\" = ¿Me trae la cuenta?\n• In the US, the tip (propina) is usually 15–20% and is NOT included automatically.",
+      "grammarRuleEn": "Two key ordering phrases: 'Can I have...' (direct) and 'I would like...' / 'I'd like...' (polite). Servers will ask: 'For here or to go?' and 'What would you like to drink?' The tip is usually 15–20% and not included.",
+      "grammarExample": "\"I'd like the combo number two, please. Can I have it without onions? And can I have a water to drink?\"",
+      "simulatorPrompt": "You are Sandra, a 40-year-old waitress at 'Rosa's Diner', a beloved Mexican-American diner in San Antonio. You are experienced, warm, and efficient. You have a slight Texas accent. You genuinely love the food here and can recommend dishes. The specials today are: green chile enchiladas ($10.99) and carne guisada plate with rice and beans ($12.50). You treat every customer like a regular.\n\nThis conversation has 4 natural stages — move through them:\n\nSTAGE 1 — WELCOME AND DRINKS: Greet them, hand them a menu, and ask what they would like to drink. Give them a moment to look.\nSTAGE 2 — TAKING THE ORDER: Ask if they are ready to order. If they seem unsure, offer to tell them today's specials. When they order, confirm it back warmly: \"Great choice! And for here or to go?\" Ask if they want anything else.\nSTAGE 3 — CHECKING IN: After a moment, check on them: \"How is everything? Can I get you anything else?\" Be friendly and brief. Handle any modifications they need (no onions, extra salsa, etc.).\nSTAGE 4 — THE CHECK: Bring the check. Mention the total naturally. Remind them the tip is not included. Thank them warmly and invite them back: \"Thank you so much — you come back and see us now!\"\n\nRULES:\n- Be warm and natural. Use Southern/Texas warmth: \"Hon\", \"sweetie\", \"you betcha\".\n- When the student orders, repeat the order back to confirm it.\n- Keep lines short and conversational (1-3 sentences)\n- If student uses 'give me' instead of 'I'd like' — that's fine, do not correct, just respond naturally\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used 'I would like' or 'Can I have' to order, handled for-here-or-to-go, and asked for the check; 'amber' = communicated the order but with errors or very minimal phrases; 'red' = could not place an order at all\n- Set isConversationFinished to true after the farewell in Stage 4",
+      "simulatorCharacterEn": "Sandra",
+      "simulatorCharacterRoleEs": "Mesera en Rosa's Diner, un restaurante mexicano-americano en San Antonio",
+      "simulatorOpeningEn": "Well hey there, welcome to Rosa's! Go ahead and have a seat, hon. Here's your menu. Can I start you off with something to drink?",
+      "simulatorOpeningHintEs": "Sandra te está tomando la orden — empieza pidiendo algo para tomar: \"Can I have a water, please?\" o \"I would like a coffee.\" ¡Luego revisa el menú!",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Ordenar comida en un restaurante usando 'I would like' y 'Can I have', y pedir la cuenta"
+    },
+    {
+      "id": "path_daily_routine_01",
+      "titleEs": "Todos los Días",
+      "titleEn": "Every Day",
+      "difficulty": "A1",
+      "iconEmoji": "🌅",
+      "targetVocabulary": [
+        {
+          "wordEn": "wake up",
+          "wordEs": "despertar(se)",
+          "exampleEn": "I wake up at six in the morning.",
+          "exampleEs": "Me despierto a las seis de la mañana."
+        },
+        {
+          "wordEn": "get up",
+          "wordEs": "levantarse",
+          "exampleEn": "I get up and make coffee.",
+          "exampleEs": "Me levanto y preparo café."
+        },
+        {
+          "wordEn": "take a shower",
+          "wordEs": "bañarse / ducharse",
+          "exampleEn": "I take a shower every morning.",
+          "exampleEs": "Me baño todas las mañanas."
+        },
+        {
+          "wordEn": "eat breakfast",
+          "wordEs": "desayunar / comer el desayuno",
+          "exampleEn": "I eat breakfast before I go to work.",
+          "exampleEs": "Desayuno antes de ir al trabajo."
+        },
+        {
+          "wordEn": "go to work",
+          "wordEs": "ir al trabajo",
+          "exampleEn": "I go to work at seven thirty.",
+          "exampleEs": "Voy al trabajo a las siete y media."
+        },
+        {
+          "wordEn": "start work",
+          "wordEs": "entrar a trabajar / empezar el turno",
+          "exampleEn": "I start work at eight o'clock.",
+          "exampleEs": "Empiezo a trabajar a las ocho en punto."
+        },
+        {
+          "wordEn": "finish work",
+          "wordEs": "salir del trabajo / terminar el turno",
+          "exampleEn": "I finish work at five in the afternoon.",
+          "exampleEs": "Salgo del trabajo a las cinco de la tarde."
+        },
+        {
+          "wordEn": "pick up the kids",
+          "wordEs": "recoger a los niños",
+          "exampleEn": "I pick up my kids from school at three.",
+          "exampleEs": "Recojo a mis hijos de la escuela a las tres."
+        },
+        {
+          "wordEn": "cook dinner",
+          "wordEs": "cocinar la cena",
+          "exampleEn": "My wife cooks dinner every night.",
+          "exampleEs": "Mi esposa cocina la cena todas las noches."
+        },
+        {
+          "wordEn": "watch TV",
+          "wordEs": "ver televisión",
+          "exampleEn": "After dinner, we watch TV.",
+          "exampleEs": "Después de cenar, vemos televisión."
+        },
+        {
+          "wordEn": "go to bed",
+          "wordEs": "acostarse / irse a dormir",
+          "exampleEn": "I go to bed at ten o'clock.",
+          "exampleEs": "Me acuesto a las diez de la noche."
+        },
+        {
+          "wordEn": "in the morning",
+          "wordEs": "en la mañana / por la mañana",
+          "exampleEn": "In the morning, I drink coffee.",
+          "exampleEs": "En la mañana, tomo café."
+        },
+        {
+          "wordEn": "in the afternoon",
+          "wordEs": "en la tarde / por la tarde",
+          "exampleEn": "I take a walk in the afternoon.",
+          "exampleEs": "Doy una caminata en la tarde."
+        },
+        {
+          "wordEn": "at night",
+          "wordEs": "en la noche / por la noche",
+          "exampleEn": "At night, the kids do their homework.",
+          "exampleEs": "En la noche, los niños hacen su tarea."
+        },
+        {
+          "wordEn": "every day",
+          "wordEs": "todos los días",
+          "exampleEn": "I walk my dog every day.",
+          "exampleEs": "Paseo a mi perro todos los días."
+        },
+        {
+          "wordEn": "on weekends",
+          "wordEs": "los fines de semana",
+          "exampleEn": "On weekends, I sleep a little longer.",
+          "exampleEs": "Los fines de semana duermo un poco más."
+        },
+        {
+          "wordEn": "usually",
+          "wordEs": "normalmente / generalmente / usualmente",
+          "exampleEn": "I usually eat lunch at noon.",
+          "exampleEs": "Normalmente como al mediodía."
+        },
+        {
+          "wordEn": "sometimes",
+          "wordEs": "a veces",
+          "exampleEn": "Sometimes I work overtime.",
+          "exampleEs": "A veces trabajo horas extra."
+        }
+      ],
+      "grammarRuleEs": "El presente simple en inglés se usa para hablar de rutinas — cosas que haces todos los días. ¡Es muy diferente al español porque casi nunca cambia!\n\n━━━ EL PRESENTE SIMPLE ━━━\n\nPara YO, TÚ, NOSOTROS y ELLOS — el verbo NO cambia:\n• I work (yo trabajo)\n• You work (tú trabajas)\n• We work (nosotros trabajamos)\n• They work (ellos trabajan)\n\n⚠️ SOLO CAMBIA con ÉL / ELLA / ELLO — se agrega -S o -ES:\n• He work-S (él trabaja)\n• She go-ES (ella va) ← verbos que terminan en -o, -sh, -ch, -x\n• He watch-ES TV (él ve televisión)\n\n━━━ EJEMPLOS DE RUTINA DIARIA ━━━\n\n• \"I wake up at six.\" = Me despierto a las seis.\n• \"She goes to work at seven.\" = Ella va al trabajo a las siete.\n• \"We eat dinner together every night.\" = Cenamos juntos todas las noches.\n• \"He watches TV after work.\" = Él ve televisión después del trabajo.\n\n━━━ LAS HORAS EN INGLÉS ━━━\n\n• 6:00 = six o'clock\n• 6:15 = six fifteen / quarter past six\n• 6:30 = six thirty / half past six\n• 6:45 = six forty-five / quarter to seven\n\n━━━ EXPRESIONES DE TIEMPO ━━━\n\n• every day = todos los días\n• every morning = todas las mañanas\n• on weekdays = entre semana / de lunes a viernes\n• on weekends = los fines de semana\n• usually = normalmente\n• sometimes = a veces\n• always = siempre\n• never = nunca\n\n━━━ HACER PREGUNTAS ━━━\n\nPara preguntar sobre rutinas, usamos 'DO' o 'DOES':\n• \"What do you do every morning?\" = ¿Qué haces todas las mañanas?\n• \"What time does she go to work?\" = ¿A qué hora va ella al trabajo?\n• \"Do you work on weekends?\" = ¿Trabajas los fines de semana?",
+      "grammarRuleEn": "Simple present tense for routines: the verb stays the same for I/you/we/they but adds -s/-es for he/she/it. Use 'do/does' to form questions. Key time words: every day, usually, sometimes, always, never.",
+      "grammarExample": "\"Every morning I wake up at six. I eat breakfast and then I go to work at seven thirty. I usually finish at five.\"",
+      "simulatorPrompt": "You are Linda, a 55-year-old retired school cafeteria worker who is now your neighbor. You are the friendliest person on the block — you know everyone's schedule and you love to chat. You often see the student coming and going and you are genuinely curious about their life. You are warm, chatty, and encouraging. You speak clearly but at a natural pace.\n\nThis conversation has 4 natural stages — move through them:\n\nSTAGE 1 — MORNING SMALL TALK: You are both outside, maybe getting the mail or walking to the car. Comment on seeing them so early: \"My goodness, you are always up so early! What time do you start work?\" Be warm and impressed by their answer.\nSTAGE 2 — DAILY SCHEDULE: You are curious about their whole day. Ask follow-up questions naturally: \"And what time do you finish? Do you have to pick up kids?\" Share a bit about your own retired routine (you wake up at 8, walk your dog Biscuit, watch the morning news).\nSTAGE 3 — WEEKENDS: Ask what they do on weekends: \"So what do you like to do on weekends? Do you rest or do you stay busy?\" Share what you do on weekends (you visit your grandkids on Sundays and go to church on Saturday evenings).\nSTAGE 4 — FRIENDLY GOODBYE: You need to get going. Wrap up warmly: \"Well, it was so nice talking to you! You work so hard — you deserve a nice weekend. Say hello to your family for me!\" Close naturally.\n\nRULES:\n- Be a real chatty neighbor — warm, interested, talkative but in short bursts.\n- React specifically to what the student says: if they say they work 12-hour shifts, react with empathy.\n- Ask ONE follow-up question at a time, not multiple.\n- Keep your lines to 2-3 sentences max.\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used simple present correctly (I wake up / she works / we eat) with time expressions; 'amber' = communicated the routine but had errors with he/she verb forms or time expressions; 'red' = could not describe a daily routine at all\n- Set isConversationFinished to true after the farewell in Stage 4",
+      "simulatorCharacterEn": "Linda",
+      "simulatorCharacterRoleEs": "Vecina amigable y jubilada que vive en tu cuadra",
+      "simulatorOpeningEn": "Oh hey, good morning! I always see you leaving so early — my goodness! What time do you have to be at work?",
+      "simulatorOpeningHintEs": "Linda es tu vecina y quiere saber de tu rutina — dile a qué hora te despiertas y a qué hora vas al trabajo. Usa 'I wake up at...' e 'I go to work at...'",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Describir tu rutina diaria en presente simple, incluyendo horas y expresiones de tiempo"
+    },
+    {
+      "id": "path_past_weekend_01",
+      "titleEs": "El Fin de Semana Pasado",
+      "titleEn": "Talking About Past Weekends",
+      "difficulty": "A2",
+      "iconEmoji": "📅",
+      "targetVocabulary": [
+        {
+          "wordEn": "went",
+          "wordEs": "fui / fue / fuimos (pasado de 'go')",
+          "exampleEn": "I went to the park on Saturday.",
+          "exampleEs": "Fui al parque el sábado."
+        },
+        {
+          "wordEn": "ate",
+          "wordEs": "comí / comió / comimos (pasado de 'eat')",
+          "exampleEn": "We ate at a Mexican restaurant last night.",
+          "exampleEs": "Comimos en un restaurante mexicano anoche."
+        },
+        {
+          "wordEn": "saw",
+          "wordEs": "vi / vio / vimos (pasado de 'see')",
+          "exampleEn": "I saw a good movie on Friday.",
+          "exampleEs": "Vi una buena película el viernes."
+        },
+        {
+          "wordEn": "did",
+          "wordEs": "hice / hizo / hicimos (pasado de 'do')",
+          "exampleEn": "What did you do on Sunday?",
+          "exampleEs": "¿Qué hiciste el domingo?"
+        },
+        {
+          "wordEn": "watched",
+          "wordEs": "vi / vio (pasado de 'watch')",
+          "exampleEn": "He watched the game at home.",
+          "exampleEs": "Él vio el partido en casa."
+        },
+        {
+          "wordEn": "played",
+          "wordEs": "jugué / jugó (pasado de 'play')",
+          "exampleEn": "The kids played in the backyard.",
+          "exampleEs": "Los niños jugaron en el patio."
+        },
+        {
+          "wordEn": "visited",
+          "wordEs": "visité / visitó (pasado de 'visit')",
+          "exampleEn": "We visited my parents on Sunday.",
+          "exampleEs": "Visitamos a mis padres el domingo."
+        },
+        {
+          "wordEn": "cooked",
+          "wordEs": "cociné / cocinó (pasado de 'cook')",
+          "exampleEn": "She cooked tamales for the whole family.",
+          "exampleEs": "Ella cocinó tamales para toda la familia."
+        },
+        {
+          "wordEn": "slept",
+          "wordEs": "dormí / durmió (pasado de 'sleep')",
+          "exampleEn": "I slept until nine on Saturday.",
+          "exampleEs": "Dormí hasta las nueve el sábado."
+        },
+        {
+          "wordEn": "stayed",
+          "wordEs": "me quedé / se quedó (pasado de 'stay')",
+          "exampleEn": "We stayed home and rested.",
+          "exampleEs": "Nos quedamos en casa y descansamos."
+        },
+        {
+          "wordEn": "had",
+          "wordEs": "tuve / tuvo (pasado de 'have')",
+          "exampleEn": "We had a barbecue on Saturday.",
+          "exampleEs": "Tuvimos una barbacoa el sábado."
+        },
+        {
+          "wordEn": "bought",
+          "wordEs": "compré / compró (pasado de 'buy')",
+          "exampleEn": "She bought new shoes at the mall.",
+          "exampleEs": "Ella compró zapatos nuevos en el centro comercial."
+        },
+        {
+          "wordEn": "drove",
+          "wordEs": "manejé / manejó (pasado de 'drive')",
+          "exampleEn": "He drove his kids to soccer practice.",
+          "exampleEs": "Él llevó a sus hijos a practicar fútbol."
+        },
+        {
+          "wordEn": "called",
+          "wordEs": "llamé / llamó (pasado de 'call')",
+          "exampleEn": "I called my mom on Sunday morning.",
+          "exampleEs": "Llamé a mi mamá el domingo por la mañana."
+        },
+        {
+          "wordEn": "danced",
+          "wordEs": "bailé / bailó (pasado de 'dance')",
+          "exampleEn": "We danced at my cousin's party.",
+          "exampleEs": "Bailamos en la fiesta de mi prima."
+        },
+        {
+          "wordEn": "enjoyed",
+          "wordEs": "disfruté / disfrutó (pasado de 'enjoy')",
+          "exampleEn": "I really enjoyed the weekend.",
+          "exampleEs": "Realmente disfruté el fin de semana."
+        },
+        {
+          "wordEn": "tried",
+          "wordEs": "intenté / probé (pasado de 'try')",
+          "exampleEn": "I tried a new recipe on Saturday.",
+          "exampleEs": "Probé una receta nueva el sábado."
+        },
+        {
+          "wordEn": "spent",
+          "wordEs": "pasé / gastó (pasado de 'spend')",
+          "exampleEn": "We spent time with the family.",
+          "exampleEs": "Pasamos tiempo con la familia."
+        }
+      ],
+      "grammarRuleEs": "El pasado simple en inglés es como el pretérito en español — se usa para hablar de acciones que ya terminaron. ¡Pero tiene algunas diferencias importantes!\n\n━━━ VERBOS REGULARES: agrega -ED ━━━\n\nLa mayoría de los verbos solo necesitan -ED al final:\n• work → work-ED (trabajé / trabajó)\n• watch → watch-ED (vi / vio)\n• play → play-ED (jugué / jugó)\n• cook → cook-ED (cociné / cocinó)\n• visit → visit-ED (visité / visitó)\n• enjoy → enjoy-ED (disfruté / disfrutó)\n• dance → danc-ED (bailé / bailó)\n• call → call-ED (llamé / llamó)\n\n¡IGUAL para TODOS! No cambia con él/ella/ellos como en el presente:\n• \"She worked.\" ✅ (NO: She workED-S)\n• \"They watched.\" ✅\n\n━━━ VERBOS IRREGULARES: hay que aprenderlos ━━━\n\nAlgunos verbos cambian completamente — igual que en español (ir → fui):\n• go → went (fui / fue)\n• eat → ate (comí / comió)\n• see → saw (vi / vio)\n• have → had (tuve / tuvo)\n• buy → bought (compré / compró)\n• drive → drove (manejé / manejó)\n• sleep → slept (dormí / durmió)\n• spend → spent (pasé el tiempo)\n\n━━━ PREGUNTAS Y NEGACIONES CON DID ━━━\n\nPara preguntar o negar, usamos DID / DIDN'T + verbo en forma base:\n• \"Did you go to the park?\" = ¿Fuiste al parque?\n• \"What did you do on Saturday?\" = ¿Qué hiciste el sábado?\n• \"I didn't go out. I stayed home.\" = No salí. Me quedé en casa.\n• \"She didn't cook. We ordered pizza.\" = Ella no cocinó. Pedimos pizza.\n\n⚠️ IMPORTANTE: Después de DID/DIDN'T, el verbo vuelve a su forma BASE:\n• \"Did you went?\" ❌ → \"Did you go?\" ✅\n• \"I didn't worked.\" ❌ → \"I didn't work.\" ✅\n\n━━━ MARCADORES DE TIEMPO DEL PASADO ━━━\n\n• yesterday = ayer\n• last weekend = el fin de semana pasado\n• last Saturday / Sunday = el sábado / domingo pasado\n• last night = anoche\n• this morning = esta mañana (ya pasó)\n• two days ago = hace dos días",
+      "grammarRuleEn": "Simple past tense: regular verbs add -ed (worked, cooked, played). Irregular verbs change completely (go→went, eat→ate, see→saw). Use did/didn't + base verb for questions and negatives. The verb form is the same for all subjects — no -s changes.",
+      "grammarExample": "\"Last Saturday I went to my cousin's house. We ate a lot of food and we played cards. On Sunday I stayed home. I didn't do much — I just watched TV and called my mom.\"",
+      "simulatorPrompt": "You are Marco, a 32-year-old friendly coworker at a warehouse distribution center. You and the student work the same shift and you are both on a 15-minute break in the break room on Monday morning. You are upbeat, casual, and genuinely interested in how your coworker's weekend went. You love football and your cousin's BBQs.\n\nThis conversation has 4 natural stages — move through them one at a time:\n\nSTAGE 1 — SATURDAY CHECK-IN: Start by asking what they did on Saturday. Be casual: \"Hey! How was your weekend? What did you do Saturday?\" React to their answer with genuine interest — if they mention family, ask about it; if they mention going somewhere, be curious.\nSTAGE 2 — SUNDAY AND FAMILY: Ask about Sunday specifically: \"And Sunday? Did you do anything with the family?\" Listen and react. Be warm and relatable.\nSTAGE 3 — MARCO SHARES: Transition naturally to sharing what you did: tell them you watched the football game Saturday afternoon, then Sunday you went to your cousin Ramiro's BBQ — there was carne asada, the kids ran around, and your cousin's wife made this incredible tres leches cake. Keep it vivid and fun.\nSTAGE 4 — BACK TO WORK: The break is ending. Wrap up naturally: \"Alright, break's almost over. Good talking to you — sounds like you had a good one!\" and close the conversation.\n\nRULES:\n- React authentically to what the student says. If they say they went to church, be respectful. If they mention kids, relate to it.\n- If the student uses the PRESENT tense instead of past (e.g., 'I go' instead of 'I went'), gently model the correct form naturally in your reply: repeat what they said in the correct past tense as part of your response (e.g., 'Oh nice, you went to the park! That sounds fun.')\n- Ask ONE question at a time.\n- Keep your turns to 2-4 sentences.\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used past tense correctly (went, ate, watched, cooked, did, etc.) with time markers; 'amber' = communicated the past event but mixed present and past tense or skipped irregular forms; 'red' = used only present tense or could not describe past events at all\n- Set isConversationFinished to true only after the farewell in Stage 4",
+      "simulatorCharacterEn": "Marco",
+      "simulatorCharacterRoleEs": "Compañero de trabajo amigable en el almacén, descanso del lunes por la mañana",
+      "simulatorOpeningEn": "Hey! Monday already, huh? How was your weekend? What did you do on Saturday?",
+      "simulatorOpeningHintEs": "Marco quiere saber qué hiciste el fin de semana. Cuéntale lo que hiciste el sábado — usa verbos en pasado como 'I went...', 'I ate...', 'I watched...', 'I stayed home...'",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Hablar sobre actividades del fin de semana usando el pasado simple (went, ate, saw, watched, did) y marcadores de tiempo"
+    },
+    {
+      "id": "path_directions_02",
+      "titleEs": "Pidiendo Direcciones",
+      "titleEn": "Asking for and Giving Directions",
+      "difficulty": "A2",
+      "iconEmoji": "🗺️",
+      "targetVocabulary": [
+        {
+          "wordEn": "go straight",
+          "wordEs": "sigue derecho / siga recto",
+          "exampleEn": "Go straight for two blocks.",
+          "exampleEs": "Sigue derecho por dos cuadras."
+        },
+        {
+          "wordEn": "turn left",
+          "wordEs": "dobla a la izquierda / gira a la izquierda",
+          "exampleEn": "Turn left at the traffic light.",
+          "exampleEs": "Dobla a la izquierda en el semáforo."
+        },
+        {
+          "wordEn": "turn right",
+          "wordEs": "dobla a la derecha / gira a la derecha",
+          "exampleEn": "Turn right on Main Street.",
+          "exampleEs": "Dobla a la derecha en la Calle Main."
+        },
+        {
+          "wordEn": "next to",
+          "wordEs": "al lado de",
+          "exampleEn": "The pharmacy is next to the supermarket.",
+          "exampleEs": "La farmacia está al lado del supermercado."
+        },
+        {
+          "wordEn": "across from",
+          "wordEs": "enfrente de / frente a",
+          "exampleEn": "The school is across from the park.",
+          "exampleEs": "La escuela está enfrente del parque."
+        },
+        {
+          "wordEn": "on the corner",
+          "wordEs": "en la esquina",
+          "exampleEn": "There is a bakery on the corner.",
+          "exampleEs": "Hay una panadería en la esquina."
+        },
+        {
+          "wordEn": "between",
+          "wordEs": "entre",
+          "exampleEn": "The post office is between the bank and the library.",
+          "exampleEs": "El correo está entre el banco y la biblioteca."
+        },
+        {
+          "wordEn": "behind",
+          "wordEs": "detrás de",
+          "exampleEn": "The parking lot is behind the store.",
+          "exampleEs": "El estacionamiento está detrás de la tienda."
+        },
+        {
+          "wordEn": "in front of",
+          "wordEs": "en frente de / delante de",
+          "exampleEn": "I'll meet you in front of the restaurant.",
+          "exampleEs": "Te veo enfrente del restaurante."
+        },
+        {
+          "wordEn": "block",
+          "wordEs": "cuadra / bloque",
+          "exampleEn": "Walk three blocks and then turn left.",
+          "exampleEs": "Camina tres cuadras y luego dobla a la izquierda."
+        },
+        {
+          "wordEn": "intersection",
+          "wordEs": "intersección / cruce de calles",
+          "exampleEn": "Stop at the intersection of Oak and Main.",
+          "exampleEs": "Para en la intersección de Oak y Main."
+        },
+        {
+          "wordEn": "traffic light",
+          "wordEs": "semáforo",
+          "exampleEn": "Turn right at the second traffic light.",
+          "exampleEs": "Dobla a la derecha en el segundo semáforo."
+        },
+        {
+          "wordEn": "crosswalk",
+          "wordEs": "cruce peatonal / paso de cebra",
+          "exampleEn": "Use the crosswalk to cross the street safely.",
+          "exampleEs": "Usa el cruce peatonal para cruzar la calle con seguridad."
+        },
+        {
+          "wordEn": "keep going",
+          "wordEs": "sigue adelante / continúa",
+          "exampleEn": "Keep going until you see the gas station.",
+          "exampleEs": "Sigue adelante hasta que veas la gasolinera."
+        },
+        {
+          "wordEn": "you'll see it",
+          "wordEs": "lo vas a ver / lo verás",
+          "exampleEn": "Turn left and you'll see it on your right.",
+          "exampleEs": "Dobla a la izquierda y lo verás a tu derecha."
+        },
+        {
+          "wordEn": "is it far?",
+          "wordEs": "¿está lejos?",
+          "exampleEn": "Excuse me, is it far from here?",
+          "exampleEs": "Disculpe, ¿está lejos de aquí?"
+        },
+        {
+          "wordEn": "how do I get to...?",
+          "wordEs": "¿cómo llego a...? / ¿cómo puedo llegar a...?",
+          "exampleEn": "Excuse me, how do I get to the hospital?",
+          "exampleEs": "Disculpe, ¿cómo puedo llegar al hospital?"
+        },
+        {
+          "wordEn": "on your left / on your right",
+          "wordEs": "a tu izquierda / a tu derecha",
+          "exampleEn": "The post office will be on your left.",
+          "exampleEs": "El correo estará a tu izquierda."
+        }
+      ],
+      "grammarRuleEs": "Para dar direcciones en inglés usamos dos estructuras importantes: el IMPERATIVO y las PREPOSICIONES DE LUGAR. ¡Son muy fáciles!\n\n━━━ EL IMPERATIVO: dar órdenes / instrucciones ━━━\n\nEn inglés, el imperativo es simplemente el verbo en su forma base — sin sujeto:\n• \"Go straight.\" = Sigue derecho.\n• \"Turn left.\" = Dobla a la izquierda.\n• \"Walk two blocks.\" = Camina dos cuadras.\n• \"Take the first right.\" = Toma la primera a la derecha.\n• \"Don't turn yet.\" = No dobles todavía.\n\n✅ Es igual para tú, usted, todos — nunca cambia:\n• No se dice \"You go\" para dar una dirección, solo \"Go!\"\n• Para negar: Don't + verbo (\"Don't turn left here.\")\n\n━━━ PREPOSICIONES DE LUGAR ━━━\n\nEstas preposiciones te dicen DÓNDE está algo — ¡muy distintas al español!\n\n• next to = al lado de → \"The bank is next to the pharmacy.\"\n• across from = enfrente de → \"The library is across from the park.\"\n• between = entre → \"It's between the school and the store.\"\n• behind = detrás de → \"The parking lot is behind the building.\"\n• in front of = enfrente de / delante de → \"Wait in front of the entrance.\"\n• on the corner of = en la esquina de → \"It's on the corner of Oak and Elm.\"\n\n⚠️ CUIDADO CON ESTAS:\n• Se dice \"on the left\" / \"on the right\" (NO 'in the left')\n• Se dice \"on your left\" cuando das instrucciones\n• \"at the corner\" (en la esquina, cuando describes el punto)\n• \"around the corner\" = a la vuelta de la esquina\n\n━━━ FRASES ÚTILES PARA PEDIR DIRECCIONES ━━━\n\n• \"Excuse me, how do I get to the post office?\"\n• \"Is it far from here?\"\n• \"Can you repeat that, please?\"\n• \"How many blocks?\"\n• \"Do I turn left or right?\"\n\n━━━ EJEMPLO COMPLETO ━━━\n\n\"Go straight for two blocks. At the traffic light, turn right. Walk one more block — the post office is on your left, between the bank and the pharmacy.\"",
+      "grammarRuleEn": "Imperatives (go, turn, walk, don't turn) are used to give directions — just use the base verb with no subject. Prepositions of place (next to, across from, between, behind, in front of, on the corner) describe where things are. Remember: 'on the left/right' not 'in the left/right'.",
+      "grammarExample": "\"Go straight for three blocks. Turn left at the traffic light. Walk one block — you'll see the post office on your right, across from the park.\"",
+      "simulatorPrompt": "You are Derek, a 45-year-old friendly local man sitting on a bench outside the public library on a sunny afternoon. You have lived in this neighborhood your whole life and you know every street. You are patient, clear, and you enjoy helping people. You speak at a clear, measured pace.\n\nThe student approaches you because they are lost and looking for the post office. The post office is 3 blocks away: go straight 2 blocks, turn right at the traffic light, walk 1 more block — the post office is on the left, between the bank and a green pharmacy.\n\nThis conversation has 4 natural stages:\n\nSTAGE 1 — STUDENT ASKS FOR HELP: The student approaches you and asks for the post office. Respond warmly and confirm what they're looking for: \"The post office? Sure, I can help you with that.\"\nSTAGE 2 — GIVE DIRECTIONS: Give the step-by-step directions clearly, using landmarks: the traffic light, the bank, the green pharmacy. Break it into manageable steps. Be patient if they seem confused.\nSTAGE 3 — FOLLOW-UP QUESTIONS: The student asks follow-up questions (is it far? how many blocks? do I turn left or right?). Answer patiently and clearly. Encourage them: \"You've got it, don't worry — it's easy to find!\"\nSTAGE 4 — FRIENDLY GOODBYE: Wish them luck, tell them it won't take more than 5 minutes walking. Close warmly: \"Good luck! You can't miss it!\"\n\nRULES:\n- Be patient and clear. If the student seems confused, rephrase the directions more simply.\n- If the student uses a wrong preposition (e.g., 'in the left' instead of 'on the left'), naturally model the correct form in your response: \"Yes, that's right — it'll be on your left.\"\n- Keep your turns to 2-4 sentences.\n- Ask clarifying questions only if needed.\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used direction phrases and prepositions correctly (go straight, turn left/right, on the left, across from, next to, etc.); 'amber' = communicated the direction request but made preposition errors (in the left, in front the store) or confused left/right; 'red' = could not ask for or repeat directions at all\n- Set isConversationFinished to true only after the farewell in Stage 4",
+      "simulatorCharacterEn": "Derek",
+      "simulatorCharacterRoleEs": "Vecino amigable sentado afuera de la biblioteca — conoce bien el barrio",
+      "simulatorOpeningEn": "Hey there! You look a little lost — can I help you find something?",
+      "simulatorOpeningHintEs": "Estás perdido/a y necesitas llegar al correo (post office). Pregúntale a Derek — di: 'Excuse me, how do I get to the post office?' o 'Excuse me, where is the post office?'",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Pedir y entender direcciones usando imperativos (go straight, turn left) y preposiciones de lugar (on the left, next to, across from)"
+    },
+    {
+      "id": "path_travel_plans_01",
+      "titleEs": "Planes para Viajar",
+      "titleEn": "Making Future Travel Plans",
+      "difficulty": "A2",
+      "iconEmoji": "✈️",
+      "targetVocabulary": [
+        {
+          "wordEn": "flight",
+          "wordEs": "vuelo",
+          "exampleEn": "My flight leaves at seven in the morning.",
+          "exampleEs": "Mi vuelo sale a las siete de la mañana."
+        },
+        {
+          "wordEn": "hotel",
+          "wordEs": "hotel",
+          "exampleEn": "We are going to stay at a hotel near the beach.",
+          "exampleEs": "Vamos a quedarnos en un hotel cerca de la playa."
+        },
+        {
+          "wordEn": "booking / reservation",
+          "wordEs": "reserva / reservación",
+          "exampleEn": "I need to make a reservation for two nights.",
+          "exampleEs": "Necesito hacer una reservación para dos noches."
+        },
+        {
+          "wordEn": "round trip",
+          "wordEs": "viaje redondo / ida y vuelta",
+          "exampleEn": "A round trip ticket is usually cheaper.",
+          "exampleEs": "Un boleto de ida y vuelta suele ser más barato."
+        },
+        {
+          "wordEn": "one way",
+          "wordEs": "solo ida / de un solo sentido",
+          "exampleEn": "I want a one-way ticket to Miami.",
+          "exampleEs": "Quiero un boleto solo de ida a Miami."
+        },
+        {
+          "wordEn": "departure",
+          "wordEs": "salida / partida",
+          "exampleEn": "What is your departure date?",
+          "exampleEs": "¿Cuál es tu fecha de salida?"
+        },
+        {
+          "wordEn": "arrival",
+          "wordEs": "llegada",
+          "exampleEn": "My arrival time is 3 PM.",
+          "exampleEs": "Mi hora de llegada es las 3 de la tarde."
+        },
+        {
+          "wordEn": "passport",
+          "wordEs": "pasaporte",
+          "exampleEn": "Don't forget to bring your passport.",
+          "exampleEs": "No olvides traer tu pasaporte."
+        },
+        {
+          "wordEn": "luggage / suitcase",
+          "wordEs": "equipaje / maleta",
+          "exampleEn": "How many bags of luggage can I bring?",
+          "exampleEs": "¿Cuántas maletas puedo llevar?"
+        },
+        {
+          "wordEn": "vacation",
+          "wordEs": "vacaciones",
+          "exampleEn": "We are planning a vacation to Costa Rica.",
+          "exampleEs": "Estamos planeando unas vacaciones a Costa Rica."
+        },
+        {
+          "wordEn": "beach",
+          "wordEs": "playa",
+          "exampleEn": "The kids want to spend the whole trip at the beach.",
+          "exampleEs": "Los niños quieren pasar todo el viaje en la playa."
+        },
+        {
+          "wordEn": "visa",
+          "wordEs": "visa",
+          "exampleEn": "Do I need a visa to travel there?",
+          "exampleEs": "¿Necesito visa para viajar allá?"
+        },
+        {
+          "wordEn": "itinerary",
+          "wordEs": "itinerario",
+          "exampleEn": "I'll email you the full itinerary.",
+          "exampleEs": "Te voy a mandar el itinerario completo por correo."
+        },
+        {
+          "wordEn": "travel insurance",
+          "wordEs": "seguro de viaje",
+          "exampleEn": "It's a good idea to buy travel insurance.",
+          "exampleEs": "Es buena idea comprar un seguro de viaje."
+        },
+        {
+          "wordEn": "check in",
+          "wordEs": "registrarse / hacer check-in",
+          "exampleEn": "You can check in online the day before your flight.",
+          "exampleEs": "Puedes hacer check-in en línea el día antes de tu vuelo."
+        },
+        {
+          "wordEn": "boarding pass",
+          "wordEs": "pase de abordar / tarjeta de embarque",
+          "exampleEn": "Show your boarding pass at the gate.",
+          "exampleEs": "Muestra tu pase de abordar en la puerta."
+        },
+        {
+          "wordEn": "cancel",
+          "wordEs": "cancelar",
+          "exampleEn": "I need to cancel my reservation.",
+          "exampleEs": "Necesito cancelar mi reservación."
+        },
+        {
+          "wordEn": "trip",
+          "wordEs": "viaje",
+          "exampleEn": "This is going to be a great trip!",
+          "exampleEs": "¡Este va a ser un gran viaje!"
+        }
+      ],
+      "grammarRuleEs": "En inglés hay dos formas principales de hablar del futuro: 'GOING TO' y 'WILL'. ¡Cada una tiene su momento!\n\n━━━ GOING TO — para planes ya decididos ━━━\n\nUsa 'going to' cuando ya tienes el plan en mente — es como decir 'voy a' en español:\n• \"I am going to visit Mexico in July.\" = Voy a visitar México en julio.\n• \"We are going to book the hotel this week.\" = Vamos a reservar el hotel esta semana.\n• \"She is going to take two weeks off.\" = Ella va a tomar dos semanas de vacaciones.\n• \"They are going to fly to Cancún.\" = Ellos van a volar a Cancún.\n\nEstructura: sujeto + am/is/are + going to + verbo base\n• I am going to... / He is going to... / We are going to...\n\n━━━ WILL — para decisiones espontáneas, ofertas y predicciones ━━━\n\nUsa 'will' cuando decides algo en el momento, ofreces ayuda, o predices algo:\n• \"I'll pay for the hotel, don't worry.\" = Yo pago el hotel, no te preocupes. (decisión espontánea)\n• \"I think the trip will be amazing.\" = Creo que el viaje será increíble. (predicción)\n• \"I'll send you the details right now.\" = Te mando los detalles ahora mismo. (oferta)\n\nContracción muy común: I will → I'll / She will → She'll / We will → We'll\n\n━━━ COMPARACIÓN RÁPIDA ━━━\n\n✅ \"We're going to travel in August.\" — ya lo planeamos ✅\n✅ \"Oh, wait — I'll book the flights right now!\" — decisión en este momento ✅\n\n⚠️ También escucharás 'gonna' en inglés casual = going to:\n• \"I'm gonna call the hotel tonight.\" = Voy a llamar al hotel esta noche.\n(En conversación informal está bien, pero en documentos usa 'going to')\n\n━━━ EJEMPLOS DE VIAJE ━━━\n\n• \"I am going to pack my suitcase tonight.\"\n• \"We're going to arrive on Friday evening.\"\n• \"I think it will be hot, so bring light clothes.\"\n• \"I'll check in online before we go to the airport.\"",
+      "grammarRuleEn": "'Going to' is used for plans already decided (like 'voy a' in Spanish). 'Will' is used for spontaneous decisions, offers, and predictions. Contraction: I'll / we'll / she'll. In casual speech, 'gonna' = going to. Both refer to future actions but signal different levels of planning.",
+      "grammarExample": "\"Next month I am going to take a vacation. I'm going to fly to Mexico with my family. I think the weather will be beautiful. I'll make the hotel reservation tonight so we don't lose it.\"",
+      "simulatorPrompt": "You are Patricia, a 50-year-old experienced travel agent who runs a small travel agency in a strip mall — warm, professional, and genuinely passionate about helping families plan trips to Mexico, Central America, and the Caribbean. You have been to Cancún, Puerto Vallarta, Guatemala City, and Costa Rica many times. You love talking about travel and you have a warm, slightly old-school customer service style.\n\nA new customer (the student) has walked into your agency. Your goal is to help them plan a vacation — find out where they want to go, what dates work, whether they want round trip or one way, hotel preferences, and activities.\n\nThis conversation has 4 natural stages:\n\nSTAGE 1 — WELCOME AND DESTINATION: Greet the customer warmly and ask where they want to go and roughly when: \"Welcome! So, where are you thinking of going? And when are you hoping to travel?\" Be enthusiastic about whatever destination they mention.\nSTAGE 2 — FLIGHTS: Discuss flight options. Ask if they want a round trip or one-way ticket. Ask about preferred departure dates and approximate budget. Share a specific option: \"I can get you a round trip to Cancún for around $380 per person — that includes one checked bag.\"\nSTAGE 3 — HOTEL AND ACTIVITIES: Ask about accommodation preferences — do they want to be near the beach? All-inclusive or just a room? Mention 1-2 specific hotel recommendations based on their answers. Ask what activities they enjoy (beach, ruins, zip-lining, local food tours).\nSTAGE 4 — CONFIRM AND GOODBYE: Summarize the plan: dates, destination, round trip flight, hotel. Ask if they'd like you to send an email with the full itinerary. Remind them about their passport and travel insurance. Close warmly: \"You are going to have an amazing trip — I just know it!\"\n\nRULES:\n- Be enthusiastic and professional. Speak clearly.\n- React specifically to what the student says — if they say Cancún, mention the beach; if they say Guatemala, mention the ruins at Tikal.\n- If the student uses present tense for future plans (e.g., 'I go next month' instead of 'I'm going to go'), naturally model the correct form: \"Oh wonderful, so you're going to travel next month — perfect timing!\"\n- If the student mixes up 'going to' and 'will' in confusing ways, model the natural correct form in your reply.\n- Keep your turns to 2-4 sentences. Ask ONE question at a time.\n- Return ONLY valid JSON, no extra text: {\"feedbackColor\": \"green\"|\"amber\"|\"red\", \"aiSpokenReply\": \"...\", \"isConversationFinished\": false}\n- feedbackColor: 'green' = student used future forms correctly (going to for plans, will for spontaneous decisions/predictions) with travel vocabulary; 'amber' = communicated travel plans but mixed up tenses or used present for future consistently; 'red' = could not express future plans at all or vocabulary too limited to discuss travel\n- Set isConversationFinished to true only after the farewell in Stage 4",
+      "simulatorCharacterEn": "Patricia",
+      "simulatorCharacterRoleEs": "Agente de viajes con 25 años de experiencia — especialista en México y Centroamérica",
+      "simulatorOpeningEn": "Good afternoon, welcome to Sunshine Travel! My name is Patricia. Please, have a seat! So — where are you dreaming of going?",
+      "simulatorOpeningHintEs": "Patricia es una agente de viajes y quiere ayudarte a planear unas vacaciones. Cuéntale a dónde quieres ir — usa 'I am going to...' o 'I want to go to...' y menciona cuándo quieres viajar.",
+      "simulatorExpectedTurns": 8,
+      "simulatorTargetGoalEs": "Hablar sobre planes de viaje futuros usando 'going to' para planes ya decididos y 'will' para decisiones espontáneas, con vocabulario de viajes"
+    }
+  ]
+}

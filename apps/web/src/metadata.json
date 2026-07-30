@@ -1,0 +1,6 @@
+{
+  "name": "Portfolio and Project Hub",
+  "description": "A clean, modern, and responsive personal portfolio and project hub featuring a project dashboard and a markdown-based tech blog.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

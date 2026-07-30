@@ -1,0 +1,533 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../core/providers/path_lesson_provider.dart';
+import '../../core/providers/repaso_provider.dart';
+import '../../core/providers/settings_provider.dart';
+import '../../core/providers/smart_review_provider.dart';
+import '../../core/providers/stats_provider.dart';
+import '../../core/providers/vocab_provider.dart';
+import '../../core/theme/app_theme.dart';
+import '../../core/widgets/clave_stat_card.dart';
+import '../../core/widgets/glass_container.dart';
+import '../../core/widgets/responsive_layout.dart';
+import '../../l10n/app_strings.dart';
+import '../lessons/lesson_detail_screen.dart';
+import '../repaso/repaso_screen.dart';
+import 'widgets/ai_daily_lesson_card.dart';
+import 'widgets/path_lesson_card.dart';
+import 'widgets/premium_modal.dart';
+import 'widgets/welcome_hero_widget.dart';
+
+/// The main "Home" tab — shows the learning path.
+class GlassHomeTab extends ConsumerWidget {
+  const GlassHomeTab({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lessonsAsync = ref.watch(pathLessonsAsyncProvider);
+    final lessons = lessonsAsync.valueOrNull ?? const [];
+    final completedCount = ref.watch(completedPathLessonCountProvider);
+    final track = ref.watch(learningTrackProvider);
+    final isPremium = ref.watch(settingsProvider).isPremium;
+    final vocabStats = ref.watch(vocabStatsProvider);
+    final repasoDue = ref.watch(repasoDueWordsProvider);
+    final showRepaso = repasoDue.isNotEmpty || vocabStats.total > 0;
+    final smartReviewCount = ref.watch(smartReviewCountProvider);
+    final stats = ref.watch(statsProvider);
+
+    // Index of the first incomplete lesson — that card gets a glow border.
+    final nextIndex = lessons.indexWhere((l) {
+      final progress = ref.watch(pathLessonProgressProvider(l.id));
+      return !(progress?.completed ?? false);
+    });
+
+    // ── Extracted Widgets ──────────────────────────────────────────
+
+    final welcomeHero = const Padding(
+      padding: EdgeInsets.only(top: 24, bottom: 12),
+      child: WelcomeHeroWidget(),
+    );
+
+    final statsDashboard = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: ClaveStatCard(
+              icon: '🔥',
+              label: 'Racha',
+              value: '${stats.streak}',
+              compact: true,
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: ClaveStatCard(
+              icon: '⚡',
+              label: 'XP Total',
+              value: '${stats.xp}',
+              compact: true,
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: ClaveStatCard(
+              icon: '🎙️',
+              label: 'Hablando',
+              value: '${stats.speakingLessonsCompleted}',
+              compact: true,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    final aiDailyCard = const Padding(
+      padding: EdgeInsets.fromLTRB(20, 4, 20, 4),
+      child: AiDailyLessonCard(),
+    );
+
+    final trackToggle = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Row(
+        children: [
+          _TrackButton(
+            label: '🌎 ${AppStrings.trackGeneralEs}',
+            isActive: track == LearningTrack.general,
+            onTap: () => ref
+                .read(learningTrackProvider.notifier)
+                .setTrack(LearningTrack.general),
+          ),
+          const SizedBox(width: 8),
+          _TrackButton(
+            label: '🇺🇸 ${AppStrings.trackCitizenshipEs}',
+            isActive: track == LearningTrack.citizenship,
+            showProBadge: !isPremium,
+            onTap: () {
+              if (isPremium) {
+                ref
+                    .read(learningTrackProvider.notifier)
+                    .setTrack(LearningTrack.citizenship);
+              } else {
+                showPremiumModal(context, ref);
+              }
+            },
+          ),
+        ],
+      ),
+    );
+
+    Widget? repasoCardWidget;
+    if (showRepaso) {
+      repasoCardWidget = Padding(
+        padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const RepasoScreen(),
+            ),
+          ),
+          child: GlassContainer(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            child: Row(
+              children: [
+                const Text('🧠', style: TextStyle(fontSize: 22)),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppStrings.repasoTitleEs,
+                        style: AppTextStyles.cardTitle(),
+                      ),
+                      if (repasoDue.isNotEmpty)
+                        Text(
+                          '${repasoDue.length} palabras para hoy',
+                          style: AppTextStyles.monoMeta(
+                            color: AppColors.textSub,
+                            fontSize: 12,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right, color: AppColors.textDim, size: 22),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    Widget? smartReviewCardWidget;
+    if (smartReviewCount >= 3) {
+      smartReviewCardWidget = Padding(
+        padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+        child: GestureDetector(
+          onTap: () {
+            final notifier = ref.read(smartReviewProvider.notifier);
+            final entries = notifier.pickReviewItems();
+            final result = SmartReviewService.buildReviewLesson(entries);
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => LessonDetailScreen(
+                  lesson: result.lesson,
+                  isReviewMode: true,
+                  reviewBankKeys: result.bankKeys,
+                ),
+              ),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: AppRadius.mdBr,
+              border: Border.all(
+                color: AppColors.emerald.withValues(alpha: 0.4),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.emerald.withValues(alpha: 0.1),
+                  blurRadius: 12,
+                  spreadRadius: 1,
+                ),
+              ],
+            ),
+            child: GlassContainer(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              child: Row(
+                children: [
+                  const Text('🧠', style: TextStyle(fontSize: 22)),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppStrings.smartReviewTitleEs,
+                          style: AppTextStyles.cardTitle(),
+                        ),
+                        Text(
+                          '$smartReviewCount${AppStrings.smartReviewCardSubtitleEs}',
+                          style: AppTextStyles.monoMeta(
+                            color: AppColors.textSub,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.chevron_right, color: AppColors.emerald, size: 22),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    final pathHeader = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Flexible(
+            child: Text(
+              AppStrings.pathTitleEs,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: AppFontSizes.title,
+                fontWeight: FontWeight.w800,
+                color: AppColors.text,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            '[ $completedCount / ${lessons.length} ]',
+            style: AppTextStyles.progressCounter(),
+          ),
+        ],
+      ),
+    );
+
+    // ── Layout Assembly ──────────────────────────────────────────────
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: AppGlassStyles.backgroundGradient,
+      ),
+      child: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isDesktop =
+                constraints.maxWidth >= ResponsiveBreakpoints.desktop;
+
+            if (isDesktop) {
+              return Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1200),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Left Column: Path Lessons
+                      Expanded(
+                        flex: 5,
+                        child: CustomScrollView(
+                          slivers: [
+                            SliverToBoxAdapter(child: welcomeHero),
+                            SliverToBoxAdapter(child: trackToggle),
+                            SliverToBoxAdapter(child: pathHeader),
+                            if (lessonsAsync.isLoading)
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 32),
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.emerald,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            else if (lessonsAsync.hasError)
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(24),
+                                  child: Text(
+                                    'Error al cargar las lecciones',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: AppColors.textSub,
+                                      fontSize: AppFontSizes.body,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            else
+                              SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    final lesson = lessons[index];
+                                    final isCompleted = ref
+                                            .watch(pathLessonProgressProvider(
+                                                lesson.id))
+                                            ?.completed ??
+                                        false;
+                                    final isCitizenshipLocked =
+                                        track == LearningTrack.citizenship &&
+                                            !isPremium;
+                                    final isNext = !isCitizenshipLocked &&
+                                        index == nextIndex;
+                                    final isLocked = isCitizenshipLocked ||
+                                        (!isCompleted &&
+                                            index != nextIndex &&
+                                            nextIndex != -1);
+                                    return PathLessonCard(
+                                      lesson: lesson,
+                                      isNextAvailable: isNext,
+                                      isLocked: isLocked,
+                                      onLockedTap: isCitizenshipLocked
+                                          ? () => showPremiumModal(context, ref)
+                                          : null,
+                                    );
+                                  },
+                                  childCount: lessons.length,
+                                ),
+                              ),
+                            const SliverToBoxAdapter(
+                                child: SizedBox(height: 32)),
+                          ],
+                        ),
+                      ),
+                      // Right Column: Dashboard Sidebar
+                      Expanded(
+                        flex: 3,
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.only(top: 24, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              statsDashboard,
+                              const SizedBox(height: 16),
+                              aiDailyCard,
+                              if (repasoCardWidget != null) ...[
+                                const SizedBox(height: 8),
+                                repasoCardWidget,
+                              ],
+                              if (smartReviewCardWidget != null) ...[
+                                const SizedBox(height: 8),
+                                smartReviewCardWidget,
+                              ],
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            // Mobile Layout
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(child: welcomeHero),
+                SliverToBoxAdapter(child: statsDashboard),
+                SliverToBoxAdapter(child: aiDailyCard),
+                SliverToBoxAdapter(child: trackToggle),
+                if (repasoCardWidget != null)
+                  SliverToBoxAdapter(child: repasoCardWidget),
+                if (smartReviewCardWidget != null)
+                  SliverToBoxAdapter(child: smartReviewCardWidget),
+                SliverToBoxAdapter(child: pathHeader),
+                if (lessonsAsync.isLoading)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 32),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.emerald,
+                        ),
+                      ),
+                    ),
+                  )
+                else if (lessonsAsync.hasError)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Text(
+                        'Error al cargar las lecciones',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.textSub,
+                          fontSize: AppFontSizes.body,
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final lesson = lessons[index];
+                        final isCompleted = ref
+                                .watch(pathLessonProgressProvider(lesson.id))
+                                ?.completed ??
+                            false;
+                        final isCitizenshipLocked =
+                            track == LearningTrack.citizenship && !isPremium;
+                        final isNext =
+                            !isCitizenshipLocked && index == nextIndex;
+                        final isLocked = isCitizenshipLocked ||
+                            (!isCompleted &&
+                                index != nextIndex &&
+                                nextIndex != -1);
+                        return PathLessonCard(
+                          lesson: lesson,
+                          isNextAvailable: isNext,
+                          isLocked: isLocked,
+                          onLockedTap: isCitizenshipLocked
+                              ? () => showPremiumModal(context, ref)
+                              : null,
+                        );
+                      },
+                      childCount: lessons.length,
+                    ),
+                  ),
+                const SliverToBoxAdapter(child: SizedBox(height: 32)),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+// ── Track button ──────────────────────────────────────────────────────────────
+
+class _TrackButton extends StatelessWidget {
+  const _TrackButton({
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+    this.showProBadge = false,
+  });
+
+  final String label;
+  final bool isActive;
+  final VoidCallback onTap;
+  final bool showProBadge;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          constraints: const BoxConstraints(minHeight: 48),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          decoration: BoxDecoration(
+            color: isActive
+                ? AppColors.emerald.withValues(alpha: 0.08)
+                : AppColors.cardSurface,
+            borderRadius: AppRadius.mdBr,
+            border: Border.all(
+              color: isActive
+                  ? AppColors.emerald.withValues(alpha: 0.5)
+                  : AppColors.cardBorder,
+              width: isActive ? 1.5 : 1,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
+                    color: isActive
+                        ? AppColors.emerald
+                        : AppColors.textSub,
+                  ),
+                ),
+              ),
+              if (showProBadge) ...[
+                const SizedBox(width: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.gold,
+                    borderRadius: AppRadius.xsBr,
+                  ),
+                  child: Text(
+                    AppStrings.premiumBadgeEs,
+                    style: GoogleFonts.jetBrainsMono(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.white,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
