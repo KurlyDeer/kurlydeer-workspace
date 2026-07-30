@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev": "flutter run -d chrome",
+    "build": "flutter build web"
+  },
   "dependencies": {
     "firebase": "^12.15.0"
   }

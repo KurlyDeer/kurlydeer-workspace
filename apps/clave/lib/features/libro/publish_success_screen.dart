@@ -160,7 +160,7 @@ class _PublishSuccessScreenState extends ConsumerState<PublishSuccessScreen> {
                 maxBlastForce: 25,
                 minBlastForce: 8,
                 gravity: 0.3,
-                colors: const [
+                colors: [
                   AppColors.glowTerracotta,
                   Color(0xFF5DADE2),
                   Colors.amber,

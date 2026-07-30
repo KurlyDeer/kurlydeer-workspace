@@ -435,7 +435,7 @@ class _LibroScreenState extends ConsumerState<LibroScreen> {
                   height: 20,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.5,
-                    valueColor: const AlwaysStoppedAnimation<Color>(
+                    valueColor: AlwaysStoppedAnimation<Color>(
                         AppColors.glowTerracotta),
                   ),
                 ),

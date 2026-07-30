@@ -107,10 +107,16 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.cream,
+      backgroundColor: AppColors.gradientStart,
       appBar: AppBar(
-        backgroundColor: AppColors.deepBlue,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.surface0,
+        foregroundColor: AppColors.text,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: AppColors.borderLight, height: 1.0),
+        ),
         title: Text(
           '${AppStrings.vocabTitleEs}  •  ${AppStrings.vocabTitleEn}',
           style: TextStyle(
@@ -194,9 +200,9 @@ class _StudyView extends StatelessWidget {
                   ? 0
                   : stats.known / stats.total,
               minHeight: isSenior ? 8 : 6,
-              backgroundColor: AppColors.terracotta.withValues(alpha: 0.15),
+              backgroundColor: AppColors.surface2,
               valueColor:
-                  const AlwaysStoppedAnimation<Color>(AppColors.terracotta),
+                  AlwaysStoppedAnimation<Color>(AppColors.text),
             ),
           ),
           const SizedBox(height: 28),
@@ -247,16 +253,16 @@ class _StudyView extends StatelessWidget {
                         onPressed: onRepeat,
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
-                              color: AppColors.terracotta, width: 2),
+                              color: AppColors.borderDark, width: 1.0),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: AppRadius.smBr,
                           ),
                         ),
                         child: Text(
                           AppStrings.vocabRepeatEs,
                           style: TextStyle(
                             fontSize: btnTextSize,
-                            color: AppColors.terracotta,
+                            color: AppColors.text,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -271,12 +277,13 @@ class _StudyView extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: onKnow,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF27AE60),
-                          foregroundColor: Colors.white,
+                          backgroundColor: AppColors.text,
+                          foregroundColor: AppColors.surface0,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: AppRadius.smBr,
+                            side: const BorderSide(color: AppColors.borderDark, width: 1.0),
                           ),
-                          elevation: 4,
+                          elevation: 0,
                         ),
                         child: Text(
                           AppStrings.vocabKnowItEs,
@@ -406,12 +413,11 @@ class _CardFace extends StatelessWidget {
   final bool isSenior;
   final AudioService? tts;
 
-  // Abuelo: high-contrast terracotta back; default: deepBlue back.
-  Color get _backColor =>
-      isSenior ? AppColors.terracotta : AppColors.deepBlue;
+  // Monochrome flip card faces
+  Color get _backColor => AppColors.surface1;
 
   double get _wordSize {
-    if (isSenior) return 32.0; // per spec: Abuelo 32pt bold
+    if (isSenior) return 32.0;
     return AppFontSizes.title;
   }
 
@@ -421,20 +427,10 @@ class _CardFace extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 36),
       decoration: BoxDecoration(
-        color: isFront ? Colors.white : _backColor,
-        borderRadius: BorderRadius.circular(24),
-        border: isFront
-            ? Border.all(
-                color: AppColors.deepBlue.withValues(alpha: 0.18), width: 1.5)
-            : null,
-        boxShadow: [
-          BoxShadow(
-            color: (isFront ? AppColors.deepBlue : _backColor)
-                .withValues(alpha: 0.18),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        color: isFront ? AppColors.surface0 : _backColor,
+        borderRadius: AppRadius.smBr,
+        border: Border.all(
+                color: AppColors.borderLight, width: 1.0),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -444,9 +440,8 @@ class _CardFace extends StatelessWidget {
   }
 
   List<Widget> _frontChildren() {
-    final labelColor = AppColors.deepBlue;
-    final wordColor =
-        isSenior ? AppColors.darkText : AppColors.darkText;
+    final labelColor = AppColors.textSub;
+    final wordColor = AppColors.text;
 
     return [
       // Source badge
@@ -482,11 +477,11 @@ class _CardFace extends StatelessWidget {
       // ESPAÑOL label
       Text(
         AppStrings.vocabBackLabelEs,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 11,
           letterSpacing: 2,
           fontWeight: FontWeight.w800,
-          color: Colors.white70,
+          color: AppColors.textSub,
         ),
       ),
       const SizedBox(height: 20),
@@ -497,7 +492,7 @@ class _CardFace extends StatelessWidget {
         style: TextStyle(
           fontSize: _wordSize,
           fontWeight: FontWeight.w800,
-          color: Colors.white,
+          color: AppColors.text,
           height: 1.3,
         ),
       ),
@@ -514,11 +509,12 @@ class _CardFace extends StatelessWidget {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          foregroundColor: _backColor,
+          backgroundColor: AppColors.text,
+          foregroundColor: AppColors.surface0,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: AppRadius.pillBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
           padding: EdgeInsets.symmetric(
             horizontal: isSenior ? 28 : 20,

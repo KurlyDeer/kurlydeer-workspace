@@ -169,7 +169,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             minHeight: 8,
                             backgroundColor:
                                 AppColors.glassSurface.withValues(alpha: 0.5),
-                            valueColor: const AlwaysStoppedAnimation<Color>(
+                            valueColor: AlwaysStoppedAnimation<Color>(
                                 AppColors.glowTerracotta),
                           ),
                         ),

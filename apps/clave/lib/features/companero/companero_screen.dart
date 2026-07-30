@@ -467,7 +467,7 @@ class _AiBubble extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.replay_rounded,
+                    Icon(Icons.replay_rounded,
                         size: 15, color: AppColors.glowTerracotta),
                     const SizedBox(width: 4),
                     Text(

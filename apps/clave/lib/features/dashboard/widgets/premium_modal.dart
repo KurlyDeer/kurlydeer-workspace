@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../core/widgets/clave_button.dart';
+
 import '../../../l10n/app_strings.dart';
 
 void showPremiumModal(BuildContext context, WidgetRef ref) {
@@ -29,21 +29,12 @@ class _PremiumModalContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface1,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-        border: Border(
-          top: BorderSide(
-            color: AppColors.gold.withValues(alpha: 0.3),
-            width: 1.5,
-          ),
-          left: BorderSide(
-            color: AppColors.gold.withValues(alpha: 0.3),
-            width: 1.0,
-          ),
-          right: BorderSide(
-            color: AppColors.gold.withValues(alpha: 0.3),
-            width: 1.0,
-          ),
+        color: AppColors.surface0, // stark background
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(4)), // sharp corners
+        border: const Border(
+          top: BorderSide(color: AppColors.borderLight, width: 1.0),
+          left: BorderSide(color: AppColors.borderLight, width: 1.0),
+          right: BorderSide(color: AppColors.borderLight, width: 1.0),
         ),
       ),
       child: SafeArea(
@@ -118,21 +109,15 @@ class _PremiumModalContent extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.gold,
-                      borderRadius: AppRadius.mdBr,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.gold.withValues(alpha: 0.3),
-                          blurRadius: 16,
-                          spreadRadius: 1,
-                        ),
-                      ],
+                      color: AppColors.text, // stark high-contrast inverted
+                      borderRadius: AppRadius.smBr, // sharp corners
+                      border: Border.all(color: AppColors.borderDark, width: 1.0),
                     ),
                     alignment: Alignment.center,
                     child: Text(
                       AppStrings.premiumUpgradeEs,
                       style: AppTextStyles.buttonLabel().copyWith(
-                        color: AppColors.white,
+                        color: AppColors.surface0, // inverted text
                       ),
                     ),
                   ),
@@ -169,8 +154,8 @@ class _BulletRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.check_circle_rounded,
-            color: AppColors.gold, size: 20),
+        Icon(Icons.check,
+            color: AppColors.text, size: 20),
         const SizedBox(width: 12),
         Expanded(
           child: Text(

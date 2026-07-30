@@ -24,7 +24,7 @@ class DashboardScreen extends ConsumerWidget {
     final isSenior = persona?.isSeniorMode ?? false;
 
     return Scaffold(
-      backgroundColor: AppColors.cream,
+      backgroundColor: AppColors.gradientStart,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -128,11 +128,12 @@ class _DashboardHeader extends StatelessWidget {
           width: 64,
           height: 64,
           decoration: BoxDecoration(
-            color: AppColors.terracotta,
-            borderRadius: BorderRadius.circular(16),
+            color: AppColors.surface1,
+            borderRadius: AppRadius.smBr,
+            border: Border.all(color: AppColors.borderLight, width: 1.0),
           ),
           child: const Center(
-            child: Text('🌉', style: TextStyle(fontSize: 36)),
+            child: Text('🌉', style: TextStyle(fontSize: 32)),
           ),
         ),
       ],
@@ -160,12 +161,13 @@ class _SosButton extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const SosScreen()),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.terracotta,
-          foregroundColor: AppColors.lightText,
+          backgroundColor: AppColors.surface1,
+          foregroundColor: AppColors.text,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppRadius.smBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
-          elevation: 4,
+          elevation: 0,
         ),
         child: Text(
           '${AppStrings.dashboardSosEs}  •  ${AppStrings.dashboardSosEn}',
@@ -201,12 +203,13 @@ class _LessonButton extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const LessonListScreen()),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green[700],
-          foregroundColor: AppColors.lightText,
+          backgroundColor: AppColors.surface1,
+          foregroundColor: AppColors.text,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppRadius.smBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
-          elevation: 4,
+          elevation: 0,
         ),
         child: Text(
           '${AppStrings.dashboardLessonsEs}  •  ${AppStrings.dashboardLessonsEn}',
@@ -242,12 +245,13 @@ class _VocabButton extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const VocabScreen()),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF8E44AD), // purple
-          foregroundColor: AppColors.lightText,
+          backgroundColor: AppColors.surface1,
+          foregroundColor: AppColors.text,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppRadius.smBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
-          elevation: 4,
+          elevation: 0,
         ),
         child: Text(
           '${AppStrings.dashboardVocabEs}  •  ${AppStrings.dashboardVocabEn}',
@@ -284,12 +288,13 @@ class _SimuladorButton extends StatelessWidget {
               builder: (_) => const SimuladorListScreen()),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF16A085), // teal
-          foregroundColor: AppColors.lightText,
+          backgroundColor: AppColors.surface1,
+          foregroundColor: AppColors.text,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppRadius.smBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
-          elevation: 4,
+          elevation: 0,
         ),
         child: Text(
           '${AppStrings.dashboardSimuladorEs}  •  ${AppStrings.dashboardSimuladorEn}',
@@ -325,12 +330,13 @@ class _AnalizadorButton extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const AnalizadorScreen()),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF8E3A59), // deep rose
-          foregroundColor: AppColors.lightText,
+          backgroundColor: AppColors.surface1,
+          foregroundColor: AppColors.text,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppRadius.smBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
-          elevation: 4,
+          elevation: 0,
         ),
         child: Text(
           '${AppStrings.dashboardAnalizadorEs}  •  ${AppStrings.dashboardAnalizadorEn}',
@@ -366,12 +372,13 @@ class _LibroButton extends StatelessWidget {
           MaterialPageRoute<void>(builder: (_) => const BookGalleryScreen()),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.deepBlue,
-          foregroundColor: AppColors.lightText,
+          backgroundColor: AppColors.surface1,
+          foregroundColor: AppColors.text,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppRadius.smBr,
+            side: const BorderSide(color: AppColors.borderLight, width: 1.0),
           ),
-          elevation: 4,
+          elevation: 0,
         ),
         child: Text(
           '${AppStrings.dashboardLibroEs}  •  ${AppStrings.dashboardLibroEn}',

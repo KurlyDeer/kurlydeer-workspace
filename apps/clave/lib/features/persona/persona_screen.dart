@@ -189,7 +189,7 @@ class _PersonaScreenState extends ConsumerState<PersonaScreen> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
               borderSide:
-                  const BorderSide(color: AppColors.glowTerracotta, width: 2),
+                  BorderSide(color: AppColors.glowTerracotta, width: 2),
             ),
           ),
         ),

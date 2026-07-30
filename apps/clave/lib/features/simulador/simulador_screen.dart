@@ -261,7 +261,7 @@ class _SimuladorScreenState extends ConsumerState<SimuladorScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const CircularProgressIndicator(
+                        CircularProgressIndicator(
                             color: AppColors.glowTerracotta),
                         const SizedBox(height: 16),
                         Text(
@@ -337,7 +337,7 @@ class _GlassBottomArea extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const SizedBox(
+            SizedBox(
               width: 80,
               height: 80,
               child: CircularProgressIndicator(

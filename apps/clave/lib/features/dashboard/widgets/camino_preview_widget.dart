@@ -97,7 +97,7 @@ class CaminoPreviewWidget extends ConsumerWidget {
                     child: LinearProgressIndicator(
                       value: progress,
                       backgroundColor: AppColors.glassBorder,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
+                      valueColor: AlwaysStoppedAnimation<Color>(
                           AppColors.glowTerracotta),
                       minHeight: 6,
                     ),

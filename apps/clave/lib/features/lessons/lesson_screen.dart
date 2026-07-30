@@ -1165,7 +1165,7 @@ class _LevelBar extends StatelessWidget {
                         width: fillWidth.clamp(0.0, constraints.maxWidth),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(7),
-                          gradient: const LinearGradient(
+                          gradient: LinearGradient(
                             colors: [
                               AppColors.deepBlue,
                               AppColors.glowTerracotta,

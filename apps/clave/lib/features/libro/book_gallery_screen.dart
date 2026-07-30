@@ -413,7 +413,7 @@ class _GlassPageCard extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: onPlay,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.volume_up_rounded,
                       color: AppColors.glowTerracotta,
                     ),

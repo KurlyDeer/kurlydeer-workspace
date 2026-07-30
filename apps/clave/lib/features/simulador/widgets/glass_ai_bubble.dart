@@ -53,7 +53,7 @@ class GlassAiBubble extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.replay_rounded,
                     size: 16,
                     color: AppColors.glowTerracotta,

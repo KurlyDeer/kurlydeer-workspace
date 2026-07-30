@@ -13,24 +13,24 @@ class AppColors {
   static const Color white       = Color(0xFFFFFFFF);
 
   // ── Dark Surfaces (primary theme) ─────────────────────────────────────────
-  static const Color surface0    = Color(0xFF09090B); // zinc-950 — deepest bg
-  static const Color surface1    = Color(0xFF0F0F12); // slightly lifted
-  static const Color surface2    = Color(0xFF18181B); // zinc-900 — card bg
-  static const Color surface3    = Color(0xFF27272A); // zinc-800 — elevated
-  static const Color surface4    = Color(0xFF3F3F46); // zinc-700 — subtle
+  static const Color surface0    = Color(0xFF0A0A0A); // High-contrast deepest bg
+  static const Color surface1    = Color(0xFF111111); // slightly lifted
+  static const Color surface2    = Color(0xFF1A1A1A); // card bg
+  static const Color surface3    = Color(0xFF222222); // elevated
+  static const Color surface4    = Color(0xFF333333); // subtle
 
   // ── Light Surfaces (for light mode support) ───────────────────────────────
   static const Color lightSurface0 = Color(0xFFFFFFFF);
-  static const Color lightSurface1 = Color(0xFFFAFAFA); // zinc-50
-  static const Color lightSurface2 = Color(0xFFF4F4F5); // zinc-100
-  static const Color lightSurface3 = Color(0xFFE4E4E7); // zinc-200
-  static const Color lightSurface4 = Color(0xFFD4D4D8); // zinc-300
+  static const Color lightSurface1 = Color(0xFFF8F9FA); // apps/web background
+  static const Color lightSurface2 = Color(0xFFF1F3F5); // card bg
+  static const Color lightSurface3 = Color(0xFFE9ECEF); // elevated
+  static const Color lightSurface4 = Color(0xFFDEE2E6); // subtle
 
   // ── Borders ───────────────────────────────────────────────────────────────
-  static const Color borderDark    = Color(0xFF27272A); // zinc-800
-  static const Color borderSubtle  = Color(0xFF3F3F46); // zinc-700
-  static const Color borderLight   = Color(0xFFD4D4D8); // zinc-300
-  static const Color borderLighter = Color(0xFFE4E4E7); // zinc-200
+  static const Color borderDark    = Color(0xFF222222); // sharp dark border
+  static const Color borderSubtle  = Color(0xFF333333); // subtle dark border
+  static const Color borderLight   = Color(0xFFDEE2E6); // sharp light border
+  static const Color borderLighter = Color(0xFFE9ECEF); // subtle light border
 
   // ── Text ──────────────────────────────────────────────────────────────────
   static const Color textPrimary   = Color(0xFFFAFAFA); // zinc-50
@@ -171,21 +171,15 @@ class AppGlassStyles {
 
   static BoxDecoration get cardDecoration => BoxDecoration(
     color: AppColors.cardSurface,
-    borderRadius: AppRadius.mdBr,
-    border: Border.all(color: AppColors.cardBorder, width: 1.0),
+    borderRadius: AppRadius.smBr, // Crisper corners
+    border: Border.all(color: AppColors.cardBorder, width: 1.0), // Crisp 1px border
   );
 
   static BoxDecoration glowBorder(Color color) => BoxDecoration(
     color: AppColors.cardSurface,
-    borderRadius: AppRadius.mdBr,
-    border: Border.all(color: color.withValues(alpha: 0.5), width: 1.5),
-    boxShadow: [
-      BoxShadow(
-        color: color.withValues(alpha: 0.15),
-        blurRadius: 12,
-        spreadRadius: 1,
-      ),
-    ],
+    borderRadius: AppRadius.smBr,
+    border: Border.all(color: color, width: 1.0),
+    // Removed heavy shadows for flat design
   );
 
   static Color difficultyColor(String difficulty) {

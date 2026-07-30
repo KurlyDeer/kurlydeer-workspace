@@ -383,7 +383,7 @@ class _GeneratingView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CircularProgressIndicator(
+            CircularProgressIndicator(
               color: AppColors.glowTerracotta,
               strokeWidth: 4,
             ),
