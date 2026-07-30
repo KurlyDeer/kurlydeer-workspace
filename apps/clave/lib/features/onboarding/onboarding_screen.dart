@@ -54,20 +54,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final onboarding = ref.watch(onboardingProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.glassGradientStart,
+      backgroundColor: AppColors.surface0,
       resizeToAvoidBottomInset: true,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.glassGradientStart,
-              AppColors.glassGradientMid,
-              AppColors.glassGradientEnd,
-            ],
-          ),
-        ),
+        color: AppColors.surface0,
         child: SafeArea(
           child: Column(
             children: [
@@ -125,23 +115,22 @@ class _DotIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(pageCount, (i) {
-        final isActive = i == currentPage;
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          width: isActive ? 24 : 8,
-          height: 8,
-          decoration: BoxDecoration(
-            color: isActive
-                ? AppColors.glowTerracotta
-                : AppColors.glassBorder,
-            borderRadius: BorderRadius.circular(4),
-          ),
-        );
-      }),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.surface1,
+        borderRadius: AppRadius.smBr,
+        border: Border.all(color: AppColors.borderLight),
+      ),
+      child: Text(
+        '[ ${currentPage + 1} / $pageCount ]',
+        style: TextStyle(
+          fontFamily: 'JetBrains Mono',
+          color: AppColors.text,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 1.2,
+        ),
+      ),
     );
   }
 }
@@ -173,35 +162,21 @@ class _BottomButton extends StatelessWidget {
         child: SizedBox(
           height: 60,
           width: double.infinity,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: isEnabled
-                  ? [
-                      BoxShadow(
-                        color: AppColors.glowTerracotta.withValues(alpha: 0.4),
-                        blurRadius: 20,
-                        spreadRadius: 2,
-                      ),
-                    ]
-                  : [],
-            ),
-            child: ElevatedButton(
-              onPressed: isEnabled ? onPressed : null,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.glowTerracotta,
-                foregroundColor: AppColors.lightText,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 0,
+          child: ElevatedButton(
+            onPressed: isEnabled ? onPressed : null,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.text,
+              foregroundColor: AppColors.surface0,
+              shape: RoundedRectangleBorder(
+                borderRadius: AppRadius.smBr,
               ),
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontSize: AppFontSizes.subtitle,
-                  fontWeight: FontWeight.w700,
-                ),
+              elevation: 0,
+            ),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: AppFontSizes.subtitle,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ),
@@ -228,13 +203,16 @@ class _WelcomePage extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.headlineLarge,
               fontWeight: FontWeight.w900,
-              color: AppColors.glassText,
+              color: AppColors.text,
               letterSpacing: -0.5,
             ),
           ),
           const SizedBox(height: 32),
           GlassContainer(
             padding: const EdgeInsets.all(24),
+            backgroundColor: AppColors.surface1,
+            borderColor: AppColors.borderLight,
+            borderRadius: 8,
             child: Column(
               children: [
                 Text(
@@ -243,7 +221,7 @@ class _WelcomePage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.title,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.glassText,
+                    color: AppColors.text,
                     height: 1.3,
                   ),
                 ),
@@ -253,7 +231,7 @@ class _WelcomePage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.body,
-                    color: AppColors.glassTextMuted,
+                    color: AppColors.textSub,
                     height: 1.5,
                   ),
                 ),
@@ -287,23 +265,26 @@ class _NamePage extends ConsumerWidget {
             style: TextStyle(
               fontSize: AppFontSizes.headline,
               fontWeight: FontWeight.w800,
-              color: AppColors.glassText,
+              color: AppColors.text,
               height: 1.2,
             ),
           ),
           const SizedBox(height: 32),
           GlassContainer(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            backgroundColor: AppColors.surface1,
+            borderColor: AppColors.borderLight,
+            borderRadius: 8,
             child: TextField(
               controller: controller,
               style: TextStyle(
-                color: AppColors.glassText,
+                color: AppColors.text,
                 fontSize: AppFontSizes.body,
               ),
               decoration: InputDecoration(
                 hintText: AppStrings.ftueNameHintEs,
                 hintStyle: TextStyle(
-                  color: AppColors.glassTextMuted,
+                  color: AppColors.textSub,
                   fontSize: AppFontSizes.body,
                 ),
                 border: InputBorder.none,
@@ -340,7 +321,7 @@ class _GoalPage extends ConsumerWidget {
             style: TextStyle(
               fontSize: AppFontSizes.headline,
               fontWeight: FontWeight.w800,
-              color: AppColors.glassText,
+              color: AppColors.text,
               height: 1.2,
             ),
           ),
@@ -349,7 +330,7 @@ class _GoalPage extends ConsumerWidget {
             AppStrings.ftueGoalSubtitleEs,
             style: TextStyle(
               fontSize: AppFontSizes.body,
-              color: AppColors.glassTextMuted,
+              color: AppColors.textSub,
               height: 1.4,
             ),
           ),
@@ -413,26 +394,14 @@ class _GoalCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        decoration: isSelected
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.glowTerracotta.withValues(alpha: 0.4),
-                    blurRadius: 16,
-                    spreadRadius: 2,
-                  ),
-                ],
-              )
-            : null,
         child: GlassContainer(
           padding: const EdgeInsets.all(20),
+          borderRadius: 8,
+          backgroundColor: isSelected ? AppColors.surface2 : AppColors.surface1,
           borderColor:
-              isSelected ? AppColors.glowTerracotta : AppColors.glassBorder,
+              isSelected ? AppColors.text : AppColors.borderLight,
           child: Container(
-            color: isSelected
-                ? AppColors.glowTerracotta.withValues(alpha: 0.10)
-                : Colors.transparent,
+            color: Colors.transparent,
             child: Row(
               children: [
                 Text(emoji, style: const TextStyle(fontSize: 36)),
@@ -446,7 +415,7 @@ class _GoalCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: AppFontSizes.title,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.glassText,
+                          color: AppColors.text,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -454,7 +423,7 @@ class _GoalCard extends StatelessWidget {
                         description,
                         style: TextStyle(
                           fontSize: AppFontSizes.body - 2,
-                          color: AppColors.glassTextMuted,
+                          color: AppColors.textSub,
                           height: 1.4,
                         ),
                       ),
@@ -490,7 +459,7 @@ class _LevelPage extends ConsumerWidget {
             style: TextStyle(
               fontSize: AppFontSizes.headline,
               fontWeight: FontWeight.w800,
-              color: AppColors.glassText,
+              color: AppColors.text,
               height: 1.2,
             ),
           ),
@@ -499,7 +468,7 @@ class _LevelPage extends ConsumerWidget {
             'Esto nos ayudará a personalizar tu contenido.',
             style: TextStyle(
               fontSize: AppFontSizes.body,
-              color: AppColors.glassTextMuted,
+              color: AppColors.textSub,
               height: 1.4,
             ),
           ),
@@ -557,7 +526,7 @@ class _TimePage extends ConsumerWidget {
             style: TextStyle(
               fontSize: AppFontSizes.headline,
               fontWeight: FontWeight.w800,
-              color: AppColors.glassText,
+              color: AppColors.text,
               height: 1.2,
             ),
           ),
@@ -566,7 +535,7 @@ class _TimePage extends ConsumerWidget {
             'La consistencia es clave para aprender un idioma.',
             style: TextStyle(
               fontSize: AppFontSizes.body,
-              color: AppColors.glassTextMuted,
+              color: AppColors.textSub,
               height: 1.4,
             ),
           ),

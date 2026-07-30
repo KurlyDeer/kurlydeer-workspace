@@ -56,17 +56,17 @@ class _PlacementScreenState extends ConsumerState<PlacementScreen> {
     final showStepIndicator = !state.isComplete;
 
     return Scaffold(
-      backgroundColor: AppColors.cream,
+      backgroundColor: AppColors.surface0,
       appBar: AppBar(
-        backgroundColor: AppColors.deepBlue,
-        foregroundColor: AppColors.lightText,
+        backgroundColor: AppColors.surface1,
+        foregroundColor: AppColors.text,
         automaticallyImplyLeading: false,
         title: Text(
           AppStrings.placementTitle,
           style: TextStyle(
             fontSize: isSenior ? AppFontSizes.titleLarge : AppFontSizes.title,
             fontWeight: FontWeight.w700,
-            color: AppColors.lightText,
+            color: AppColors.text,
           ),
         ),
         actions: [
@@ -74,16 +74,22 @@ class _PlacementScreenState extends ConsumerState<PlacementScreen> {
             Padding(
               padding: const EdgeInsets.only(right: 16),
               child: Center(
-                child: Chip(
-                  backgroundColor: AppColors.terracotta,
-                  label: Text(
-                    '${AppStrings.placementQuestionOf} ${questionIndex + 1} ${AppStrings.placementQuestionOfTotal}',
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.surface2,
+                    borderRadius: AppRadius.smBr,
+                    border: Border.all(color: AppColors.borderLight),
+                  ),
+                  child: Text(
+                    '[ ${questionIndex + 1} / 3 ]',
                     style: TextStyle(
-                      color: AppColors.lightText,
+                      fontFamily: 'JetBrains Mono',
+                      color: AppColors.text,
                       fontSize: isSenior
                           ? AppFontSizes.bodyLarge - 2
                           : AppFontSizes.body - 2,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -159,19 +165,20 @@ class _ChatBubble extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: isApp ? AppColors.deepBlue : AppColors.terracotta,
+          color: isApp ? AppColors.surface1 : AppColors.surface2,
+          border: Border.all(color: AppColors.borderLight),
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(18),
-            topRight: const Radius.circular(18),
-            bottomLeft: Radius.circular(isApp ? 4 : 18),
-            bottomRight: Radius.circular(isApp ? 18 : 4),
+            topLeft: const Radius.circular(8),
+            topRight: const Radius.circular(8),
+            bottomLeft: Radius.circular(isApp ? 0 : 8),
+            bottomRight: Radius.circular(isApp ? 8 : 0),
           ),
         ),
         child: Text(
           message.text,
           style: TextStyle(
             fontSize: bodySize,
-            color: AppColors.lightText,
+            color: AppColors.text,
             height: 1.4,
           ),
         ),
@@ -216,12 +223,13 @@ class _TypingIndicatorState extends State<_TypingIndicator>
         margin: const EdgeInsets.only(top: 6, bottom: 6, right: 48),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: AppColors.deepBlue,
+          color: AppColors.surface1,
+          border: Border.all(color: AppColors.borderLight),
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(18),
-            topRight: Radius.circular(18),
-            bottomRight: Radius.circular(18),
-            bottomLeft: Radius.circular(4),
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+            bottomRight: Radius.circular(8),
+            bottomLeft: Radius.circular(0),
           ),
         ),
         child: AnimatedBuilder(
@@ -242,7 +250,7 @@ class _TypingIndicatorState extends State<_TypingIndicator>
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: AppColors.lightText,
+                        color: AppColors.textSub,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -302,13 +310,13 @@ class _AnswerButtons extends StatelessWidget {
                 onPressed: () => onSelect(entry.key),
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(
-                    color: AppColors.deepBlue,
-                    width: 1.5,
+                    color: AppColors.borderDark,
+                    width: 1.0,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: AppRadius.smBr,
                   ),
-                  foregroundColor: AppColors.deepBlue,
+                  foregroundColor: AppColors.text,
                 ),
                 child: Text(
                   entry.value,
@@ -349,12 +357,12 @@ class _CompletionButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.terracotta,
-            foregroundColor: AppColors.lightText,
+            backgroundColor: AppColors.text,
+            foregroundColor: AppColors.surface0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: AppRadius.smBr,
             ),
-            elevation: 4,
+            elevation: 0,
           ),
           child: Text(
             '${AppStrings.placementGoToDashboardEs}  •  ${AppStrings.placementGoToDashboardEn}',
