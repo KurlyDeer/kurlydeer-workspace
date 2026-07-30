@@ -88,12 +88,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
       // AuthGate will handle navigation on auth state change.
     } on FirebaseAuthException catch (e) {
+      debugPrint('Firebase Auth Exception: ${e.code} - ${e.message}');
       if (mounted) {
-        setState(() => _errorMessage = _friendlyError(e.code));
+        setState(() => _errorMessage = '${e.code}: ${e.message}');
       }
     } catch (e) {
+      debugPrint('Firebase Auth Exception: $e');
       if (mounted) {
-        setState(() => _errorMessage = 'Error inesperado. Intenta de nuevo.');
+        setState(() => _errorMessage = e.toString());
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -133,8 +135,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     try {
       final provider = GoogleAuthProvider();
       await FirebaseAuth.instance.signInWithPopup(provider);
+    } on FirebaseAuthException catch (e) {
+      debugPrint('Firebase Auth Exception: ${e.code} - ${e.message}');
+      if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
     } catch (e) {
-      if (mounted) setState(() => _errorMessage = 'Error con Google.');
+      debugPrint('Firebase Auth Exception: $e');
+      if (mounted) setState(() => _errorMessage = e.toString());
     }
   }
 
@@ -142,8 +148,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     try {
       final provider = OAuthProvider('apple.com');
       await FirebaseAuth.instance.signInWithPopup(provider);
+    } on FirebaseAuthException catch (e) {
+      debugPrint('Firebase Auth Exception: ${e.code} - ${e.message}');
+      if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
     } catch (e) {
-      if (mounted) setState(() => _errorMessage = 'Error con Apple.');
+      debugPrint('Firebase Auth Exception: $e');
+      if (mounted) setState(() => _errorMessage = e.toString());
     }
   }
 

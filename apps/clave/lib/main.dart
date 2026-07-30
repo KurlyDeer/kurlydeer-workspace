@@ -46,6 +46,9 @@ void main() async {
   // Firebase + Crashlytics — only runs when real credentials are present.
   // Flip _kFirebaseConfigured to true after running `flutterfire configure`.
   if (_kFirebaseConfigured) {
+    if (dotenv.env['FIREBASE_API_KEY'] == null || dotenv.env['FIREBASE_API_KEY']!.isEmpty) {
+      debugPrint('Warning: FIREBASE_API_KEY is undefined. Firebase auth might crash.');
+    }
     try {
       await Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform);
