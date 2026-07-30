@@ -4,12 +4,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/providers/auth_provider.dart';
+import '../../core/providers/shared_preferences_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/clave_button.dart';
 import '../../core/widgets/clave_text_field.dart';
 import '../../core/widgets/glass_container.dart';
 import '../../core/widgets/responsive_layout.dart';
 import '../../l10n/app_strings.dart';
+import '../dashboard/main_shell_screen.dart';
+import '../onboarding/onboarding_screen.dart';
 
 /// Login / Sign-up screen following the app's glassmorphism design.
 ///
@@ -105,16 +108,42 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     try {
       await ref.read(authServiceProvider).signInAnonymously();
-    } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        setState(() => _errorMessage = _friendlyError(e.code));
-      }
     } catch (e) {
+      debugPrint('Anonymous auth failed: $e. Falling back to local guest session.');
+      final prefs = ref.read(sharedPreferencesProvider);
+      await prefs.setBool('is_guest_fallback', true);
+      
+      final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+      final hasLegacyPersona = prefs.getString('persona') != null;
       if (mounted) {
-        setState(() => _errorMessage = 'Error inesperado. Intenta de nuevo.');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => (onboardingComplete || hasLegacyPersona)
+                ? const MainShellScreen()
+                : const OnboardingScreen(),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final provider = GoogleAuthProvider();
+      await FirebaseAuth.instance.signInWithPopup(provider);
+    } catch (e) {
+      if (mounted) setState(() => _errorMessage = 'Error con Google.');
+    }
+  }
+
+  Future<void> _signInWithApple() async {
+    try {
+      final provider = OAuthProvider('apple.com');
+      await FirebaseAuth.instance.signInWithPopup(provider);
+    } catch (e) {
+      if (mounted) setState(() => _errorMessage = 'Error con Apple.');
     }
   }
 
@@ -123,9 +152,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Scaffold(
       backgroundColor: AppColors.surface0,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: AppGlassStyles.backgroundGradient,
-        ),
+        color: AppColors.surface0,
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -143,6 +170,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   // ── Login Form ────────────────────────────────────────
                   GlassContainer(
                     padding: const EdgeInsets.all(24),
+                    borderRadius: 8,
+                    backgroundColor: AppColors.surface1,
+                    borderColor: AppColors.borderLight,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -249,6 +279,42 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
+                  
+                  // ── OAuth Buttons ─────────────────────────────────────
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.g_mobiledata, size: 28),
+                          label: const Text('Google', style: TextStyle(fontWeight: FontWeight.w600)),
+                          onPressed: _isLoading ? null : _signInWithGoogle,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.text,
+                            backgroundColor: AppColors.surface0,
+                            side: const BorderSide(color: AppColors.borderDark, width: 1.0),
+                            shape: RoundedRectangleBorder(borderRadius: AppRadius.smBr),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.apple, size: 24),
+                          label: const Text('Apple', style: TextStyle(fontWeight: FontWeight.w600)),
+                          onPressed: _isLoading ? null : _signInWithApple,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.text,
+                            backgroundColor: AppColors.surface0,
+                            side: const BorderSide(color: AppColors.borderDark, width: 1.0),
+                            shape: RoundedRectangleBorder(borderRadius: AppRadius.smBr),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
 
                   // ── Divider ───────────────────────────────────────────
                   Row(
@@ -279,7 +345,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ClaveButton(
                     label: 'Continuar como invitado',
                     icon: Icons.person_outline,
-                    variant: ClaveButtonVariant.secondary,
                     onPressed: _isLoading ? null : _continueAsGuest,
                   ),
                 ],

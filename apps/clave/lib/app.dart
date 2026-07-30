@@ -44,21 +44,23 @@ class _AuthGate extends ConsumerWidget {
 
     return authState.when(
       loading: () => Scaffold(
-        backgroundColor: AppColors.glassGradientStart,
+        backgroundColor: AppColors.gradientStart,
         body: Center(
           child: CircularProgressIndicator(
-            color: AppColors.glowTerracotta,
+            color: AppColors.text,
           ),
         ),
       ),
       error: (e, st) => const LoginScreen(),
       data: (user) {
-        if (user == null) {
+        final prefs = ref.read(sharedPreferencesProvider);
+        final isGuestFallback = prefs.getBool('is_guest_fallback') ?? false;
+
+        if (user == null && !isGuestFallback) {
           return const LoginScreen();
         }
 
-        // User is authenticated — check onboarding status.
-        final prefs = ref.read(sharedPreferencesProvider);
+        // User is authenticated or in guest fallback — check onboarding status.
         final onboardingComplete =
             prefs.getBool('onboarding_complete') ?? false;
         final hasLegacyPersona = prefs.getString('persona') != null;
