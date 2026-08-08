@@ -49,7 +49,7 @@ class VoiceChallengeView extends StatelessWidget {
             style: TextStyle(
               fontSize: titleSize,
               fontWeight: FontWeight.w800,
-              color: AppColors.darkText,
+              color: AppColors.text,
             ),
           ),
           const SizedBox(height: 16),
@@ -58,7 +58,7 @@ class VoiceChallengeView extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: bodySize,
-              color: AppColors.darkText.withValues(alpha: 0.7),
+              color: AppColors.textSub,
             ),
           ),
           const SizedBox(height: 12),
@@ -66,15 +66,9 @@ class VoiceChallengeView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColors.shadow,
-                  blurRadius: 8,
-                  offset: Offset(0, 3),
-                ),
-              ],
+              color: AppColors.surface1,
+              borderRadius: AppRadius.smBr,
+              border: Border.all(color: AppColors.borderDark, width: 1.0),
             ),
             child: Text(
               '"$targetSentence"',
@@ -82,7 +76,7 @@ class VoiceChallengeView extends StatelessWidget {
               style: TextStyle(
                 fontSize: bodySize + 2,
                 fontWeight: FontWeight.w700,
-                color: AppColors.terracotta,
+                color: AppColors.emerald,
                 fontStyle: FontStyle.italic,
                 height: 1.4,
               ),
@@ -105,7 +99,7 @@ class VoiceChallengeView extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: bodySize - 2,
-                color: AppColors.terracotta,
+                color: AppColors.emerald,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -116,7 +110,7 @@ class VoiceChallengeView extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: bodySize - 2,
-                  color: AppColors.darkText,
+                  color: AppColors.text,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -130,7 +124,7 @@ class VoiceChallengeView extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: bodySize - 2,
-                color: AppColors.darkText.withValues(alpha: 0.55),
+                color: AppColors.textDim,
               ),
             ),
           ],
@@ -140,16 +134,16 @@ class VoiceChallengeView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.red[50],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.red[200]!),
+                color: AppColors.errorSubtle,
+                borderRadius: AppRadius.smBr,
+                border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
               ),
               child: Text(
                 AppStrings.lessonOfflineEs,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: bodySize - 2,
-                  color: Colors.red[800],
+                  color: AppColors.error,
                   height: 1.5,
                 ),
               ),
@@ -159,16 +153,16 @@ class VoiceChallengeView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.orange[50],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.orange[200]!),
+                color: AppColors.gold.withValues(alpha: 0.08),
+                borderRadius: AppRadius.smBr,
+                border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
               ),
               child: Text(
                 errorMessage,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: bodySize - 2,
-                  color: Colors.orange[900],
+                  color: AppColors.gold,
                   height: 1.5,
                 ),
               ),
@@ -182,17 +176,17 @@ class VoiceChallengeView extends StatelessWidget {
               onPressed: onSkip,
               style: OutlinedButton.styleFrom(
                 side: BorderSide(
-                  color: AppColors.darkText.withValues(alpha: 0.3),
+                  color: AppColors.borderDark,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: AppRadius.smBr,
                 ),
               ),
               child: Text(
                 AppStrings.retoSkipEs,
                 style: TextStyle(
                   fontSize: bodySize - 2,
-                  color: AppColors.darkText.withValues(alpha: 0.6),
+                  color: AppColors.textSub,
                 ),
               ),
             ),

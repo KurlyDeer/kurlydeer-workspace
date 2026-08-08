@@ -59,7 +59,7 @@ class _MicHoldButtonState extends State<MicHoldButton>
   Widget build(BuildContext context) {
     final size = widget.isSenior ? 120.0 : 100.0;
     final color =
-        widget.isRecording ? AppColors.terracotta : AppColors.deepBlue;
+        widget.isRecording ? AppColors.emerald : AppColors.surface3;
     final icon = widget.isRecording ? Icons.mic : Icons.mic_none;
 
     return GestureDetector(

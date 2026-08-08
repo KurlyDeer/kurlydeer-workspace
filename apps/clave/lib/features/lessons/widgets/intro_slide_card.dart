@@ -29,7 +29,7 @@ class IntroSlideCard extends StatelessWidget {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: AppColors.terracotta.withValues(alpha: 0.12),
+              color: AppColors.emerald.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Center(
@@ -46,7 +46,7 @@ class IntroSlideCard extends StatelessWidget {
             style: TextStyle(
               fontSize: titleSize,
               fontWeight: FontWeight.w800,
-              color: AppColors.darkText,
+              color: AppColors.text,
               height: 1.2,
             ),
           ),
@@ -56,7 +56,7 @@ class IntroSlideCard extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: bodySize,
-              color: AppColors.darkText.withValues(alpha: 0.55),
+              color: AppColors.textSub,
               fontStyle: FontStyle.italic,
             ),
           ),
@@ -64,14 +64,14 @@ class IntroSlideCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: AppColors.deepBlue.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
+              color: AppColors.emerald.withValues(alpha: 0.1),
+              borderRadius: AppRadius.pillBr,
             ),
             child: Text(
               content.topicEs,
               style: TextStyle(
                 fontSize: bodySize - 2,
-                color: AppColors.deepBlue,
+                color: AppColors.emerald,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -80,15 +80,9 @@ class IntroSlideCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColors.shadow,
-                  blurRadius: 8,
-                  offset: Offset(0, 3),
-                ),
-              ],
+              color: AppColors.surface1,
+              borderRadius: AppRadius.smBr,
+              border: Border.all(color: AppColors.borderDark, width: 1.0),
             ),
             child: Column(
               children: [
@@ -97,7 +91,7 @@ class IntroSlideCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: bodySize - 2,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.darkText,
+                    color: AppColors.text,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -141,7 +135,7 @@ class _StepChip extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: bodySize - 4,
-            color: AppColors.darkText.withValues(alpha: 0.7),
+            color: AppColors.textSub,
           ),
         ),
       ],

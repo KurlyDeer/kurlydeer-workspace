@@ -74,10 +74,10 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
     final btnHeight = isSenior ? 72.0 : 56.0;
 
     return Scaffold(
-      backgroundColor: AppColors.cream,
+      backgroundColor: AppColors.gradientStart,
       appBar: AppBar(
-        backgroundColor: AppColors.terracotta,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.surface0,
+        foregroundColor: AppColors.text,
         title: Text(
           widget.lessonLabel != null
               ? '${widget.lessonLabel}  •  ${state.content.titleEs}'
@@ -88,6 +88,10 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             fontSize: isSenior ? AppFontSizes.bodyLarge : AppFontSizes.body,
             fontWeight: FontWeight.w700,
           ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: AppColors.cardBorder, height: 1.0),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -105,15 +109,15 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             LinearProgressIndicator(
               value: (state.slideIndex + 1) / state.totalSlides,
               minHeight: 6,
-              backgroundColor: AppColors.unselectedBorder,
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.terracotta),
+              backgroundColor: AppColors.surface3,
+              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.emerald),
             ),
           ],
           // Main content
           Expanded(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
-              child: _buildSlide(state, notifier, isSenior),
+              child: _buildSlide(state, notifier, isSenior, tts),
             ),
           ),
           // Bottom bar
@@ -125,7 +129,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
   }
 
   Widget _buildSlide(
-      LessonState state, LessonNotifier notifier, bool isSenior) {
+      LessonState state, LessonNotifier notifier, bool isSenior, dynamic tts) {
     switch (state.status) {
       case LessonStatus.intro:
         return IntroSlideCard(
@@ -206,7 +210,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.terracotta),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.emerald),
               ),
               const SizedBox(height: 16),
               Text(
@@ -215,7 +219,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                     : AppStrings.retoScoringEs,
                 style: TextStyle(
                   fontSize: bodySize,
-                  color: AppColors.darkText,
+                  color: AppColors.text,
                 ),
               ),
             ],
@@ -250,7 +254,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
               style: TextStyle(
                 fontSize: bodySize + 4,
                 fontWeight: FontWeight.w700,
-                color: AppColors.darkText,
+                color: AppColors.text,
               ),
             ),
           ),
@@ -294,12 +298,13 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                   notifier.unlockNext();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.deepBlue,
-                  foregroundColor: AppColors.lightText,
+                  backgroundColor: AppColors.surface2,
+                  foregroundColor: AppColors.text,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: AppRadius.smBr,
                   ),
-                  elevation: 2,
+                  elevation: 0,
+                  side: BorderSide(color: AppColors.borderDark),
                 ),
                 child: Text(
                   AppStrings.lessonRepeatAudioEs,
@@ -333,12 +338,12 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           child: ElevatedButton(
             onPressed: notifier.startLesson,
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.terracotta,
-              foregroundColor: AppColors.lightText,
+              backgroundColor: AppColors.emerald,
+              foregroundColor: AppColors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppRadius.smBr,
               ),
-              elevation: 4,
+              elevation: 0,
             ),
             child: Text(
               AppStrings.lessonIntroStartEs,
@@ -356,14 +361,14 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           child: ElevatedButton(
             onPressed: state.nextUnlocked ? notifier.nextSlide : null,
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.terracotta,
-              foregroundColor: AppColors.lightText,
+              backgroundColor: AppColors.emerald,
+              foregroundColor: AppColors.white,
               disabledBackgroundColor:
-                  AppColors.unselectedBorder,
+                  AppColors.surface3,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppRadius.smBr,
               ),
-              elevation: 4,
+              elevation: 0,
             ),
             child: Text(
               AppStrings.lessonNextEs,
@@ -386,20 +391,20 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           child: ElevatedButton(
             onPressed: null,
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.unselectedBorder,
+              backgroundColor: AppColors.surface3,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppRadius.smBr,
               ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
+                SizedBox(
                   width: 20,
                   height: 20,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: AppColors.darkText,
+                    color: AppColors.text,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -409,7 +414,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                     : AppStrings.retoScoringEs,
                   style: TextStyle(
                     fontSize: bodySize - 2,
-                    color: AppColors.darkText,
+                    color: AppColors.text,
                   ),
                 ),
               ],
@@ -426,12 +431,12 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
                 ? () => notifier.completeLesson(state.voiceScore, state.feedbackEs)
                 : notifier.retryVoiceChallenge,
             style: ElevatedButton.styleFrom(
-              backgroundColor: canComplete ? Colors.green[700] : AppColors.deepBlue,
-              foregroundColor: AppColors.lightText,
+              backgroundColor: canComplete ? AppColors.emeraldDark : AppColors.surface2,
+              foregroundColor: AppColors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppRadius.smBr,
               ),
-              elevation: 4,
+              elevation: 0,
             ),
             child: Text(
               canComplete ? AppStrings.lessonCompleteActionEs : AppStrings.retoTryAgainEs,

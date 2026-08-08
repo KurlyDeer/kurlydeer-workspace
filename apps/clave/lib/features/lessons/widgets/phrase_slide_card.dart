@@ -29,14 +29,14 @@ class PhraseSlideCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: AppColors.terracotta.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(20),
+                color: AppColors.emerald.withValues(alpha: 0.1),
+                borderRadius: AppRadius.pillBr,
               ),
               child: Text(
                 '💬 Frase Útil',
                 style: TextStyle(
                   fontSize: bodySize - 2,
-                  color: AppColors.terracotta,
+                  color: AppColors.emerald,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -47,15 +47,9 @@ class PhraseSlideCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
             decoration: BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: AppColors.shadow,
-                  blurRadius: 12,
-                  offset: Offset(0, 4),
-                ),
-              ],
+              color: AppColors.surface1,
+              borderRadius: AppRadius.smBr,
+              border: Border.all(color: AppColors.borderDark, width: 1.0),
             ),
             child: Column(
               children: [
@@ -65,7 +59,7 @@ class PhraseSlideCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: titleSize,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.terracotta,
+                    color: AppColors.text,
                     height: 1.3,
                   ),
                 ),
@@ -75,7 +69,7 @@ class PhraseSlideCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: bodySize,
-                    color: AppColors.darkText.withValues(alpha: 0.7),
+                    color: AppColors.textSub,
                   ),
                 ),
               ],
@@ -87,10 +81,10 @@ class PhraseSlideCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.terracotta.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(16),
+                color: AppColors.surface2.withValues(alpha: 0.5),
+                borderRadius: AppRadius.smBr,
                 border: Border.all(
-                  color: AppColors.terracotta.withValues(alpha: 0.15),
+                  color: AppColors.borderDark,
                 ),
               ),
               child: Column(
@@ -102,7 +96,7 @@ class PhraseSlideCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: bodySize,
                         fontStyle: FontStyle.italic,
-                        color: AppColors.darkText,
+                        color: AppColors.text,
                         height: 1.4,
                       ),
                     ),
@@ -112,7 +106,7 @@ class PhraseSlideCard extends StatelessWidget {
                       slide.exampleEs!,
                       style: TextStyle(
                         fontSize: bodySize - 2,
-                        color: AppColors.darkText.withValues(alpha: 0.6),
+                        color: AppColors.textSub,
                         height: 1.4,
                       ),
                     ),

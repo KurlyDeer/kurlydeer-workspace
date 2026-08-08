@@ -10,6 +10,7 @@ import '../../core/services/sync_service.dart';
 import '../../core/providers/persona_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
+import '../../core/providers/stats_provider.dart';
 import '../../l10n/app_strings.dart';
 import '../companero/companero_screen.dart';
 import 'glass_home_tab.dart';
@@ -53,6 +54,7 @@ class _MainShellScreenState extends ConsumerState<MainShellScreen> {
         if (isDesktop) {
           return Scaffold(
             backgroundColor: AppColors.gradientStart,
+            appBar: _buildTopBar(context, isDesktop),
             body: Row(
               children: [
                 _WebSideNav(
@@ -73,6 +75,7 @@ class _MainShellScreenState extends ConsumerState<MainShellScreen> {
 
         return Scaffold(
           backgroundColor: AppColors.gradientStart,
+          appBar: _buildTopBar(context, false),
           body: IndexedStack(
             index: _currentIndex,
             children: _tabs,
@@ -84,6 +87,110 @@ class _MainShellScreenState extends ConsumerState<MainShellScreen> {
           ),
         );
       },
+    );
+  }
+
+  PreferredSizeWidget _buildTopBar(BuildContext context, bool isDesktop) {
+    final stats = ref.watch(statsProvider);
+    
+    return AppBar(
+      backgroundColor: AppColors.surface0,
+      elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1.0),
+        child: Container(
+          color: AppColors.cardBorder,
+          height: 1.0,
+        ),
+      ),
+      title: Row(
+        children: [
+          Text(
+            'Inicio / Dashboard',
+            style: GoogleFonts.jetBrainsMono(
+              fontSize: 14,
+              color: AppColors.textSub,
+              letterSpacing: 0.5,
+            ),
+          ),
+          const Spacer(),
+          // User streak
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: AppColors.surface2,
+              borderRadius: AppRadius.smBr,
+              border: Border.all(color: AppColors.cardBorder),
+            ),
+            child: Row(
+              children: [
+                const Text('🔥', style: TextStyle(fontSize: 14)),
+                const SizedBox(width: 4),
+                Text(
+                  '${stats.streak}',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.text,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          // User XP
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: AppColors.surface2,
+              borderRadius: AppRadius.smBr,
+              border: Border.all(color: AppColors.cardBorder),
+            ),
+            child: Row(
+              children: [
+                const Text('⚡', style: TextStyle(fontSize: 14)),
+                const SizedBox(width: 4),
+                Text(
+                  '${stats.xp}',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.gold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          // Back link
+          if (!isDesktop) // on desktop we already have it in the sidebar
+            GestureDetector(
+              onTap: () => launchUrl(Uri.parse('https://kurlydeer.com')),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: AppRadius.smBr,
+                  border: Border.all(color: AppColors.cardBorder),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.open_in_new, color: AppColors.textDim, size: 14),
+                    const SizedBox(width: 6),
+                    Text(
+                      'kurlydeer.com',
+                      style: GoogleFonts.jetBrainsMono(
+                        fontSize: 12,
+                        color: AppColors.textSub,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

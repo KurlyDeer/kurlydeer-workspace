@@ -170,42 +170,40 @@ class _StudyView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
         children: [
-          // ── Progress header ──────────────────────────────────────────────
+          // ── Clean Progress header ──────────────────────────────────────────────
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '$queueRemaining ${AppStrings.vocabWordsToStudyEs}',
-                style: TextStyle(
-                  fontSize: smallSize,
-                  color: AppColors.terracotta,
-                  fontWeight: FontWeight.w700,
+                'STUDY QUEUE',
+                style: AppTextStyles.monoMeta(
+                  color: AppColors.textSub,
+                  fontSize: 11,
                 ),
               ),
               Text(
-                '${stats.known} ${AppStrings.vocabOfEs} ${stats.total} ${AppStrings.vocabWordsKnownOfEs}',
-                style: TextStyle(
-                  fontSize: smallSize,
-                  color: AppColors.darkText.withValues(alpha: 0.55),
-                  fontWeight: FontWeight.w600,
+                '[ $queueRemaining LEFT ]',
+                style: AppTextStyles.monoMeta(
+                  color: AppColors.textSub,
+                  fontSize: 11,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(2),
             child: LinearProgressIndicator(
               value: stats.total == 0
                   ? 0
                   : stats.known / stats.total,
-              minHeight: isSenior ? 8 : 6,
-              backgroundColor: AppColors.surface2,
+              minHeight: 4,
+              backgroundColor: AppColors.surface3,
               valueColor:
-                  AlwaysStoppedAnimation<Color>(AppColors.text),
+                  AlwaysStoppedAnimation<Color>(AppColors.emerald),
             ),
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 40),
 
           // ── Flashcard ────────────────────────────────────────────────────
           Expanded(
@@ -229,7 +227,7 @@ class _StudyView extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: smallSize,
-                color: AppColors.darkText.withValues(alpha: 0.4),
+                color: AppColors.text.withValues(alpha: 0.4),
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -245,50 +243,61 @@ class _StudyView extends StatelessWidget {
               ignoring: !isFlipped,
               child: Row(
                 children: [
-                  // Repeat
+                  // Repeat (Red Glow)
                   Expanded(
-                    child: SizedBox(
-                      height: buttonHeight,
-                      child: OutlinedButton(
-                        onPressed: onRepeat,
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(
-                              color: AppColors.borderDark, width: 1.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.smBr,
-                          ),
+                    child: GestureDetector(
+                      onTap: onRepeat,
+                      child: Container(
+                        height: buttonHeight,
+                        decoration: BoxDecoration(
+                          color: AppColors.surface1,
+                          borderRadius: AppRadius.smBr,
+                          border: Border.all(color: AppColors.terracotta.withValues(alpha: 0.5)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.terracotta.withValues(alpha: 0.2),
+                              blurRadius: 12,
+                              spreadRadius: 1,
+                            ),
+                          ],
                         ),
+                        alignment: Alignment.center,
                         child: Text(
                           AppStrings.vocabRepeatEs,
                           style: TextStyle(
                             fontSize: btnTextSize,
-                            color: AppColors.text,
+                            color: AppColors.terracotta,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  // Know it
+                  const SizedBox(width: 16),
+                  // Know it (Green Glow)
                   Expanded(
-                    child: SizedBox(
-                      height: buttonHeight,
-                      child: ElevatedButton(
-                        onPressed: onKnow,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.text,
-                          foregroundColor: AppColors.surface0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppRadius.smBr,
-                            side: const BorderSide(color: AppColors.borderDark, width: 1.0),
-                          ),
-                          elevation: 0,
+                    child: GestureDetector(
+                      onTap: onKnow,
+                      child: Container(
+                        height: buttonHeight,
+                        decoration: BoxDecoration(
+                          color: AppColors.surface1,
+                          borderRadius: AppRadius.smBr,
+                          border: Border.all(color: AppColors.emerald.withValues(alpha: 0.5)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.emerald.withValues(alpha: 0.2),
+                              blurRadius: 12,
+                              spreadRadius: 1,
+                            ),
+                          ],
                         ),
+                        alignment: Alignment.center,
                         child: Text(
                           AppStrings.vocabKnowItEs,
                           style: TextStyle(
                             fontSize: btnTextSize,
+                            color: AppColors.emerald,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -430,7 +439,7 @@ class _CardFace extends StatelessWidget {
         color: isFront ? AppColors.surface0 : _backColor,
         borderRadius: AppRadius.smBr,
         border: Border.all(
-                color: AppColors.borderLight, width: 1.0),
+                color: AppColors.borderDark, width: 1.0),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -661,7 +670,7 @@ class _CelebrationState extends StatelessWidget {
               onPressed: onReset,
               style: OutlinedButton.styleFrom(
                 side:
-                    const BorderSide(color: AppColors.deepBlue, width: 2),
+                    const BorderSide(color: AppColors.borderDark, width: 2),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -670,7 +679,7 @@ class _CelebrationState extends StatelessWidget {
                 AppStrings.vocabReviewAllEs,
                 style: TextStyle(
                   fontSize: btnTextSize,
-                  color: AppColors.deepBlue,
+                  color: AppColors.text,
                   fontWeight: FontWeight.w700,
                 ),
               ),

@@ -27,7 +27,7 @@ class AppColors {
   static const Color lightSurface4 = Color(0xFFDEE2E6); // subtle
 
   // ── Borders ───────────────────────────────────────────────────────────────
-  static const Color borderDark    = Color(0xFF222222); // sharp dark border
+  static const Color borderDark    = Color(0xFF27272A); // zinc-800 border
   static const Color borderSubtle  = Color(0xFF333333); // subtle dark border
   static const Color borderLight   = Color(0xFFDEE2E6); // sharp light border
   static const Color borderLighter = Color(0xFFE9ECEF); // subtle light border

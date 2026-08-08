@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/providers/auth_provider.dart';
 import '../../core/providers/shared_preferences_provider.dart';
+import '../../core/services/sync_service.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/clave_button.dart';
 import '../../core/widgets/clave_text_field.dart';
@@ -86,11 +87,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       } else {
         await authService.signInWithEmail(email: email, password: password);
       }
+      
+      // Merge guest progress into Firestore
+      ref.read(syncServiceProvider).syncProgress();
+      
+      // Clear guest fallback flag
+      final prefs = ref.read(sharedPreferencesProvider);
+      await prefs.remove('is_guest_fallback');
+      
       // AuthGate will handle navigation on auth state change.
     } on FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Exception: ${e.code} - ${e.message}');
       if (mounted) {
-        setState(() => _errorMessage = '${e.code}: ${e.message}');
+        setState(() => _errorMessage = _friendlyError(e.code));
       }
     } catch (e) {
       debugPrint('Firebase Auth Exception: $e');
@@ -135,6 +144,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     try {
       final provider = GoogleAuthProvider();
       await FirebaseAuth.instance.signInWithPopup(provider);
+      
+      // Merge guest progress into Firestore
+      ref.read(syncServiceProvider).syncProgress();
     } on FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Exception (Google Popup): ${e.code} - ${e.message}');
       if (e.code == 'popup-blocked' || e.code == 'popup-closed-by-user') {
@@ -142,7 +154,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         final provider = GoogleAuthProvider();
         await FirebaseAuth.instance.signInWithRedirect(provider);
       } else {
-        if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
+        if (mounted) setState(() => _errorMessage = _friendlyError(e.code));
       }
     } catch (e) {
       debugPrint('Firebase Auth Exception (Google): $e');
@@ -154,6 +166,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     try {
       final provider = OAuthProvider('apple.com');
       await FirebaseAuth.instance.signInWithPopup(provider);
+      
+      // Merge guest progress into Firestore
+      ref.read(syncServiceProvider).syncProgress();
     } on FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Exception (Apple Popup): ${e.code} - ${e.message}');
       if (e.code == 'popup-blocked' || e.code == 'popup-closed-by-user') {
@@ -161,7 +176,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         final provider = OAuthProvider('apple.com');
         await FirebaseAuth.instance.signInWithRedirect(provider);
       } else {
-        if (mounted) setState(() => _errorMessage = '${e.code}: ${e.message}');
+        if (mounted) setState(() => _errorMessage = _friendlyError(e.code));
       }
     } catch (e) {
       debugPrint('Firebase Auth Exception (Apple): $e');
@@ -198,6 +213,68 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        // Tab Selector
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 24),
+                          decoration: BoxDecoration(
+                            color: AppColors.surface0,
+                            borderRadius: AppRadius.smBr,
+                            border: Border.all(color: AppColors.borderLight),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () => setState(() {
+                                    _isSignUp = false;
+                                    _errorMessage = null;
+                                  }),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: !_isSignUp ? AppColors.surface2 : Colors.transparent,
+                                      borderRadius: AppRadius.smBr,
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Iniciar Sesión',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: !_isSignUp ? FontWeight.w700 : FontWeight.w500,
+                                        color: !_isSignUp ? AppColors.text : AppColors.textSub,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () => setState(() {
+                                    _isSignUp = true;
+                                    _errorMessage = null;
+                                  }),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: _isSignUp ? AppColors.surface2 : Colors.transparent,
+                                      borderRadius: AppRadius.smBr,
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Crear Cuenta',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: _isSignUp ? FontWeight.w700 : FontWeight.w500,
+                                        color: _isSignUp ? AppColors.text : AppColors.textSub,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        
                         Text(
                           _isSignUp ? 'Crear Cuenta' : 'Iniciar Sesión',
                           style: AppTextStyles.glassTitle(),
@@ -274,28 +351,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           isLoading: _isLoading,
                           onPressed: _submitEmailPassword,
                           height: 60,
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Toggle sign-in / sign-up
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isSignUp = !_isSignUp;
-                              _errorMessage = null;
-                            });
-                          },
-                          child: Text(
-                            _isSignUp
-                                ? '¿Ya tienes cuenta? Inicia sesión'
-                                : '¿No tienes cuenta? Regístrate',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: AppFontSizes.body - 2,
-                              color: AppColors.emerald,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
                         ),
                       ],
                     ),

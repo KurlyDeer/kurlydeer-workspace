@@ -66,7 +66,7 @@ html.light .bg-zinc-950 { background-color: #ffffff !important; }
 html.light .bg-zinc-950\/70 { background-color: rgba(255,255,255,0.75) !important; }
 html.light .bg-zinc-950\/80 { background-color: rgba(255,255,255,0.85) !important; }
 html.light .bg-zinc-950\/40 { background-color: rgba(248,249,250,0.6) !important; }
-html.light .bg-\[#070708\] { background-color: #f8f9fa !important; }
+html.light .bg-\[\#070708\] { background-color: #f8f9fa !important; }
 
 /* Card surfaces */
 html.light .bg-zinc-900\/70 { background-color: rgba(255,255,255,0.85) !important; }
