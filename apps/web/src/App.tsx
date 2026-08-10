@@ -20,7 +20,8 @@ import Footer from "@/components/Footer";
 import NotFound from "@/components/NotFound";
 import ContactDrawer from "@/components/ContactDrawer";
 import BackToTop from "@/components/BackToTop";
-import { DEFAULT_PROJECTS, DEFAULT_BLOGS } from "@/defaultData";
+import { PROJECTS } from "@/data/projects";
+import { BLOGS } from "@/data/blogs";
 import { Project, BlogPost, ContactMessage } from "@/types";
 
 export default function App() {
@@ -39,39 +40,10 @@ export default function App() {
   const activeTab = getActiveTabFromPath();
   const [isContactDrawerOpen, setIsContactDrawerOpen] = useState(false);
 
-  const [projects, setProjects] = useState<Project[]>(() => {
-    try {
-      const stored = localStorage.getItem("nexus_projects");
-      let merged = [...DEFAULT_PROJECTS];
-      if (stored) {
-        const parsed = JSON.parse(stored) as Project[];
-        const defaultIds = new Set(DEFAULT_PROJECTS.map(p => p.id));
-        const custom = parsed.filter(p => !defaultIds.has(p.id));
-        merged = [...merged, ...custom];
-      }
-      return merged;
-    } catch (e) {
-      console.error(e);
-      return DEFAULT_PROJECTS;
-    }
-  });
-
-  const [blogs, setBlogs] = useState<BlogPost[]>(() => {
-    try {
-      const stored = localStorage.getItem("nexus_blogs");
-      let merged = [...DEFAULT_BLOGS];
-      if (stored) {
-        const parsed = JSON.parse(stored) as BlogPost[];
-        const defaultIds = new Set(DEFAULT_BLOGS.map(b => b.id));
-        const custom = parsed.filter(b => !defaultIds.has(b.id));
-        merged = [...merged, ...custom];
-      }
-      return merged;
-    } catch (e) {
-      console.error(e);
-      return DEFAULT_BLOGS;
-    }
-  });
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('nexus_projects');
+    localStorage.removeItem('nexus_blogs');
+  }
 
   const [messages, setMessages] = useState<ContactMessage[]>(() => {
     try {
@@ -85,58 +57,8 @@ export default function App() {
     return [];
   });
 
-  // Sync state helpers
-  const saveProjectsToLocalStorage = (newProjs: Project[]) => {
-    setProjects(newProjs);
-    localStorage.setItem("nexus_projects", JSON.stringify(newProjs));
-  };
+  // Admin interface is kept local for messages only in this version
 
-  const saveBlogsToLocalStorage = (newBlogs: BlogPost[]) => {
-    setBlogs(newBlogs);
-    localStorage.setItem("nexus_blogs", JSON.stringify(newBlogs));
-  };
-
-  const saveMessagesToLocalStorage = (newMsgs: ContactMessage[]) => {
-    setMessages(newMsgs);
-    localStorage.setItem("nexus_messages", JSON.stringify(newMsgs));
-  };
-
-  // State actions
-  const handleAddProject = (p: Omit<Project, "id" | "createdAt">) => {
-    const freshProject: Project = {
-      ...p,
-      id: `proj_custom_${Date.now()}`,
-      createdAt: new Date().toISOString().split("T")[0]
-    };
-    saveProjectsToLocalStorage([freshProject, ...projects]);
-  };
-
-  const handleDeleteProject = (id: string) => {
-    const updated = projects.filter((p) => p.id !== id);
-    saveProjectsToLocalStorage(updated);
-  };
-
-  const handleResetProjects = () => {
-    saveProjectsToLocalStorage(DEFAULT_PROJECTS);
-  };
-
-  const handleAddBlog = (b: Omit<BlogPost, "id" | "publishedAt">) => {
-    const freshBlog: BlogPost = {
-      ...b,
-      id: `blog_custom_${Date.now()}`,
-      publishedAt: new Date().toISOString().split("T")[0]
-    };
-    saveBlogsToLocalStorage([freshBlog, ...blogs]);
-  };
-
-  const handleDeleteBlog = (id: string) => {
-    const updated = blogs.filter((b) => b.id !== id);
-    saveBlogsToLocalStorage(updated);
-  };
-
-  const handleResetBlogs = () => {
-    saveBlogsToLocalStorage(DEFAULT_BLOGS);
-  };
 
   const handleAddContactMessage = (msg: Omit<ContactMessage, "id" | "createdAt">) => {
     const freshMsg: ContactMessage = {
@@ -185,30 +107,30 @@ export default function App() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={
                 <HomeSection
-                  projects={projects}
-                  blogs={blogs}
+                  projects={PROJECTS}
+                  blogs={BLOGS}
                   onContactMessageSubmit={handleAddContactMessage}
-                  projectsCount={projects.length}
-                  blogsCount={blogs.length}
+                  projectsCount={PROJECTS.length}
+                  blogsCount={BLOGS.length}
                   onContactClick={() => setIsContactDrawerOpen(true)}
                 />
               } />
 
               <Route path="/projects" element={
                 <ProjectGrid
-                  projects={projects}
-                  onAddProject={handleAddProject}
-                  onDeleteProject={handleDeleteProject}
-                  onResetProjects={handleResetProjects}
+                  projects={PROJECTS}
+                  onAddProject={() => {}}
+                  onDeleteProject={() => {}}
+                  onResetProjects={() => {}}
                 />
               } />
 
               <Route path="/blog" element={
                 <BlogSection
-                  blogs={blogs}
-                  onAddBlog={handleAddBlog}
-                  onDeleteBlog={handleDeleteBlog}
-                  onResetBlogs={handleResetBlogs}
+                  blogs={BLOGS}
+                  onAddBlog={() => {}}
+                  onDeleteBlog={() => {}}
+                  onResetBlogs={() => {}}
                 />
               } />
 

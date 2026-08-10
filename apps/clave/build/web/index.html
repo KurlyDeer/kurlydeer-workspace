@@ -33,6 +33,35 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- Native Web Audio & Speech Context Unlocker -->
+  <script>
+    // 1. Web Speech API Shim
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    // 2. Web Audio Context Unlocker
+    document.addEventListener('click', function unlockAudioContext() {
+      if (window.AudioContext || window.webkitAudioContext) {
+        var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        var audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+      document.removeEventListener('click', unlockAudioContext);
+    }, { once: true });
+    
+    document.addEventListener('touchstart', function unlockAudioContextTouch() {
+      if (window.AudioContext || window.webkitAudioContext) {
+        var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        var audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+      document.removeEventListener('touchstart', unlockAudioContextTouch);
+    }, { once: true });
+  </script>
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
