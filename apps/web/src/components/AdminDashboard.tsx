@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthProvider";
-import { supabase } from "@/lib/supabaseClient";
+import { useAuth } from "@/contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import {
   LogOut,
@@ -47,36 +47,15 @@ export default function AdminDashboard() {
   // Availability toggle
   const [isAvailable, setIsAvailable] = useState(true);
 
-  // Load initial availability from Supabase
+  // Load initial availability (Mock)
   useEffect(() => {
-    const loadAvailability = async () => {
-      const { data } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key_name", "availability_status")
-        .single();
-      if (data) {
-        setIsAvailable(data.value === "available");
-      }
-    };
-    loadAvailability();
+    setIsAvailable(true);
   }, []);
 
   const handleToggleAvailability = async () => {
     const newValue = !isAvailable;
     setIsAvailable(newValue);
-    const { error } = await supabase
-      .from("site_settings")
-      .update({ value: newValue ? "available" : "engaged" })
-      .eq("key_name", "availability_status");
-    if (error) {
-      console.error("Supabase availability update error:", error);
-      setIsAvailable(!newValue); // revert on failure
-      showSaveConfirmation("Error updating status");
-    } else {
-      console.log("Availability status updated to:", newValue ? "available" : "engaged");
-      showSaveConfirmation(newValue ? "Status: Available" : "Status: Engaged");
-    }
+    showSaveConfirmation(newValue ? "Status: Available" : "Status: Engaged");
   };
 
   // Project form state
@@ -120,46 +99,21 @@ export default function AdminDashboard() {
   const handleSaveProject = async () => {
     if (!project.title) return;
     setSaving(true);
-    const { error } = await supabase.from("projects").insert([
-      {
-        title: project.title,
-        description: project.description,
-        tech_stack: project.tags,
-        status: project.status,
-        live_url: null,
-      },
-    ]);
-    setSaving(false);
-    if (error) {
-      console.error("Supabase project insert error:", error);
-      showSaveConfirmation("Error: " + error.message);
-    } else {
-      console.log("Project saved to Supabase successfully");
-      showSaveConfirmation("Project saved to Supabase");
+    setTimeout(() => {
+      setSaving(false);
+      showSaveConfirmation("Project saved locally (Static Mode)");
       setProject({ title: "", description: "", tags: [], tagInput: "", status: "In Progress" });
-    }
+    }, 500);
   };
 
   const handleSaveContent = async () => {
     if (!content.title) return;
     setSaving(true);
-    const { error } = await supabase.from("posts").insert([
-      {
-        title: content.title,
-        body: content.markdown,
-        youtube_url: content.youtubeUrl || null,
-        status: content.publishState,
-      },
-    ]);
-    setSaving(false);
-    if (error) {
-      console.error("Supabase post insert error:", error);
-      showSaveConfirmation("Error: " + error.message);
-    } else {
-      console.log(`Post ${content.publishState === "published" ? "published" : "saved as draft"} to Supabase`);
-      showSaveConfirmation(`Post ${content.publishState === "published" ? "published" : "saved as draft"}`);
+    setTimeout(() => {
+      setSaving(false);
+      showSaveConfirmation(`Post ${content.publishState === "published" ? "published" : "saved as draft"} locally (Static Mode)`);
       setContent({ title: "", markdown: "", youtubeUrl: "", publishState: "draft" });
-    }
+    }, 500);
   };
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [

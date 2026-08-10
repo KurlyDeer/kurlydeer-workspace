@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Sparkles, ArrowUpRight, Code2, Star } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
-
-interface SupabaseProject {
-  id: string;
-  title: string;
-  description: string;
-  tech_stack: string[];
-  status: string;
-  live_url: string | null;
-  created_at: string;
-}
+import { PROJECTS } from "@/data/projects";
 
 const ACCENT_CYCLE = ["emerald", "sky", "amber", "rose"] as const;
 
@@ -167,32 +157,10 @@ function InitialLetterPlaceholder({
 
 export default function ProjectsGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [projects, setProjects] = useState<SupabaseProject[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("projects")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        console.error("Failed to fetch projects:", error);
-      }
-
-      if (data && data.length > 0) {
-        setProjects(data);
-      }
-      setLoading(false);
-    };
-    fetchProjects();
-  }, []);
 
   // Separate featured projects from the rest
-  const featuredProjects = projects.filter((p) => isFeatured(p.title));
-  const regularProjects = projects.filter((p) => !isFeatured(p.title));
+  const featuredProjects = PROJECTS.filter((p) => isFeatured(p.title));
+  const regularProjects = PROJECTS.filter((p) => !isFeatured(p.title));
   const sortedProjects = [...featuredProjects, ...regularProjects];
 
   return (
@@ -224,15 +192,10 @@ export default function ProjectsGrid() {
 
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {loading ? (
-            <>
-              <SkeletonCard />
-              <SkeletonCard />
-            </>
-          ) : projects.length === 0 ? (
+          {sortedProjects.length === 0 ? (
             <div className="col-span-full text-center py-16">
               <Code2 className="h-8 w-8 text-zinc-700 mx-auto mb-3" />
-              <p className="font-mono text-sm text-zinc-600">No projects found in database.</p>
+              <p className="font-mono text-sm text-zinc-600">No projects found.</p>
             </div>
           ) : (
             sortedProjects.map((project, index) => {
@@ -279,12 +242,15 @@ export default function ProjectsGrid() {
                         <div>
                           <h3 className="font-display font-bold text-xl text-zinc-100 flex items-center gap-2">
                             {project.title}
-                            {project.live_url && (
-                              <a href={project.live_url} target="_blank" rel="noopener noreferrer">
+                            {project.liveUrl ? (
+                              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                                 <ArrowUpRight className="h-4 w-4 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
                               </a>
-                            )}
-                            {!project.live_url && (
+                            ) : project.githubUrl ? (
+                              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                <ArrowUpRight className="h-4 w-4 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
+                              </a>
+                            ) : (
                               <ArrowUpRight className="h-4 w-4 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
                             )}
                           </h3>
@@ -323,9 +289,9 @@ export default function ProjectsGrid() {
                     </p>
 
                     {/* Tech-stack badges */}
-                    {project.tech_stack && project.tech_stack.length > 0 && (
+                    {project.technologies && project.technologies.length > 0 && (
                       <div className="flex flex-wrap gap-2">
-                        {project.tech_stack.map((tag) => (
+                        {project.technologies.map((tag) => (
                           <TechBadge key={tag} tech={tag} />
                         ))}
                       </div>

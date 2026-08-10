@@ -1,6 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '../supabaseClient';
+
+// Mock User & Session
+export interface User {
+  id: string;
+  email: string;
+}
+
+export interface Session {
+  access_token: string;
+  user: User;
+}
 
 interface AuthContextType {
   session: Session | null;
@@ -17,22 +26,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user || null);
-      setLoading(false);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user || null);
-    });
-
-    return () => subscription.unsubscribe();
+    // Mock successful authentication for the static site
+    const mockUser: User = { id: 'admin', email: 'admin@local' };
+    const mockSession: Session = { access_token: 'mock', user: mockUser };
+    setSession(mockSession);
+    setUser(mockUser);
+    setLoading(false);
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    setSession(null);
+    setUser(null);
   };
 
   return (

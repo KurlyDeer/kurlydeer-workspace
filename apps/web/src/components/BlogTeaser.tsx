@@ -2,16 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { BookOpen, Clock, ArrowRight, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/lib/supabaseClient";
-
-interface SupabasePost {
-  id: string;
-  title: string;
-  body: string;
-  youtube_url: string | null;
-  status: string;
-  created_at: string;
-}
+import { BLOGS } from "@/data/blogs";
 
 const ACCENT_CYCLE = [
   { bg: "bg-amber-500/10", border: "border-amber-500/20", text: "text-amber-400" },
@@ -48,30 +39,7 @@ function SkeletonCard() {
 }
 
 export default function BlogTeaser() {
-  const [posts, setPosts] = useState<SupabasePost[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("status", "published")
-        .order("created_at", { ascending: false })
-        .limit(3);
-
-      if (error) {
-        console.error("Failed to fetch posts:", error);
-      }
-
-      if (data) {
-        setPosts(data);
-      }
-      setLoading(false);
-    };
-    fetchPosts();
-  }, []);
+  const posts = BLOGS.slice(0, 3);
 
   return (
     <section className="px-6 py-20">
@@ -111,13 +79,7 @@ export default function BlogTeaser() {
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {loading ? (
-            <>
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-            </>
-          ) : posts.length === 0 ? (
+          {posts.length === 0 ? (
             <div className="col-span-full text-center py-16">
               <FileText className="h-8 w-8 text-zinc-700 mx-auto mb-3" />
               <p className="font-mono text-sm text-zinc-600">No published posts yet.</p>
@@ -125,7 +87,7 @@ export default function BlogTeaser() {
           ) : (
             posts.map((post, index) => {
               const accent = ACCENT_CYCLE[index % ACCENT_CYCLE.length];
-              const readTime = estimateReadTime(post.body || "");
+              const readTime = post.readTime || estimateReadTime(post.content || "");
               return (
                 <motion.article
                   key={post.id}
@@ -174,18 +136,6 @@ export default function BlogTeaser() {
           )}
         </div>
 
-        {/* CMS integration note */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 text-center"
-        >
-          <p className="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">
-            Powered by Supabase CMS
-          </p>
-        </motion.div>
       </div>
     </section>
   );

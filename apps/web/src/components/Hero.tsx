@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ChevronRight, Download, Github, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/lib/supabaseClient";
 
 const TYPING_LINES = [
   "$ whoami",
@@ -22,24 +21,8 @@ export default function Hero({ onContactClick }: HeroProps) {
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
-  const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
+  const [isAvailable] = useState<boolean>(true);
 
-  // Fetch availability status from Supabase
-  useEffect(() => {
-    const fetchStatus = async () => {
-      const { data } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key_name", "availability_status")
-        .single();
-      if (data) {
-        setIsAvailable(data.value === "available");
-      } else {
-        setIsAvailable(true); // fallback
-      }
-    };
-    fetchStatus();
-  }, []);
 
   // Blinking cursor
   useEffect(() => {
