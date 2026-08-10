@@ -35,8 +35,6 @@ dependencies:
   flutter_riverpod: ^2.6.1
   shared_preferences: ^2.3.2
   speech_to_text: ^7.0.0
-  just_audio: ^0.9.40
-  audio_session: ^0.1.21
   connectivity_plus: ^6.1.0
   http: ^1.2.0
   hive: ^2.2.3
@@ -58,6 +56,8 @@ dependencies:
   firebase_auth: ^5.7.0
   google_fonts: ^8.1.0
   flutter_dotenv: ^6.0.1
+  flutter_tts: ^4.2.5
+  js: ^0.7.2
 
 dev_dependencies:
   flutter_test:

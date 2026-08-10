@@ -12,6 +12,7 @@ import '../services/audio_service.dart';
 import '../services/claude_service.dart';
 import '../services/connectivity_service.dart';
 import '../services/sync_service.dart';
+import '../services/web_stt_fallback.dart';
 import '../../l10n/app_strings.dart';
 import 'connectivity_provider.dart';
 import 'lesson_progress_provider.dart';
@@ -272,8 +273,35 @@ class LessonNotifier extends StateNotifier<LessonState> {
       );
     }
     if (!_sttAvailable) {
-      state = state.copyWith(errorMessage: AppStrings.sttMicDeniedEs);
-      return;
+      if (WebSpeechFallback.isAvailable) {
+        state = state.copyWith(
+          status: LessonStatus.voiceRecording,
+          voiceTranscription: '',
+          isOfflineError: false,
+          errorMessage: '',
+          sttConfidence: 0.0,
+          sttLowConfidence: false,
+        );
+        WebSpeechFallback.startListening(
+          onResult: (text) {
+            state = state.copyWith(
+              voiceTranscription: text,
+              sttConfidence: 0.9,
+            );
+          },
+          onError: (msg) {
+            state = state.copyWith(
+              status: LessonStatus.voiceChallenge,
+              errorMessage: msg,
+            );
+          },
+          onEnd: () {},
+        );
+        return;
+      } else {
+        state = state.copyWith(errorMessage: AppStrings.sttMicDeniedEs);
+        return;
+      }
     }
 
     state = state.copyWith(
@@ -302,7 +330,12 @@ class LessonNotifier extends StateNotifier<LessonState> {
   }
 
   Future<void> stopRecordingAndScore() async {
-    await _stt.stop();
+    if (!_sttAvailable && WebSpeechFallback.isAvailable) {
+      WebSpeechFallback.stopListening();
+    } else {
+      await _stt.stop();
+    }
+    
     await AudioService.activateForTts();
     final transcribed = state.voiceTranscription.trim();
 

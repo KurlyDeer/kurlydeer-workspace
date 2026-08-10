@@ -123,21 +123,7 @@ class _PremiumModalContent extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 14),
 
-              // Restore link
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  AppStrings.premiumRestoreEs,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.textDim,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.textDim,
-                  ),
-                ),
-              ),
             ],
           ),
         ),

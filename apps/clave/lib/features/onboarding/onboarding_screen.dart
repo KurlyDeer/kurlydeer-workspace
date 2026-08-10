@@ -62,7 +62,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              _DotIndicator(currentPage: _currentPage, pageCount: 5),
+              _DotIndicator(currentPage: _currentPage, pageCount: 3),
               const SizedBox(height: 16),
               Expanded(
                 child: PageView(
@@ -70,26 +70,23 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (i) => setState(() => _currentPage = i),
                   children: [
-                    _WelcomePage(),
-                    _NamePage(controller: _nameController),
-                    const _LevelPage(),
                     const _GoalPage(),
                     const _TimePage(),
+                    const _LevelPage(),
                   ],
                 ),
               ),
               _BottomButton(
                 currentPage: _currentPage,
-                pageCount: 5,
+                pageCount: 3,
                 isEnabled: () {
-                  if (_currentPage == 1) return _nameController.text.trim().isNotEmpty;
+                  if (_currentPage == 0) return onboarding.userGoal != null;
+                  if (_currentPage == 1) return onboarding.userDailyTime != null;
                   if (_currentPage == 2) return onboarding.userLevel != null;
-                  if (_currentPage == 3) return onboarding.userGoal != null;
-                  if (_currentPage == 4) return onboarding.userDailyTime != null;
                   return true;
                 }(),
                 onPressed: () {
-                  if (_currentPage < 4) {
+                  if (_currentPage < 2) {
                     _nextPage();
                   } else {
                     _complete(context);

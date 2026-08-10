@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/stt_low_confidence_tooltip.dart';
 import '../../../l10n/app_strings.dart';
-import '../../../features/sos/widgets/mic_hold_button.dart';
+import '../../../features/sos/widgets/mic_tap_button.dart';
 
 class VoiceChallengeView extends StatelessWidget {
   const VoiceChallengeView({
@@ -14,8 +14,7 @@ class VoiceChallengeView extends StatelessWidget {
     required this.isOfflineError,
     required this.errorMessage,
     required this.isSenior,
-    required this.onLongPressStart,
-    required this.onLongPressEnd,
+    required this.onToggleRecording,
     required this.onSkip,
     this.sttLowConfidence = false,
   });
@@ -26,8 +25,7 @@ class VoiceChallengeView extends StatelessWidget {
   final bool isOfflineError;
   final String errorMessage;
   final bool isSenior;
-  final VoidCallback onLongPressStart;
-  final VoidCallback onLongPressEnd;
+  final VoidCallback onToggleRecording;
   final VoidCallback onSkip;
   final bool sttLowConfidence;
 
@@ -85,11 +83,10 @@ class VoiceChallengeView extends StatelessWidget {
           const SizedBox(height: 32),
           // Mic
           Center(
-            child: MicHoldButton(
+            child: MicTapButton(
               isRecording: isRecording,
               isSenior: isSenior,
-              onLongPressStart: onLongPressStart,
-              onLongPressEnd: onLongPressEnd,
+              onPressed: onToggleRecording,
             ),
           ),
           const SizedBox(height: 16),
@@ -120,7 +117,7 @@ class VoiceChallengeView extends StatelessWidget {
             SttLowConfidenceTooltip(fontSize: bodySize - 2),
           ] else ...[
             Text(
-              'Mantén presionado el micrófono y habla en inglés',
+              'Toca el micrófono y habla en inglés',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: bodySize - 2,

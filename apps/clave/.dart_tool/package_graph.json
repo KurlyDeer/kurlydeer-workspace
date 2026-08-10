@@ -7,7 +7,6 @@
       "name": "english_bridge",
       "version": "1.0.0+1",
       "dependencies": [
-        "audio_session",
         "audio_waveforms",
         "cloud_firestore",
         "confetti",
@@ -20,11 +19,12 @@
         "flutter_dotenv",
         "flutter_local_notifications",
         "flutter_riverpod",
+        "flutter_tts",
         "google_fonts",
         "hive",
         "hive_flutter",
         "http",
-        "just_audio",
+        "js",
         "path_provider",
         "pdf",
         "printing",
@@ -102,6 +102,19 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "js",
+      "version": "0.7.2",
+      "dependencies": []
+    },
+    {
+      "name": "flutter_tts",
+      "version": "4.2.5",
+      "dependencies": [
+        "flutter",
+        "flutter_web_plugins"
       ]
     },
     {
@@ -316,33 +329,6 @@
         "meta",
         "nm",
         "web"
-      ]
-    },
-    {
-      "name": "audio_session",
-      "version": "0.1.25",
-      "dependencies": [
-        "flutter",
-        "flutter_web_plugins",
-        "meta",
-        "rxdart"
-      ]
-    },
-    {
-      "name": "just_audio",
-      "version": "0.9.46",
-      "dependencies": [
-        "async",
-        "audio_session",
-        "crypto",
-        "flutter",
-        "just_audio_platform_interface",
-        "just_audio_web",
-        "meta",
-        "path",
-        "path_provider",
-        "rxdart",
-        "uuid"
       ]
     },
     {
@@ -914,39 +900,6 @@
       ]
     },
     {
-      "name": "rxdart",
-      "version": "0.28.0",
-      "dependencies": []
-    },
-    {
-      "name": "uuid",
-      "version": "4.5.2",
-      "dependencies": [
-        "crypto",
-        "fixnum",
-        "meta"
-      ]
-    },
-    {
-      "name": "just_audio_web",
-      "version": "0.4.16",
-      "dependencies": [
-        "flutter",
-        "flutter_web_plugins",
-        "just_audio_platform_interface",
-        "synchronized",
-        "web"
-      ]
-    },
-    {
-      "name": "just_audio_platform_interface",
-      "version": "4.6.0",
-      "dependencies": [
-        "flutter",
-        "plugin_platform_interface"
-      ]
-    },
-    {
       "name": "speech_to_text_windows",
       "version": "1.0.0+beta.8",
       "dependencies": [
@@ -1156,6 +1109,15 @@
       ]
     },
     {
+      "name": "uuid",
+      "version": "4.5.2",
+      "dependencies": [
+        "crypto",
+        "fixnum",
+        "meta"
+      ]
+    },
+    {
       "name": "qr",
       "version": "3.0.2",
       "dependencies": [
@@ -1182,18 +1144,13 @@
       ]
     },
     {
-      "name": "fixnum",
-      "version": "1.1.1",
-      "dependencies": []
-    },
-    {
-      "name": "synchronized",
-      "version": "3.4.0",
-      "dependencies": []
-    },
-    {
       "name": "vm_service",
       "version": "15.0.2",
+      "dependencies": []
+    },
+    {
+      "name": "fixnum",
+      "version": "1.1.1",
       "dependencies": []
     }
   ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/providers/audio_provider.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/providers/shared_preferences_provider.dart';
 import '../../core/services/sync_service.dart';
@@ -88,6 +89,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         await authService.signInWithEmail(email: email, password: password);
       }
       
+      // Unlock Web Audio context
+      ref.read(audioServiceProvider).unlockWebAudio();
+      
       // Merge guest progress into Firestore
       ref.read(syncServiceProvider).syncProgress();
       
@@ -119,6 +123,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     try {
       await ref.read(authServiceProvider).signInAnonymously();
+      // Unlock Web Audio context
+      ref.read(audioServiceProvider).unlockWebAudio();
     } catch (e) {
       debugPrint('Anonymous auth failed: $e. Falling back to local guest session.');
       final prefs = ref.read(sharedPreferencesProvider);
@@ -145,6 +151,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final provider = GoogleAuthProvider();
       await FirebaseAuth.instance.signInWithPopup(provider);
       
+      // Unlock Web Audio context
+      ref.read(audioServiceProvider).unlockWebAudio();
+      
       // Merge guest progress into Firestore
       ref.read(syncServiceProvider).syncProgress();
     } on FirebaseAuthException catch (e) {
@@ -158,28 +167,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
     } catch (e) {
       debugPrint('Firebase Auth Exception (Google): $e');
-      if (mounted) setState(() => _errorMessage = e.toString());
-    }
-  }
-
-  Future<void> _signInWithApple() async {
-    try {
-      final provider = OAuthProvider('apple.com');
-      await FirebaseAuth.instance.signInWithPopup(provider);
-      
-      // Merge guest progress into Firestore
-      ref.read(syncServiceProvider).syncProgress();
-    } on FirebaseAuthException catch (e) {
-      debugPrint('Firebase Auth Exception (Apple Popup): ${e.code} - ${e.message}');
-      if (e.code == 'popup-blocked' || e.code == 'popup-closed-by-user') {
-        debugPrint('Popup blocked/closed. Falling back to signInWithRedirect...');
-        final provider = OAuthProvider('apple.com');
-        await FirebaseAuth.instance.signInWithRedirect(provider);
-      } else {
-        if (mounted) setState(() => _errorMessage = _friendlyError(e.code));
-      }
-    } catch (e) {
-      debugPrint('Firebase Auth Exception (Apple): $e');
       if (mounted) setState(() => _errorMessage = e.toString());
     }
   }
@@ -358,38 +345,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 24),
                   
                   // ── OAuth Buttons ─────────────────────────────────────
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          icon: const Icon(Icons.g_mobiledata, size: 28),
-                          label: const Text('Google', style: TextStyle(fontWeight: FontWeight.w600)),
-                          onPressed: _isLoading ? null : _signInWithGoogle,
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: AppColors.text,
-                            backgroundColor: AppColors.surface0,
-                            side: const BorderSide(color: AppColors.borderDark, width: 1.0),
-                            shape: RoundedRectangleBorder(borderRadius: AppRadius.smBr),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                          ),
-                        ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.g_mobiledata, size: 28),
+                      label: const Text('Continuar con Google', style: TextStyle(fontWeight: FontWeight.w600)),
+                      onPressed: _isLoading ? null : _signInWithGoogle,
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.text,
+                        backgroundColor: AppColors.surface0,
+                        side: const BorderSide(color: AppColors.borderDark, width: 1.0),
+                        shape: RoundedRectangleBorder(borderRadius: AppRadius.smBr),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          icon: const Icon(Icons.apple, size: 24),
-                          label: const Text('Apple', style: TextStyle(fontWeight: FontWeight.w600)),
-                          onPressed: _isLoading ? null : _signInWithApple,
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: AppColors.text,
-                            backgroundColor: AppColors.surface0,
-                            side: const BorderSide(color: AppColors.borderDark, width: 1.0),
-                            shape: RoundedRectangleBorder(borderRadius: AppRadius.smBr),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 24),
 

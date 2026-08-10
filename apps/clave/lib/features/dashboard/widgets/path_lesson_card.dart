@@ -94,17 +94,39 @@ class _PathLessonCardState extends ConsumerState<PathLessonCard> {
                 const SizedBox(height: 8),
                 Row(
                   children: [
+                    Icon(Icons.timer_outlined, size: 14, color: AppColors.textSub),
+                    const SizedBox(width: 4),
                     Text(
-                      '[ ${widget.lesson.targetVocabulary.length} Cards ]',
+                      '~${widget.lesson.targetVocabulary.length * 2} min',
                       style: AppTextStyles.monoMeta(color: AppColors.textSub, fontSize: 11),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 12),
+                    Icon(Icons.bolt, size: 14, color: AppColors.gold),
+                    const SizedBox(width: 2),
                     Text(
-                      '[ XP: 150 ]',
+                      '150 XP',
                       style: AppTextStyles.monoMeta(color: AppColors.gold, fontSize: 11),
                     ),
                   ],
                 ),
+                if (!isCompleted && widget.isNextAvailable) ...[
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.emerald,
+                      borderRadius: AppRadius.smBr,
+                    ),
+                    child: const Text(
+                      'Empezar Lección',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
                 if (isCompleted) ...[
                   const SizedBox(height: 8),
                   Text(

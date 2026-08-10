@@ -10,7 +10,7 @@ import '../../core/providers/shared_preferences_provider.dart';
 import '../../core/providers/study_plan_provider.dart';
 import '../../core/providers/user_name_provider.dart';
 import '../../core/providers/vocab_provider.dart';
-import '../../core/services/notification_service.dart';
+
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/glass_container.dart';
 import '../../l10n/app_strings.dart';
@@ -311,75 +311,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 28),
 
-                // ── Reminder Section ─────────────────────────────────────────
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.profileReminderSectionEs,
-                        style: TextStyle(
-                          fontSize: sectionSize,
-                          letterSpacing: 1.6,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.glassTextMuted,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      GestureDetector(
-                        onTap: () => _pickReminderTime(context, persona, reminderHour, reminderMinute),
-                        child: GlassContainer(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                          child: Row(
-                            children: [
-                              Icon(Icons.alarm_rounded,
-                                  color: AppColors.glowTerracotta,
-                                  size: isSenior ? 28 : 24),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      AppStrings.profileReminderLabelEs,
-                                      style: TextStyle(
-                                        fontSize: bodySize,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.glassText,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      reminderHour != null
-                                          ? '${AppStrings.profileReminderSetEs} ${reminderHour.toString().padLeft(2, '0')}:${(reminderMinute ?? 0).toString().padLeft(2, '0')}'
-                                          : AppStrings.profileReminderOffEs,
-                                      style: TextStyle(
-                                        fontSize: bodySize - 4,
-                                        color: reminderHour != null
-                                            ? AppColors.glowTerracotta
-                                            : AppColors.glassTextMuted,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              if (reminderHour != null)
-                                IconButton(
-                                  icon: Icon(Icons.close_rounded,
-                                      color: AppColors.glassTextMuted, size: 20),
-                                  tooltip: AppStrings.profileReminderRemoveEs,
-                                  onPressed: () => _removeReminder(),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 const SizedBox(height: 28),
 
                 // ── Sound + Dark Mode Section ────────────────────────────────
@@ -522,54 +454,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Future<void> _pickReminderTime(
-    BuildContext context,
-    dynamic persona,
-    int? currentHour,
-    int? currentMinute,
-  ) async {
-    final initial = TimeOfDay(
-      hour: currentHour ?? 19,
-      minute: currentMinute ?? 0,
-    );
-    final picked = await showTimePicker(
-      context: context,
-      initialTime: initial,
-      builder: (ctx, child) => Theme(
-        data: ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.dark(
-            primary: AppColors.glowTerracotta,
-            surface: AppColors.glassGradientMid,
-          ),
-        ),
-        child: child!,
-      ),
-    );
-
-    if (picked == null) return;
-
-    final prefs = ref.read(sharedPreferencesProvider);
-    await prefs.setInt('reminder_hour', picked.hour);
-    await prefs.setInt('reminder_minute', picked.minute);
-
-    if (persona != null) {
-      await NotificationService.instance.scheduleDailyReminder(
-        persona: persona,
-        hour: picked.hour,
-        minute: picked.minute,
-      );
-    }
-
-    setState(() {});
-  }
-
-  Future<void> _removeReminder() async {
-    final prefs = ref.read(sharedPreferencesProvider);
-    await prefs.remove('reminder_hour');
-    await prefs.remove('reminder_minute');
-    await NotificationService.instance.cancelAll();
-    setState(() {});
-  }
 
   Future<void> _showResetDialog(
     BuildContext context,

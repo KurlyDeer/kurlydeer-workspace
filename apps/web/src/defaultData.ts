@@ -41,13 +41,15 @@ Silo is a financial tracking tool designed to make budgeting effortless and visu
 `
   },
   {
-    id: "proj_3",
-    title: "Clave - Language Learning Platform",
-    description: "A custom-built, interactive language learning application optimized for web deployment.",
-    category: "Web & Mobile",
+    id: "clave",
+    title: "CLAVE",
+    description: "AI-powered Spanish-to-English language learning platform with real-time speech grading.",
+    category: "Full-Stack",
     status: "Completed",
-    technologies: ["TypeScript", "React", "Python", "PostgreSQL"],
+    type: "live_app",
+    technologies: ["Flutter Web", "Firebase", "Web Speech API", "Tailwind"],
     liveUrl: "https://clave.kurlydeer.com",
+    featured: true,
     createdAt: "2026-03-05",
     readme: `# Clave Language Platform
 
@@ -58,6 +60,33 @@ Clave bridges the gap between structured grammar lessons and conversational prac
 - **Spaced Repetition System (SRS)**: Algorithmically schedules vocabulary reviews to maximize long-term retention.
 - **Interactive Exercises**: Drag-and-drop sentence building and real-time pronunciation feedback.
 - **Progress Tracking**: Detailed dashboards showing fluency metrics and daily learning streaks.
+`
+  },
+  {
+    id: "cybergrid",
+    title: "CyberGrid",
+    description: "Automated network security & infrastructure telemetry framework for hybrid server nodes.",
+    category: "Systems & CLI",
+    status: "Completed",
+    type: "github_project",
+    technologies: ["TypeScript", "Security", "Docker", "Node.js"],
+    githubUrl: "https://github.com/KurlyDeer/cybergrid",
+    featured: true,
+    createdAt: "2026-08-09",
+    readme: `# CyberGrid 🛡️🌐
+> Automated Network Security, Grid Monitoring & Infrastructure Defense Framework
+
+CyberGrid is a high-performance, modular security monitoring and automated grid infrastructure telemetry platform designed to monitor network nodes, secure multi-cloud/homelab environments, detect anomalies, and streamline system administration workflows.
+
+---
+
+## 📦 Features
+
+- **Real-Time Node Telemetry:** Live heartbeat, bandwidth, and resource tracking across hybrid server nodes.
+- **Automated Security Audit Engine:** Continuous scanning for open ports, unexpected service bindings, and configuration drift.
+- **Modular Integration Grid:** Custom hooks for firewall rules (FortiGate/iptables), DNS filters, and container logs.
+- **High-Contrast Terminal Dashboard:** Sleek, low-latency web and CLI dashboard inspired by enterprise grid operations.
+- **Alerting & Webhooks:** Instant notifications via Discord, Slack, Telegram, or custom webhooks upon security threshold breaches.
 `
   }
 ];

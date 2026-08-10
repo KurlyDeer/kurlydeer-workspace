@@ -9,6 +9,7 @@ import '../../core/providers/audio_provider.dart';
 import '../../core/providers/vocab_provider.dart';
 import '../../core/services/audio_service.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/widgets/responsive_layout.dart';
 import '../../l10n/app_strings.dart';
 
 // ── Screen ────────────────────────────────────────────────────────────────────
@@ -129,7 +130,9 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: body,
+      body: ResponsiveConstrainer(
+        child: body,
+      ),
     );
   }
 }

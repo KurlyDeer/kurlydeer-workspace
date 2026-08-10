@@ -47,24 +47,43 @@ export default function App() {
   useEffect(() => {
     try {
       const storedProjects = localStorage.getItem("nexus_projects");
+      let mergedProjects = [...DEFAULT_PROJECTS];
       if (storedProjects) {
-        setProjects(JSON.parse(storedProjects));
-      } else {
-        setProjects(DEFAULT_PROJECTS);
-        localStorage.setItem("nexus_projects", JSON.stringify(DEFAULT_PROJECTS));
+        try {
+          const parsed = JSON.parse(storedProjects) as Project[];
+          // Append custom items that don't match the defaults' IDs
+          const defaultIds = new Set(DEFAULT_PROJECTS.map(p => p.id));
+          const customProjects = parsed.filter(p => !defaultIds.has(p.id));
+          mergedProjects = [...mergedProjects, ...customProjects];
+        } catch (e) {
+          console.error("Failed to parse stored projects", e);
+        }
       }
+      setProjects(mergedProjects);
+      localStorage.setItem("nexus_projects", JSON.stringify(mergedProjects));
 
       const storedBlogs = localStorage.getItem("nexus_blogs");
+      let mergedBlogs = [...DEFAULT_BLOGS];
       if (storedBlogs) {
-        setBlogs(JSON.parse(storedBlogs));
-      } else {
-        setBlogs(DEFAULT_BLOGS);
-        localStorage.setItem("nexus_blogs", JSON.stringify(DEFAULT_BLOGS));
+        try {
+          const parsed = JSON.parse(storedBlogs) as BlogPost[];
+          const defaultIds = new Set(DEFAULT_BLOGS.map(b => b.id));
+          const customBlogs = parsed.filter(b => !defaultIds.has(b.id));
+          mergedBlogs = [...mergedBlogs, ...customBlogs];
+        } catch (e) {
+          console.error("Failed to parse stored blogs", e);
+        }
       }
+      setBlogs(mergedBlogs);
+      localStorage.setItem("nexus_blogs", JSON.stringify(mergedBlogs));
 
       const storedMessages = localStorage.getItem("nexus_messages");
       if (storedMessages) {
-        setMessages(JSON.parse(storedMessages));
+        try {
+          setMessages(JSON.parse(storedMessages));
+        } catch (e) {
+          console.error("Failed to parse stored messages", e);
+        }
       }
     } catch (err) {
       console.error("Local storage sync error: ", err);
@@ -174,6 +193,8 @@ export default function App() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={
                 <HomeSection
+                  projects={projects}
+                  blogs={blogs}
                   onContactMessageSubmit={handleAddContactMessage}
                   projectsCount={projects.length}
                   blogsCount={blogs.length}

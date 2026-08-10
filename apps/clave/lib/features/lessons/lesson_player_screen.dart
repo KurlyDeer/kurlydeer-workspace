@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/models/lesson_models.dart';
@@ -8,6 +9,7 @@ import '../../core/providers/audio_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../l10n/app_strings.dart';
 import '../../shared/widgets/offline_banner.dart';
+import '../../core/widgets/responsive_layout.dart';
 import 'lesson_summary_screen.dart';
 import 'widgets/grammar_flip_card.dart';
 import 'widgets/intro_slide_card.dart';
@@ -73,8 +75,38 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
     final bodySize = isSenior ? AppFontSizes.bodyLarge : AppFontSizes.body;
     final btnHeight = isSenior ? 72.0 : 56.0;
 
-    return Scaffold(
-      backgroundColor: AppColors.gradientStart,
+    return Focus(
+      autofocus: true,
+      onKeyEvent: (node, event) {
+        if (event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.enter) {
+            if (state.status == LessonStatus.intro) {
+              notifier.startLesson();
+            } else if (state.status == LessonStatus.slide && state.nextUnlocked) {
+              notifier.nextSlide();
+            } else if (state.status == LessonStatus.result && (state.voiceScore >= 7 || state.voiceScore == 0)) {
+              notifier.completeLesson(state.voiceScore, state.feedbackEs);
+            }
+          } else if (event.logicalKey == LogicalKeyboardKey.space) {
+            final String text;
+            if (state.status == LessonStatus.slide) {
+              text = state.slides[state.slideIndex].contentEn;
+            } else {
+              text = state.content.voiceChallengeEn;
+            }
+            tts.speak(text);
+          } else if (event.logicalKey == LogicalKeyboardKey.keyR) {
+            if (state.status == LessonStatus.voiceRecording) {
+              notifier.stopRecordingAndScore();
+            } else if (state.status == LessonStatus.voiceChallenge || state.status == LessonStatus.result) {
+              notifier.startRecording();
+            }
+          }
+        }
+        return KeyEventResult.ignored;
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.gradientStart,
       appBar: AppBar(
         backgroundColor: AppColors.surface0,
         foregroundColor: AppColors.text,
@@ -101,7 +133,8 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           },
         ),
       ),
-      body: Column(
+      body: ResponsiveConstrainer(
+        child: Column(
         children: [
           const OfflineBanner(),
           // Progress bar (slide status only)
@@ -124,6 +157,8 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           if (!isVoiceActive)
             _buildBottomBar(state, notifier, tts, isSenior, bodySize, btnHeight),
         ],
+      ),
+      ),
       ),
     );
   }
@@ -194,8 +229,13 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           isOfflineError: state.isOfflineError,
           errorMessage: state.errorMessage,
           isSenior: isSenior,
-          onLongPressStart: notifier.startRecording,
-          onLongPressEnd: notifier.stopRecordingAndScore,
+          onToggleRecording: () {
+            if (state.status == LessonStatus.voiceRecording) {
+              notifier.stopRecordingAndScore();
+            } else {
+              notifier.startRecording();
+            }
+          },
           onSkip: notifier.skipVoiceChallenge,
           sttLowConfidence: state.sttLowConfidence,
         );
@@ -235,7 +275,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           wordResults: state.wordResults,
           listenSlower: state.listenSlower,
           onListenSlower: () {
-             tts.speak(state.content.voiceChallengeEn, rate: 0.75);
+             tts.speak(state.content.voiceChallengeEn, speed: 0.3);
           },
           onTryAgain: () => ref
               .read(lessonPlayerProvider(widget.lesson).notifier)
@@ -284,36 +324,78 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
               !(state.status == LessonStatus.slide &&
                   (state.slides[state.slideIndex].type == SlideType.grammarFlip ||
                    state.slides[state.slideIndex].type == SlideType.libroPrompt))) ...[
-            SizedBox(
-              height: isSenior ? 56.0 : 48.0,
-              child: ElevatedButton(
-                onPressed: () {
-                  final String text;
-                  if (state.status == LessonStatus.slide) {
-                    text = state.slides[state.slideIndex].contentEn;
-                  } else {
-                    text = state.content.voiceChallengeEn;
-                  }
-                  tts.speak(text);
-                  notifier.unlockNext();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.surface2,
-                  foregroundColor: AppColors.text,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppRadius.smBr,
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: isSenior ? 56.0 : 48.0,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        final String text;
+                        if (state.status == LessonStatus.slide) {
+                          text = state.slides[state.slideIndex].contentEn;
+                        } else {
+                          text = state.content.voiceChallengeEn;
+                        }
+                        tts.speak(text);
+                        notifier.unlockNext();
+                      },
+                      icon: const Icon(Icons.volume_up_rounded, size: 20),
+                      label: Text(
+                        AppStrings.lessonRepeatAudioEs,
+                        style: TextStyle(
+                          fontSize: bodySize - 2,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.surface2,
+                        foregroundColor: AppColors.text,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppRadius.smBr,
+                        ),
+                        elevation: 0,
+                        side: BorderSide(color: AppColors.borderDark),
+                      ),
+                    ),
                   ),
-                  elevation: 0,
-                  side: BorderSide(color: AppColors.borderDark),
                 ),
-                child: Text(
-                  AppStrings.lessonRepeatAudioEs,
-                  style: TextStyle(
-                    fontSize: bodySize - 2,
-                    fontWeight: FontWeight.w700,
+                const SizedBox(width: 8),
+                Expanded(
+                  child: SizedBox(
+                    height: isSenior ? 56.0 : 48.0,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        final String text;
+                        if (state.status == LessonStatus.slide) {
+                          text = state.slides[state.slideIndex].contentEn;
+                        } else {
+                          text = state.content.voiceChallengeEn;
+                        }
+                        tts.speak(text, speed: 0.3);
+                        notifier.unlockNext();
+                      },
+                      icon: const Icon(Icons.speed_rounded, size: 20),
+                      label: Text(
+                        'Más lento',
+                        style: TextStyle(
+                          fontSize: bodySize - 2,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.surface2,
+                        foregroundColor: AppColors.text,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppRadius.smBr,
+                        ),
+                        elevation: 0,
+                        side: BorderSide(color: AppColors.borderDark),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
             const SizedBox(height: 8),
           ],

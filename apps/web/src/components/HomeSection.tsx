@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, AlertCircle, Terminal } from "lucide-react";
-import { ContactMessage } from "@/types";
+import { ContactMessage, Project, BlogPost } from "@/types";
 import Hero from "@/components/Hero";
 import AboutMe from "@/components/AboutMe";
-import ProjectsGrid from "@/components/ProjectsGrid";
 import Infrastructure from "@/components/Infrastructure";
-import BlogTeaser from "@/components/BlogTeaser";
 import TechMarquee from "@/components/TechMarquee";
+import ShowcaseSections from "@/components/ShowcaseSections";
+import CyberGridDocsModal from "@/components/CyberGridDocsModal";
+import { Link } from "react-router-dom";
 
 interface HomeSectionProps {
+  projects: Project[];
+  blogs: BlogPost[];
   onContactMessageSubmit: (msg: Omit<ContactMessage, "id" | "createdAt">) => void;
   projectsCount: number;
   blogsCount: number;
   onContactClick: () => void;
 }
 
-export default function HomeSection({ onContactMessageSubmit, projectsCount, blogsCount, onContactClick }: HomeSectionProps) {
+export default function HomeSection({ projects, blogs, onContactMessageSubmit, projectsCount, blogsCount, onContactClick }: HomeSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,6 +28,7 @@ export default function HomeSection({ onContactMessageSubmit, projectsCount, blo
   });
   const [isSending, setIsSending] = useState(false);
   const [sendStatus, setSendStatus] = useState<"idle" | "success" | "error">("idle");
+  const [isCyberGridDocsOpen, setIsCyberGridDocsOpen] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -80,14 +84,17 @@ export default function HomeSection({ onContactMessageSubmit, projectsCount, blo
         <div className="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
       </div>
 
-      {/* 3. Software Engineering Projects */}
+      {/* 3. Featured Projects Showcase */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true, margin: "-100px" }}
       >
-        <ProjectsGrid />
+        <ShowcaseSections 
+          projects={projects.filter(p => p.featured)}
+          onOpenCyberGridDocs={() => setIsCyberGridDocsOpen(true)} 
+        />
       </motion.div>
 
       {/* Divider */}
@@ -110,13 +117,62 @@ export default function HomeSection({ onContactMessageSubmit, projectsCount, blo
         <div className="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
       </div>
 
-      {/* 4. Blog Teaser */}
-      <BlogTeaser />
-
-      {/* Divider */}
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
-      </div>
+      {/* 4. Latest Blog Posts */}
+      <section className="px-6 py-20 bg-zinc-950/50">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-10"
+          >
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-zinc-100 tracking-tight">
+              Latest from the Blog
+            </h2>
+            <p className="font-sans text-sm text-zinc-500 mt-2">
+              Insights, tutorials, and thoughts on infrastructure and engineering.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogs.slice(0, 3).map((blog, idx) => (
+              <motion.div
+                key={blog.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-zinc-900/40 border border-zinc-800/80 rounded-xl p-6 hover:bg-zinc-900/80 transition-colors flex flex-col"
+              >
+                <div className="flex items-center gap-2 mb-4 text-xs font-mono text-zinc-500 uppercase tracking-widest">
+                  <span>{blog.publishedAt}</span>
+                  <span>&bull;</span>
+                  <span>{blog.readTime}</span>
+                </div>
+                <h3 className="font-display font-bold text-xl text-zinc-100 mb-3">{blog.title}</h3>
+                <p className="font-sans text-sm text-zinc-400 mb-6 flex-1 line-clamp-3">
+                  {blog.summary}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {blog.tags.slice(0, 3).map(tag => (
+                    <span key={tag} className="bg-zinc-800/50 text-zinc-300 border border-zinc-700/50 rounded-md px-2 py-1 font-mono text-[10px] uppercase">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded-lg text-sm font-semibold text-zinc-100 transition-colors"
+            >
+              Read More Articles ➔
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* 5. Contact Form */}
       <section className="px-6 py-20">
@@ -235,6 +291,12 @@ export default function HomeSection({ onContactMessageSubmit, projectsCount, blo
           </motion.form>
         </div>
       </section>
+
+      {/* Modals */}
+      <CyberGridDocsModal 
+        isOpen={isCyberGridDocsOpen} 
+        onClose={() => setIsCyberGridDocsOpen(false)} 
+      />
     </motion.div>
   );
 }

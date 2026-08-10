@@ -7,6 +7,8 @@ export interface Project {
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
+  featured?: boolean;
+  type?: string;
   createdAt: string;
   readme?: string; // Optional detailed writeup
 }

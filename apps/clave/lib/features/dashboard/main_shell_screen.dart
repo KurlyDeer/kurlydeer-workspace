@@ -55,20 +55,9 @@ class _MainShellScreenState extends ConsumerState<MainShellScreen> {
           return Scaffold(
             backgroundColor: AppColors.gradientStart,
             appBar: _buildTopBar(context, isDesktop),
-            body: Row(
-              children: [
-                _WebSideNav(
-                  currentIndex: _currentIndex,
-                  onTap: (index) => setState(() => _currentIndex = index),
-                  isSenior: isSenior,
-                ),
-                Expanded(
-                  child: IndexedStack(
-                    index: _currentIndex,
-                    children: _tabs,
-                  ),
-                ),
-              ],
+            body: IndexedStack(
+              index: _currentIndex,
+              children: _tabs,
             ),
           );
         }
@@ -114,7 +103,29 @@ class _MainShellScreenState extends ConsumerState<MainShellScreen> {
               letterSpacing: 0.5,
             ),
           ),
-          const Spacer(),
+          // Desktop Top Navigation Links
+          if (isDesktop) ...[
+            const Spacer(),
+            _TopNavItem(
+              label: AppStrings.navHomeEs,
+              isSelected: _currentIndex == 0,
+              onTap: () => setState(() => _currentIndex = 0),
+            ),
+            const SizedBox(width: 24),
+            _TopNavItem(
+              label: AppStrings.navCompaneroEs,
+              isSelected: _currentIndex == 1,
+              onTap: () => setState(() => _currentIndex = 1),
+            ),
+            const SizedBox(width: 24),
+            _TopNavItem(
+              label: AppStrings.navLibraryEs,
+              isSelected: _currentIndex == 2,
+              onTap: () => setState(() => _currentIndex = 2),
+            ),
+            const Spacer(),
+          ] else
+            const Spacer(),
           // User streak
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -383,228 +394,48 @@ class _CompaneroNavItem extends StatelessWidget {
   }
 }
 
-// ── Web Side Nav ─────────────────────────────────────────────────────────────
 
-class _WebSideNav extends StatelessWidget {
-  const _WebSideNav({
-    required this.currentIndex,
-    required this.onTap,
-    required this.isSenior,
-  });
-
-  final int currentIndex;
-  final ValueChanged<int> onTap;
-  final bool isSenior;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 240,
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        border: Border(
-          right: BorderSide(color: AppColors.cardBorder, width: 1.0),
-        ),
-      ),
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 28),
-                // App branding — CLAVE
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      // Logo mark
-                      Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: AppRadius.smBr,
-                          color: AppColors.emerald.withValues(alpha: 0.12),
-                          border: Border.all(
-                            color: AppColors.emerald.withValues(alpha: 0.3),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'C',
-                            style: GoogleFonts.jetBrainsMono(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w800,
-                              color: AppColors.emerald,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'CLAVE',
-                              style: GoogleFonts.jetBrainsMono(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w800,
-                                color: AppColors.text,
-                                letterSpacing: 2.0,
-                              ),
-                            ),
-                            Text(
-                              'LANGUAGE LEARNING',
-                              style: GoogleFonts.jetBrainsMono(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.textDim,
-                                letterSpacing: 1.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 36),
-
-                // Navigation Links
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Column(
-                    children: [
-                      _SideNavItem(
-                        icon: Icons.home_outlined,
-                        activeIcon: Icons.home_rounded,
-                        label: AppStrings.navHomeEs,
-                        isSelected: currentIndex == 0,
-                        isSenior: isSenior,
-                        onTap: () => onTap(0),
-                      ),
-                      const SizedBox(height: 4),
-                      _SideNavItem(
-                        icon: Icons.chat_bubble_outline_rounded,
-                        activeIcon: Icons.chat_bubble_rounded,
-                        label: AppStrings.navCompaneroEs,
-                        isSelected: currentIndex == 1,
-                        isSenior: isSenior,
-                        onTap: () => onTap(1),
-                      ),
-                      const SizedBox(height: 4),
-                      _SideNavItem(
-                        icon: Icons.library_books_outlined,
-                        activeIcon: Icons.library_books_rounded,
-                        label: AppStrings.navLibraryEs,
-                        isSelected: currentIndex == 2,
-                        isSenior: isSenior,
-                        onTap: () => onTap(2),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const Spacer(),
-
-                // kurlydeer.com link
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
-                  child: GestureDetector(
-                    onTap: () => launchUrl(Uri.parse('https://kurlydeer.com')),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: AppRadius.mdBr,
-                        border: Border.all(color: AppColors.cardBorder),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.open_in_new, color: AppColors.textDim, size: 16),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              'kurlydeer.com',
-                              style: GoogleFonts.jetBrainsMono(
-                                fontSize: 12,
-                                color: AppColors.textSub,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SideNavItem extends StatelessWidget {
-  const _SideNavItem({
-    required this.icon,
-    required this.activeIcon,
+class _TopNavItem extends StatelessWidget {
+  const _TopNavItem({
     required this.label,
     required this.isSelected,
-    required this.isSenior,
     required this.onTap,
   });
 
-  final IconData icon;
-  final IconData activeIcon;
   final String label;
   final bool isSelected;
-  final bool isSenior;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final color = isSelected ? AppColors.emerald : AppColors.textDim;
-    final bgColor = isSelected
-        ? AppColors.emerald.withValues(alpha: 0.08)
-        : Colors.transparent;
-    final iconSize = isSenior ? 26.0 : 22.0;
-    final labelSize = isSenior ? 16.0 : 14.0;
-
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: AppRadius.mdBr,
-          border: Border.all(
-            color: isSelected
-                ? AppColors.emerald.withValues(alpha: 0.3)
-                : Colors.transparent,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(isSelected ? activeIcon : icon, color: color, size: iconSize),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Text(
-                label,
-                style: GoogleFonts.inter(
-                  fontSize: labelSize,
-                  color: color,
-                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                ),
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            label.toUpperCase(),
+            style: GoogleFonts.inter(
+              fontSize: 14,
+              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              color: color,
+              letterSpacing: 1.2,
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 4),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            height: 2,
+            width: isSelected ? 24 : 0,
+            decoration: BoxDecoration(
+              color: AppColors.emerald,
+              borderRadius: BorderRadius.circular(1),
+            ),
+          ),
+        ],
       ),
     );
   }
