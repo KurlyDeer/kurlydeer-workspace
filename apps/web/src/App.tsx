@@ -39,59 +39,51 @@ export default function App() {
   const activeTab = getActiveTabFromPath();
   const [isContactDrawerOpen, setIsContactDrawerOpen] = useState(false);
 
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [messages, setMessages] = useState<ContactMessage[]>([]);
-
-  // Load datasets on first render
-  useEffect(() => {
+  const [projects, setProjects] = useState<Project[]>(() => {
     try {
-      const storedProjects = localStorage.getItem("nexus_projects");
-      let mergedProjects = [...DEFAULT_PROJECTS];
-      if (storedProjects) {
-        try {
-          const parsed = JSON.parse(storedProjects) as Project[];
-          // Append custom items that don't match the defaults' IDs
-          const defaultIds = new Set(DEFAULT_PROJECTS.map(p => p.id));
-          const customProjects = parsed.filter(p => !defaultIds.has(p.id));
-          mergedProjects = [...mergedProjects, ...customProjects];
-        } catch (e) {
-          console.error("Failed to parse stored projects", e);
-        }
+      const stored = localStorage.getItem("nexus_projects");
+      let merged = [...DEFAULT_PROJECTS];
+      if (stored) {
+        const parsed = JSON.parse(stored) as Project[];
+        const defaultIds = new Set(DEFAULT_PROJECTS.map(p => p.id));
+        const custom = parsed.filter(p => !defaultIds.has(p.id));
+        merged = [...merged, ...custom];
       }
-      setProjects(mergedProjects);
-      localStorage.setItem("nexus_projects", JSON.stringify(mergedProjects));
-
-      const storedBlogs = localStorage.getItem("nexus_blogs");
-      let mergedBlogs = [...DEFAULT_BLOGS];
-      if (storedBlogs) {
-        try {
-          const parsed = JSON.parse(storedBlogs) as BlogPost[];
-          const defaultIds = new Set(DEFAULT_BLOGS.map(b => b.id));
-          const customBlogs = parsed.filter(b => !defaultIds.has(b.id));
-          mergedBlogs = [...mergedBlogs, ...customBlogs];
-        } catch (e) {
-          console.error("Failed to parse stored blogs", e);
-        }
-      }
-      setBlogs(mergedBlogs);
-      localStorage.setItem("nexus_blogs", JSON.stringify(mergedBlogs));
-
-      const storedMessages = localStorage.getItem("nexus_messages");
-      if (storedMessages) {
-        try {
-          setMessages(JSON.parse(storedMessages));
-        } catch (e) {
-          console.error("Failed to parse stored messages", e);
-        }
-      }
-    } catch (err) {
-      console.error("Local storage sync error: ", err);
-      // Fallback
-      setProjects(DEFAULT_PROJECTS);
-      setBlogs(DEFAULT_BLOGS);
+      return merged;
+    } catch (e) {
+      console.error(e);
+      return DEFAULT_PROJECTS;
     }
-  }, []);
+  });
+
+  const [blogs, setBlogs] = useState<BlogPost[]>(() => {
+    try {
+      const stored = localStorage.getItem("nexus_blogs");
+      let merged = [...DEFAULT_BLOGS];
+      if (stored) {
+        const parsed = JSON.parse(stored) as BlogPost[];
+        const defaultIds = new Set(DEFAULT_BLOGS.map(b => b.id));
+        const custom = parsed.filter(b => !defaultIds.has(b.id));
+        merged = [...merged, ...custom];
+      }
+      return merged;
+    } catch (e) {
+      console.error(e);
+      return DEFAULT_BLOGS;
+    }
+  });
+
+  const [messages, setMessages] = useState<ContactMessage[]>(() => {
+    try {
+      const stored = localStorage.getItem("nexus_messages");
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return [];
+  });
 
   // Sync state helpers
   const saveProjectsToLocalStorage = (newProjs: Project[]) => {
