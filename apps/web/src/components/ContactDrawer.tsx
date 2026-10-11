@@ -5,7 +5,7 @@ import { X, Mail, Send, Terminal } from "lucide-react";
 interface ContactDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string; email: string; message: string }) => void;
+  onSubmit: (data: { name: string; email: string; message: string }) => Promise<void>;
 }
 
 export default function ContactDrawer({ isOpen, onClose, onSubmit }: ContactDrawerProps) {
@@ -21,34 +21,13 @@ export default function ContactDrawer({ isOpen, onClose, onSubmit }: ContactDraw
     setStatus("idle");
 
     try {
-      const payload = {
-        access_key: "YOUR_ACCESS_KEY_HERE",
-        from_name: "KurlyDeer Portfolio Transmission",
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      };
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        // Also persist locally for the admin messages dashboard
-        onSubmit(formData);
-        setFormData({ name: "", email: "", message: "" });
-        setStatus("success");
+      await onSubmit(formData);
+      setFormData({ name: "", email: "", message: "" });
+      setStatus("success");
         setTimeout(() => {
           setStatus("idle");
           onClose();
         }, 2500);
-      } else {
-        setStatus("error");
-      }
     } catch {
       setStatus("error");
     } finally {
@@ -146,6 +125,7 @@ export default function ContactDrawer({ isOpen, onClose, onSubmit }: ContactDraw
               </div>
 
               {/* Status Indicator */}
+              {!import.meta.env.VITE_WEB3FORMS_ACCESS_KEY && <p role="status">Contact delivery is currently unavailable. Please use the LinkedIn link in the footer.</p>}
               {status === "success" && (
                 <div className="flex items-center gap-2 text-emerald-400 font-mono text-[11px] bg-emerald-500/5 border border-emerald-500/10 rounded-lg p-3">
                   <Terminal className="h-3.5 w-3.5 animate-pulse shrink-0" />
@@ -161,7 +141,7 @@ export default function ContactDrawer({ isOpen, onClose, onSubmit }: ContactDraw
 
               <button
                 type="submit"
-                disabled={isSending || status === "success"}
+                disabled={isSending || status === "success" || !import.meta.env.VITE_WEB3FORMS_ACCESS_KEY}
                 className="w-full py-3 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-zinc-950 font-display font-bold text-sm rounded-lg transition-all duration-200 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.35)] flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Send className="h-4 w-4" />

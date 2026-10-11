@@ -3,29 +3,33 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
 import HomeSection from "@/components/HomeSection";
-import ProjectGrid from "@/components/ProjectGrid";
-import BlogSection from "@/components/BlogSection";
+
+
 import MessagesSection from "@/components/MessagesSection";
 import Login from "@/components/Login";
-import AdminDashboard from "@/components/AdminDashboard";
+
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NotFound from "@/components/NotFound";
 import ContactDrawer from "@/components/ContactDrawer";
 import BackToTop from "@/components/BackToTop";
-import { PROJECTS } from "@/data/projects";
-import { BLOGS } from "@/data/blogs";
+import { usePublicContent } from "@/lib/usePublicContent";
 import { Project, BlogPost, ContactMessage } from "@/types";
+
+const AdminDashboard = lazy(() => import("@/components/AdminDashboard"));
+const ProjectGrid = lazy(() => import("@/components/ProjectGrid"));
+const BlogSection = lazy(() => import("@/components/BlogSection"));
 
 export default function App() {
   const location = useLocation();
+  const { projects, blogs } = usePublicContent();
   
   const getActiveTabFromPath = () => {
     switch(location.pathname) {
@@ -40,16 +44,12 @@ export default function App() {
   const activeTab = getActiveTabFromPath();
   const [isContactDrawerOpen, setIsContactDrawerOpen] = useState(false);
 
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('nexus_projects');
-    localStorage.removeItem('nexus_blogs');
-  }
-
   const [messages, setMessages] = useState<ContactMessage[]>(() => {
     try {
       const stored = localStorage.getItem("nexus_messages");
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        return Array.isArray(parsed) ? parsed.filter(m => m && typeof m.id === "string" && typeof m.message === "string") : [];
       }
     } catch (e) {
       console.error(e);
@@ -57,25 +57,40 @@ export default function App() {
     return [];
   });
 
-  // Admin interface is kept local for messages only in this version
+  // This is a browser-local history, not an inbox or message delivery service.
+  const saveMessagesToLocalStorage = (newMessages: ContactMessage[]) => {
+    localStorage.setItem("nexus_messages", JSON.stringify(newMessages));
+    setMessages(newMessages);
+  };
 
 
-  const handleAddContactMessage = (msg: Omit<ContactMessage, "id" | "createdAt">) => {
+  const handleAddContactMessage = async (msg: Omit<ContactMessage, "id" | "createdAt">) => {
+    const key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!key) throw new Error('Contact delivery is not configured.');
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: key, ...msg }),
+    });
+    const result = await response.json();
+    if (!response.ok || !result.success) throw new Error('Message delivery failed.');
     const freshMsg: ContactMessage = {
       ...msg,
       id: `msg_${Date.now()}`,
       createdAt: new Date().toLocaleString()
     };
-    saveMessagesToLocalStorage([freshMsg, ...messages]);
+    // A local history failure must not report an already-delivered message as failed.
+    try { saveMessagesToLocalStorage([freshMsg, ...messages]); }
+    catch { setMessages(prev => [freshMsg, ...prev]); }
   };
 
   const handleDeleteMessage = (id: string) => {
     const updated = messages.filter((m) => m.id !== id);
-    saveMessagesToLocalStorage(updated);
+    try { saveMessagesToLocalStorage(updated); } catch { window.alert("Could not update browser-local history."); }
   };
 
   const handleClearAllMessages = () => {
-    saveMessagesToLocalStorage([]);
+    try { saveMessagesToLocalStorage([]); } catch { window.alert("Could not clear browser-local history."); }
   };
 
   const isConsolePath = ["/projects", "/blog", "/messages"].includes(location.pathname);
@@ -104,42 +119,36 @@ export default function App() {
         {/* Console Workspace Area */}
         <main className={`flex-1 overflow-y-auto bg-[#070708] ${isConsolePath ? "border-l border-zinc-900/60" : ""}`}>
           <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
+            <Suspense fallback={<p role="status" className="p-6">Loading…</p>}><Routes location={location} key={location.pathname}>
               <Route path="/" element={
                 <HomeSection
-                  projects={PROJECTS}
-                  blogs={BLOGS}
+                  projects={projects}
+                  blogs={blogs}
                   onContactMessageSubmit={handleAddContactMessage}
-                  projectsCount={PROJECTS.length}
-                  blogsCount={BLOGS.length}
+                  projectsCount={projects.length}
+                  blogsCount={blogs.length}
                   onContactClick={() => setIsContactDrawerOpen(true)}
                 />
               } />
 
               <Route path="/projects" element={
                 <ProjectGrid
-                  projects={PROJECTS}
-                  onAddProject={() => {}}
-                  onDeleteProject={() => {}}
-                  onResetProjects={() => {}}
+                  projects={projects}
                 />
               } />
 
               <Route path="/blog" element={
                 <BlogSection
-                  blogs={BLOGS}
-                  onAddBlog={() => {}}
-                  onDeleteBlog={() => {}}
-                  onResetBlogs={() => {}}
+                  blogs={blogs}
                 />
               } />
 
               <Route path="/messages" element={
-                <MessagesSection
+                <ProtectedRoute><MessagesSection
                   messages={messages}
                   onDeleteMessage={handleDeleteMessage}
                   onClearAllMessages={handleClearAllMessages}
-                />
+                /></ProtectedRoute>
               } />
 
               <Route path="/login" element={<Login />} />
@@ -151,7 +160,7 @@ export default function App() {
               } />
               
               <Route path="*" element={<NotFound />} />
-            </Routes>
+            </Routes></Suspense>
           </AnimatePresence>
         </main>
 
