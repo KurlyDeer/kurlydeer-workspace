@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthProvider';
 import { Terminal } from 'lucide-react';
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
 
   if (loading) {
     return (
@@ -15,7 +15,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     );
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     return <Navigate to="/login" replace />;
   }
 

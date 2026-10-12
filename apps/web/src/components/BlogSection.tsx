@@ -7,9 +7,9 @@ import { BlogPost } from "../types";
 
 interface BlogSectionProps {
   blogs: BlogPost[];
-  onAddBlog: (b: Omit<BlogPost, "id" | "publishedAt">) => void;
-  onDeleteBlog: (id: string) => void;
-  onResetBlogs: () => void;
+  onAddBlog?: (b: Omit<BlogPost, "id" | "publishedAt">) => void;
+  onDeleteBlog?: (id: string) => void;
+  onResetBlogs?: () => void;
 }
 
 export default function BlogSection({ blogs, onAddBlog, onDeleteBlog, onResetBlogs }: BlogSectionProps) {
@@ -53,7 +53,7 @@ export default function BlogSection({ blogs, onAddBlog, onDeleteBlog, onResetBlo
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
-    onAddBlog({
+    onAddBlog?.({
       title: newBlog.title,
       summary: newBlog.summary,
       category: newBlog.category,
@@ -117,7 +117,7 @@ export default function BlogSection({ blogs, onAddBlog, onDeleteBlog, onResetBlo
                 </div>
 
                 <div className="flex gap-2">
-                  <button
+                  {onResetBlogs && (<button
                     id="reset-blog-archive-btn"
                     onClick={onResetBlogs}
                     title="Restore pristine lab records"
@@ -125,16 +125,16 @@ export default function BlogSection({ blogs, onAddBlog, onDeleteBlog, onResetBlo
                   >
                     <RefreshCw className="h-3.5 w-3.5" />
                     <span className="hidden sm:inline">Reset Baseline Docs</span>
-                  </button>
+                  </button>)}
 
-                  <button
+                  {onAddBlog && (<button
                     id="open-blog-editor-btn"
                     onClick={() => setIsEditorOpen(true)}
                     className="px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-sans font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.25)] cursor-pointer"
                   >
                     <Plus className="h-4 w-4 stroke-[3px]" />
                     <span>Post Tech Report</span>
-                  </button>
+                  </button>)}
                 </div>
               </div>
             </div>
@@ -206,12 +206,12 @@ export default function BlogSection({ blogs, onAddBlog, onDeleteBlog, onResetBlo
                       
                       <div className="flex items-center gap-2 mt-2">
                         {/* Delete customized journal reports */}
-                        {!blog.id.startsWith("blog_") && (
+                        {onDeleteBlog && !blog.id.startsWith("blog_") && (
                           <button
                             title="Discard technical report"
                             onClick={(e) => {
                               e.stopPropagation();
-                              onDeleteBlog(blog.id);
+                              onDeleteBlog?.(blog.id);
                             }}
                             className="p-1 px-1.5 hover:bg-rose-500/10 text-zinc-650 hover:text-rose-400 rounded border border-transparent hover:border-rose-500/25 transition cursor-pointer"
                           >

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ChevronRight, Download, Github, Linkedin } from "lucide-react";
+import { supabase } from '@/lib/supabaseClient';
 import { Link } from "react-router-dom";
 
 const TYPING_LINES = [
@@ -21,8 +22,21 @@ export default function Hero({ onContactClick }: HeroProps) {
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
-  const [isAvailable] = useState<boolean>(true);
+  const [isAvailable, setIsAvailable] = useState<boolean>(true);
 
+
+  useEffect(() => {
+    if (!supabase) return;
+    let active = true;
+    const refresh = async () => {
+      const { data } = await supabase.from('hub_settings').select('available').eq('id', 1).single();
+      if (active && data) setIsAvailable(data.available);
+    };
+    void refresh();
+    window.addEventListener('hub-content-changed', refresh);
+    window.addEventListener('focus', refresh);
+    return () => { active = false; window.removeEventListener('hub-content-changed', refresh); window.removeEventListener('focus', refresh); };
+  }, []);
 
   // Blinking cursor
   useEffect(() => {

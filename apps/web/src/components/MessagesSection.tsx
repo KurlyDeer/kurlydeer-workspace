@@ -23,10 +23,10 @@ export default function MessagesSection({ messages, onDeleteMessage, onClearAllM
           <Terminal className="h-4.5 w-4.5 text-indigo-400" />
           <div>
             <h3 className="font-display font-semibold text-xs tracking-wider text-zinc-200 uppercase">
-              Inbox Mailbox Packet Indexes
+              Browser-local sent history
             </h3>
             <p className="font-sans text-[11px] text-zinc-500">
-              Showing active cached message telemetry
+              Messages sent from this browser only; this is not an admin inbox.
             </p>
           </div>
         </div>

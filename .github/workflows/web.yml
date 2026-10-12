@@ -1,0 +1,47 @@
+name: Web validation
+on:
+  pull_request:
+    paths: ['apps/web/**', 'package*.json', '.github/workflows/web.yml']
+  push:
+    branches: [main]
+    paths: ['apps/web/**', 'package*.json', '.github/workflows/web.yml']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --include=optional
+      - run: npm run build --workspace=apps/web
+      - run: npm test --workspace=apps/web
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e --workspace=apps/web
+  database-policies:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: local-policy-tests
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate migration and row-level security
+        env:
+          PGPASSWORD: local-policy-tests
+        run: >-
+          psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1
+          -f apps/web/test/schema-bootstrap.sql
+          -f apps/web/supabase/migrations/202610110001_hub_cms.sql
+          -f apps/web/test/schema-policies.sql

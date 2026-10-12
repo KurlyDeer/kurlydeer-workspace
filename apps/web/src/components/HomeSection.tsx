@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 interface HomeSectionProps {
   projects: Project[];
   blogs: BlogPost[];
-  onContactMessageSubmit: (msg: Omit<ContactMessage, "id" | "createdAt">) => void;
+  onContactMessageSubmit: (msg: Omit<ContactMessage, "id" | "createdAt">) => Promise<void>;
   projectsCount: number;
   blogsCount: number;
   onContactClick: () => void;
@@ -35,20 +35,22 @@ export default function HomeSection({ projects, blogs, onContactMessageSubmit, p
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSending(true);
     setSendStatus("idle");
 
-    setTimeout(() => {
-      onContactMessageSubmit(formData);
+    try {
+      await onContactMessageSubmit(formData);
       setFormData({ name: "", email: "", subject: "", message: "" });
-      setIsSending(false);
       setSendStatus("success");
-      setTimeout(() => setSendStatus("idle"), 4000);
-    }, 800);
+    } catch {
+      setSendStatus("error");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -268,6 +270,7 @@ export default function HomeSection({ projects, blogs, onContactMessageSubmit, p
             </div>
 
             {/* Status messages */}
+            {!import.meta.env.VITE_WEB3FORMS_ACCESS_KEY && <p role="status">Contact delivery is currently unavailable. Please use the LinkedIn link below.</p>}
             {sendStatus === "success" && (
               <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
                 <Terminal className="h-3.5 w-3.5" />
@@ -283,7 +286,7 @@ export default function HomeSection({ projects, blogs, onContactMessageSubmit, p
 
             <button
               type="submit"
-              disabled={isSending}
+              disabled={isSending || !import.meta.env.VITE_WEB3FORMS_ACCESS_KEY}
               className="w-full py-3 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-zinc-950 font-display font-bold text-sm rounded-lg transition-all duration-200 shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.35)] cursor-pointer"
             >
               {isSending ? "Transmitting..." : "Send Message"}

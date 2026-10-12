@@ -7,9 +7,9 @@ import { Project } from "../types";
 
 interface ProjectGridProps {
   projects: Project[];
-  onAddProject: (p: Omit<Project, "id" | "createdAt">) => void;
-  onDeleteProject: (id: string) => void;
-  onResetProjects: () => void;
+  onAddProject?: (p: Omit<Project, "id" | "createdAt">) => void;
+  onDeleteProject?: (id: string) => void;
+  onResetProjects?: () => void;
 }
 
 export default function ProjectGrid({ projects, onAddProject, onDeleteProject, onResetProjects }: ProjectGridProps) {
@@ -82,7 +82,7 @@ export default function ProjectGrid({ projects, onAddProject, onDeleteProject, o
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
-    onAddProject({
+    onAddProject?.({
       title: newProj.title,
       description: newProj.description,
       category: newProj.category,
@@ -140,7 +140,7 @@ export default function ProjectGrid({ projects, onAddProject, onDeleteProject, o
 
           {/* Quick Clear Filter / Reset Controls */}
           <div className="flex gap-2">
-            <button
+            {onResetProjects && (<button
               id="reset-project-list-btn"
               onClick={onResetProjects}
               title="Reset dashboard to clean core presets"
@@ -148,16 +148,16 @@ export default function ProjectGrid({ projects, onAddProject, onDeleteProject, o
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Reset Defaults</span>
-            </button>
+            </button>)}
 
-            <button
+            {onAddProject && (<button
               id="open-add-project-modal"
               onClick={() => setIsAddModalOpen(true)}
               className="px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-sans font-semibold text-xs rounded-xl flex items-center gap-1.5 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.25)] cursor-pointer"
             >
               <Plus className="h-4 w-4 stroke-[3px]" />
               <span>Register Lab App</span>
-            </button>
+            </button>)}
           </div>
         </div>
       </div>
@@ -244,10 +244,10 @@ export default function ProjectGrid({ projects, onAddProject, onDeleteProject, o
 
                 <div className="flex items-center gap-2">
                   {/* Delete custom project if it isn't a preset */}
-                  {!proj.id.startsWith("proj_") && (
+                  {onDeleteProject && !proj.id.startsWith("proj_") && (
                     <button
                       title="Decommission project registry"
-                      onClick={() => onDeleteProject(proj.id)}
+                      onClick={() => onDeleteProject?.(proj.id)}
                       className="p-1.5 hover:bg-rose-500/10 text-zinc-500 hover:text-rose-400 rounded-lg border border-transparent hover:border-rose-500/20 transition mr-1 cursor-pointer"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
